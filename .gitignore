@@ -1,0 +1,28 @@
+# Vendor media and VM disks: never committed, never redistributed
+*.iso
+*.vhd
+*.vhdx
+*.avhdx
+*.vmcx
+*.vmrs
+*.vmgs
+*.vmdk
+range/packer/output-*/
+
+# Generated evidence and runs
+packs/
+runs/
+*.ledger.jsonl
+
+# Range keys and local secrets
+range/keys/
+*.pem
+*.key
+.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
