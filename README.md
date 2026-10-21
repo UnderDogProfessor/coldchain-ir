@@ -27,4 +27,8 @@ needed for Level 1.
 
 ## License
 
-Proposed: Apache-2.0 for code, CC BY 4.0 for labs and docs. Not applied yet.
+Everything here (labs, explainers, notes and evidence files) is licensed under
+[Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE). You can
+use, share and adapt it, including in your own training, as long as you give
+credit, for example: *"COLD CHAIN by Shreyas Lipare,
+github.com/UnderDogProfessor/coldchain-ir"*.
