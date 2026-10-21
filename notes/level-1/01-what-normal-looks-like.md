@@ -149,7 +149,8 @@ Anything here gets fixed in the lab.
   locked) and typed a wrong password first, so this wasn't a clean test.
   **Retested cleanly at 10:26: Logon Type 2 again.** The lab's answer stands.
 - DWM and UMFD *do* show up, but at startup (09:58:28 to 09:58:29 after my
-  restart), not at my own sign-ins.
+  restart), not at my own sign-ins. **Fixed:** added back to the lab on
+  2026-10-21, described as appearing at startup.
 
 ## Evidence files
 

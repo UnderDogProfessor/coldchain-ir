@@ -211,6 +211,17 @@ notes.** The log alone didn't say. That's why responders write down times.
 services. The **Process Name** in these records is `services.exe`, the part of
 Windows that starts services.
 
+Look right after your **restart** and you'll find a few more, in the first
+second or two after Windows starts, before anyone signs in:
+
+| Account Name | Account Domain | What it is |
+|---|---|---|
+| **UMFD-0**, **UMFD-1** | Font Driver Host | The part of Windows that handles fonts |
+| **DWM-1** | Window Manager | The part of Windows that draws the screen |
+
+They're Logon Type 2, the same as you, but they aren't people. That's why
+you always check the **Account Name** as well as the Logon Type.
+
 **4. Lots, maybe dozens.** Windows and its services sign in all the time. Only
 a few records were *you*. That's the most important lesson here: **most
 sign-ins on a computer aren't people.** When you hunt for something bad later,
