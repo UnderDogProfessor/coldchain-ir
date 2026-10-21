@@ -1,7 +1,15 @@
 # Working in this repo
 
-Read `docs/DESIGN.md` before changing anything. It's the contract. If code and
-the design disagree, raise it. Don't quietly pick one.
+## Right now: Level 1 basics
+
+The current work is the hand-built labs in `labs/level-1/`. Keep them simple:
+one Windows VM, one thing to find, about an hour, plain words, and short
+sentences. Don't add generators, seeds, graders or automation unless Shreyas
+asks. Every technical claim in a lab must match a source listed at the bottom
+of that lab. Anything you couldn't test on a real VM gets hedged in the text.
+
+`docs/DESIGN.md` is the parked long-term design. Read it for direction, but
+don't build from it yet.
 
 ## Hard rules
 
@@ -30,13 +38,21 @@ Defender exclusions that aren't part of the story (DESIGN §2).
 **Never weaken a verifier check to get a pack to pass.** Fix the pack or the
 scenario instead.
 
-**The range stays isolated.** Range VMs use Hyper-V private switches only. Never
-attach a range VM to an external switch. VM storage lives on `E:`.
+**Lab VMs stay off the real network.** Level 1 runs on VMware Workstation with
+NAT networking. Labs that run attacks use host-only networking, never bridged.
+VM storage lives on `E:`.
 
 ## Voice
 
 This is built in public by an early-career practitioner. The README, docs and
 release notes never claim operational experience. Use North American spelling.
+
+## Keeping GitHub current
+
+Commit and push to `origin/main` (the private repo) whenever a piece of work
+lands: a lab page written, a fix after testing, a script added. Small commits,
+plain messages that say what changed and whether it's been tested on a real
+VM. Never leave finished work sitting uncommitted at the end of a session.
 
 ## Checks
 
