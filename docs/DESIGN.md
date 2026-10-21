@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Status | Draft 0, private until v0.1 |
+| Status | Draft 0, parked (see the note below) |
 | Written | 2026-10-19 |
 | Owner | Shreyas Lipare |
 | Repo slug | `coldchain-ir` |

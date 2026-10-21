@@ -27,8 +27,9 @@ don't build from it yet.
 **Everything an agent writes is a draft.** Scenario and world files carry
 `draft: true`. Only Shreyas approves and flips them.
 
-**The repo is private until v0.1.** Don't push it public, create a public
-remote, or publish packs without his explicit go-ahead.
+**The repo is public.** Anything committed here is visible to everyone. Never
+commit secrets, real personal data, or anything from Shreyas's real computer.
+Screenshots and logs come from the lab VM only.
 
 **Cite only what you opened.** Every attacker stage cites entries in
 `sources/sources.yaml`, each with a URL, tier and the date it was opened. If
@@ -60,7 +61,7 @@ release notes never claim operational experience. Use North American spelling.
 
 ## Keeping GitHub current
 
-Commit and push to `origin/main` (the private repo) whenever a piece of work
+Commit and push to `origin/main` whenever a piece of work
 lands: a lab page written, a fix after testing, a script added. Small commits,
 plain messages that say what changed and whether it's been tested on a real
 VM. Never leave finished work sitting uncommitted at the end of a session.

@@ -4,7 +4,8 @@ Hands-on incident response labs, starting from the basics. Every lab takes
 place at the same made-up company: **Rimeport Cold Logistics**, which stores
 and delivers chilled and frozen food.
 
-**Status:** early. This repo stays private until the first labs are tested.
+**Status:** early. Level 1 is being built and tested one lab at a time, on a
+real Windows 11 VM.
 
 ## Start here
 
