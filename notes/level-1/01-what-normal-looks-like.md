@@ -74,6 +74,11 @@ matches my note.
 
 **2. My unlock: logon type?**
 
+Unlock (09:55): three records at **09:55:17**. Two are Dana, both **Logon Type
+2**, not 7. They're another Elevated Token Yes/No pair, with Logon IDs
+`0x4D2345` and `0x4D2374` linked to each other. The third is SYSTEM, Logon
+Type 5. The Logon IDs are new, different from my 09:50 sign-in.
+
 **3. A sign-in that wasn't me: which account?**
 
 **4. Roughly how many 4624 records after the restart, and why so many?**
@@ -92,6 +97,9 @@ Anything here gets fixed in the lab.
   of my eight 09:50 records were DWM or UMFD, only Dana and SYSTEM. The
   09:49:49 record from startup was SYSTEM too. **Fixed:** removed DWM and UMFD
   from the lab on 2026-10-21, to add back later only if I find them.
+- The lab said an unlock is usually Logon Type 7. Mine was **Logon Type 2**: a
+  fresh pair of Dana records that looks just like a sign-in. Only my notes told
+  me it was the unlock.
 
 ## Screenshots
 
