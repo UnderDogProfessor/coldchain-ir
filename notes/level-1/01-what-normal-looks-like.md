@@ -4,7 +4,7 @@
 > first.
 
 **Date done:**
-**Lab computer:** WS-DSP-01, Windows 11 Enterprise evaluation, VMware Workstation
+**Lab computer:** WS-DSP-01, Windows 11 Enterprise Evaluation (build 26100), VMware Workstation
 
 ## Attempts
 
@@ -33,7 +33,12 @@ match.
 
 ## Part 2: Was Windows recording sign-ins?
 
-What `auditpol` said on the **Logon** line:
+What `auditpol` said on the **Logon** line: **Success and Failure** (checked
+around 10:00 AM Eastern). I didn't change any settings, so this is the
+default on a fresh install. Windows records both successful and failed
+sign-ins here.
+
+![auditpol showing Logon: Success and Failure](images/lab1-auditpol.webp)
 
 ## Part 3: My answers
 
