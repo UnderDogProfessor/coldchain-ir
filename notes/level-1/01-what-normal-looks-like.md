@@ -42,6 +42,11 @@ sign-ins here.
 
 ## Part 3: My answers
 
+Filtering the Security log to event 4624 left **153** records. I see at least
+**8** of them around my 09:50 sign-in (09:50:15 to 09:50:34).
+
+![Security log filtered to 4624](images/lab1-filtered-list.png)
+
 **1. My two sign-ins: logon type, and did the times match?**
 
 **2. My unlock: logon type?**
