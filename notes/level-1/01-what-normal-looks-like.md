@@ -6,6 +6,15 @@
 **Date done:**
 **Lab computer:** WS-DSP-01, Windows 11 Enterprise evaluation, VMware Workstation
 
+## Attempts
+
+**Attempt 1:** I completely forgot to note down timestamps for when I signed
+in, when I locked my screen and when I restarted the computer. Without them I
+had nothing to check the log against, so I'm doing it again.
+
+**Attempt 2 (2026-10-21):** I'll start noting timestamps right after all the
+Windows updates finish and the PC restarts.
+
 ---
 
 ## Part 1: What I did
