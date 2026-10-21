@@ -90,7 +90,8 @@ Anything here gets fixed in the lab.
 
 - The lab said DWM- and UMFD- accounts start whenever someone signs in. None
   of my eight 09:50 records were DWM or UMFD, only Dana and SYSTEM. The
-  09:49:49 record from startup was SYSTEM too.
+  09:49:49 record from startup was SYSTEM too. **Fixed:** removed DWM and UMFD
+  from the lab on 2026-10-21, to add back later only if I find them.
 
 ## Screenshots
 

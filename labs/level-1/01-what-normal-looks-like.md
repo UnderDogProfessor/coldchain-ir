@@ -198,10 +198,8 @@ the whole idea of the lab.
 
 **3. You'll find accounts that aren't people.** The most common one is
 **SYSTEM**, usually with Logon Type **5**: Windows starting its own background
-services, started by `services.exe`. You may also see names starting with
-**DWM-** or **UMFD-**. Those are parts of Windows that draw the screen and
-handle fonts. Look for them around startup, before anyone signs in, rather
-than at your own sign-in.
+services. The **Process Name** in these records is `services.exe`, the part of
+Windows that starts services.
 
 **4. Lots, maybe dozens.** Windows and its services sign in all the time. Only
 a few records were *you*. That's the most important lesson here: **most
@@ -210,7 +208,7 @@ you'll be looking for one strange line among many normal ones.
 
 **5. Something like:** "Dana signs in at the keyboard (type 2) during her
 shift. She locks and unlocks her screen (type 7). Everything else is Windows
-signing itself in (SYSTEM, type 5, plus DWM and UMFD accounts)."
+signing itself in (SYSTEM, type 5)."
 
 </details>
 
