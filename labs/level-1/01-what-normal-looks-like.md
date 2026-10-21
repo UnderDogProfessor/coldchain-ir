@@ -222,6 +222,9 @@ second or two after Windows starts, before anyone signs in:
 They're Logon Type 2, the same as you, but they aren't people. That's why
 you always check the **Account Name** as well as the Logon Type.
 
+Want to know what they are, what the number means, and why responders care?
+Read [DWM and UMFD, explained](../explainers/dwm-and-umfd.md).
+
 **4. Lots, maybe dozens.** Windows and its services sign in all the time. Only
 a few records were *you*. That's the most important lesson here: **most
 sign-ins on a computer aren't people.** When you hunt for something bad later,

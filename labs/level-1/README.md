@@ -20,3 +20,8 @@ lab shows 📸. It's how real responders work, and it leaves you a record you
 can look back on.
 
 Finished a lab? Compare with [my notes](../../notes/README.md) from my own run.
+
+**Explainers** go deeper on things the labs turn up:
+
+- [DWM and UMFD, explained](../explainers/dwm-and-umfd.md): the "accounts"
+  that sign in when Windows starts, and what they tell you (Lab 1)

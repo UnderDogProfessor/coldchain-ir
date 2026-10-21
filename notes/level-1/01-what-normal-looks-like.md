@@ -123,6 +123,9 @@ Exported as [evidence/lab1-around-restart.evtx](evidence/lab1-around-restart.evt
 | 09:58:44 | **Dana, a pair** | 2 | Logon IDs `0xc102a` / `0xc1076`. This is me. |
 | 09:58:28 to 09:58:52 | SYSTEM ×40, LOCAL SERVICE ×1, NETWORK SERVICE ×1 | 5 | Started by services.exe |
 
+What UMFD and DWM are, and why they matter:
+[DWM and UMFD, explained](../../labs/explainers/dwm-and-umfd.md).
+
 **Open question:** the 09:58:30 Dana pair came about one second after Windows
 started, too fast for me to have typed my password. Windows may have signed me
 in automatically after the restart and then locked the screen. Microsoft calls
