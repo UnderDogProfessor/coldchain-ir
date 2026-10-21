@@ -72,6 +72,10 @@ Windows starting up, not me.
 First sign-in (09:50): two Dana records at 09:50:15, both Logon Type 2. That
 matches my note.
 
+Second sign-in (09:58): two Dana records at **09:58:44**, both Logon Type 2.
+That matches my note. But there's *another* Dana pair before it, at 09:58:30
+(see "After the restart" below).
+
 **2. My unlock: logon type?**
 
 Unlock (09:55): three records at **09:55:17**. Two are Dana, both **Logon Type
@@ -79,9 +83,51 @@ Unlock (09:55): three records at **09:55:17**. Two are Dana, both **Logon Type
 `0x4D2345` and `0x4D2374` linked to each other. The third is SYSTEM, Logon
 Type 5. The Logon IDs are new, different from my 09:50 sign-in.
 
+**Retest, a clean unlock.** The first try wasn't clean (Windows key + L locked
+both computers, and I typed a wrong password first), so I did it again:
+
+| What I did | Time |
+|---|---|
+| Locked from the Start menu, not Windows key + L | 10:24 (the clock turned 10:25 right after) |
+| Unlocked with the right password, first try | 10:26 |
+
+Result ([evidence](evidence/lab1-around-screenlock.evtx)): 13 sign-in records
+from 10:25:57 to 10:26:21. The unlock is a Dana pair at **10:26:21**, both
+**Logon Type 2** (Logon IDs `0xcfb871` and `0xcfb8c4`). The other 11 are
+SYSTEM, Logon Type 5. **No Logon Type 7.** Nothing appears at the moment I
+locked, because locking doesn't sign anyone in.
+
+So on this computer, an unlock is Logon Type 2. Tested twice.
+
 **3. A sign-in that wasn't me: which account?**
 
+SYSTEM, Logon Type 5, started by services.exe, in every time window I looked
+at. After the restart there were also UMFD-0, UMFD-1, DWM-1, LOCAL SERVICE and
+NETWORK SERVICE (below).
+
 **4. Roughly how many 4624 records after the restart, and why so many?**
+
+**50 in 24 seconds** (09:58:28 to 09:58:52). Only 4 were Dana. The rest was
+Windows starting up.
+
+### After the restart (09:58)
+
+Exported as [evidence/lab1-around-restart.evtx](evidence/lab1-around-restart.evtx).
+
+| Time | Account | Logon Type | Notes |
+|---|---|---|---|
+| 09:58:28 | UMFD-0 (Font Driver Host) | 2 | Started by wininit.exe |
+| 09:58:28 | UMFD-1 (Font Driver Host) | 2 | Started by winlogon.exe |
+| 09:58:29 | DWM-1 (Window Manager), a pair | 2 | Started by winlogon.exe |
+| 09:58:30 | **Dana, a pair** | 2 | Logon IDs `0x1c63c` / `0x1c6b4` |
+| 09:58:44 | **Dana, a pair** | 2 | Logon IDs `0xc102a` / `0xc1076`. This is me. |
+| 09:58:28 to 09:58:52 | SYSTEM ×40, LOCAL SERVICE ×1, NETWORK SERVICE ×1 | 5 | Started by services.exe |
+
+**Open question:** the 09:58:30 Dana pair came about one second after Windows
+started, too fast for me to have typed my password. Windows may have signed me
+in automatically after the restart and then locked the screen. Microsoft calls
+this automatic restart sign-on (ARSO). If so, my 09:58 "sign-in" was really an
+unlock, which would explain Logon Type 2 again. Not confirmed yet.
 
 **5. Normal on WS-DSP-01, in three sentences:**
 
@@ -101,6 +147,19 @@ Anything here gets fixed in the lab.
   fresh pair of Dana records that looks just like a sign-in. Only my notes told
   me it was the unlock. But I locked with Windows key + L (both computers
   locked) and typed a wrong password first, so this wasn't a clean test.
+  **Retested cleanly at 10:26: Logon Type 2 again.** The lab's answer stands.
+- DWM and UMFD *do* show up, but at startup (09:58:28 to 09:58:29 after my
+  restart), not at my own sign-ins.
+
+## Evidence files
+
+Exported from Event Viewer with **Save Filtered Log File As**. Anyone can open
+them in Event Viewer (**Action → Open Saved Log**).
+
+- [lab1-around-restart.evtx](evidence/lab1-around-restart.evtx): 50 sign-in
+  records, 09:58:28 to 09:58:52
+- [lab1-around-screenlock.evtx](evidence/lab1-around-screenlock.evtx): 13
+  sign-in records, 10:25:57 to 10:26:21
 
 ## Screenshots
 
