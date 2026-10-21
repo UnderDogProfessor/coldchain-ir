@@ -14,7 +14,9 @@ had nothing to check the log against, so I'm doing it again.
 
 **Attempt 2 (2026-10-21):** I'll start noting timestamps right after all the
 Windows updates finish and the PC restarts. Updates done, snapshot taken and
-named **WS-DSP-01 Clean**, then I started the PC.
+named **WS-DSP-01 Clean**, then I started the PC. Before the snapshot I set the
+VM's time zone to Eastern Time (US & Canada), so the VM's clock and my own
+match.
 
 ---
 
@@ -24,7 +26,8 @@ named **WS-DSP-01 Clean**, then I started the PC.
 |---|---|---|
 | 1 | Signed in as dana | 09:50 AM Eastern (my computer's clock) |
 | 2 | Locked the screen | 09:52 AM Eastern |
-| 3 | Unlocked it | |
+| 3a | Typed the wrong password by accident while unlocking | 09:54 AM Eastern |
+| 3 | Unlocked it | 09:55 AM Eastern |
 | 4 | Restarted | |
 | 5 | Signed in again | |
 
