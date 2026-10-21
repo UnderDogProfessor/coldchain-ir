@@ -252,7 +252,9 @@ type 5)."
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/01-what-normal-looks-like.md).
 Spoilers, so finish the lab first.
 
-**Next:** Lab 2, "Someone is guessing passwords." Coming soon.
+**Next:** [Lab 2: Someone is guessing passwords](02-someone-is-guessing-passwords.md).
+**Don't revert your snapshot first.** Lab 2 starts with any typo you made
+here.
 
 ## Sources
 
