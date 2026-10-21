@@ -29,7 +29,7 @@ match.
 | 3a | Typed the wrong password by accident while unlocking | 09:54 AM Eastern |
 | 3 | Unlocked it | 09:55 AM Eastern |
 | 4 | Restarted (clicked Restart) | 09:57 AM Eastern |
-| 5 | Signed in again | |
+| 5 | Signed in again after the restart | 09:58 AM Eastern |
 
 ## Part 2: Was Windows recording sign-ins?
 
