@@ -27,6 +27,33 @@ asks you to learn what a normal day looks like on Dana's computer,
 | **Event ID** | A number that says what kind of record it is. **4624** means "someone or something signed in successfully." |
 | **Logon type** | A number inside a 4624 record that says *how* it signed in: at the keyboard, by unlocking, as a background service, and so on. |
 
+## Keep notes like a responder
+
+Real incident responders write down what they did and when, and they capture
+what they saw. Those notes become the report, and they're how someone else can
+check the work. Start the habit now, in every lab.
+
+1. **Make a notes folder on your real computer**, for example
+   `Documents\Rimeport notes\lab-1\`.
+2. **Copy the [notes template](notes-template.md)** into it and fill it in
+   *as you go*, not afterward.
+3. **Wherever you see 📸, take a screenshot** and save it in the same folder.
+
+**How to screenshot the VM:**
+
+1. Press **Ctrl + Alt** to give your mouse and keyboard back to your real
+   computer.
+2. Press **Windows key + Shift + S** and drag a box around the VM window.
+3. Click the pop-up that appears and **save** the picture into your notes
+   folder. Windows usually also keeps a copy in **Pictures > Screenshots**.
+
+> Save screenshots on your **real computer**, not inside the VM. Reverting the
+> snapshot wipes everything inside the VM, screenshots included. Crop to the VM
+> window so nothing personal from your real computer shows.
+
+Want to share your notes? Put them in your own GitHub repo, the way the author
+does in [`notes/`](../../notes/README.md).
+
 ---
 
 ## Part 1: Make some "normal" (10 minutes)
@@ -35,7 +62,7 @@ Before starting, put WS-DSP-01 back to its clean state: in VMware, open the
 **VM** menu, choose **Snapshot**, then **Revert to Snapshot**. Then power the
 VM on.
 
-Do the following, and **write down the time of each step on paper.** Your
+Do the following, and **write down the time of each step in your notes.** Your
 notes are your answer key: you know exactly what happened because you did it.
 
 | # | Do this | Time you did it |
@@ -64,6 +91,8 @@ Not every computer records sign-ins. Recording is a setting, so check it first.
 3. Look at the line that says **Logon**. It should say **Success**, or
    **Success and Failure**.
 
+📸 **Screenshot:** the `auditpol` result. Save it as `lab1-auditpol.png`.
+
 If it says **No Auditing**, Windows isn't recording sign-ins and Part 3 will
 come up empty. That's a real finding too: you'd have no evidence if something
 happened. Note it down and tell your team lead (or open an issue on this repo).
@@ -84,6 +113,8 @@ You'll see a long list. That's normal, and it's partly the point of this lab.
    **OK**.
 
 Now every line is a successful sign-in.
+
+📸 **Screenshot:** the filtered list. Save it as `lab1-filtered-list.png`.
 
 ### Read one record
 
@@ -115,7 +146,7 @@ Times in the list are shown in this computer's own time zone.
 
 ## Questions
 
-Write your answers next to your notes from Part 1.
+Write your answers in your notes. For each answer, say where you found it.
 
 1. Find both of your sign-ins (steps 1 and 5). What **Logon Type** do they
    show? Do the times match what you wrote down?
@@ -125,6 +156,10 @@ Write your answers next to your notes from Part 1.
    once, so why are there so many?
 5. In three sentences, write what a normal sign-in to WS-DSP-01 looks like.
    Keep this, because Lab 2 uses it.
+
+📸 **Screenshots:** for questions 1 to 3, capture the record that proves your
+answer, with **Logon Type** and **Account Name** visible:
+`lab1-q1-signin.png`, `lab1-q2-unlock.png`, `lab1-q3-not-me.png`.
 
 <details>
 <summary><strong>Hints</strong> (open if you're stuck)</summary>
@@ -175,6 +210,8 @@ signing itself in (SYSTEM, type 5, plus DWM and UMFD accounts)."
 - **Logon Type** tells you *how*, and **Account Name** tells you *who*.
 - Recording sign-ins is a **setting**, so always check that it's on.
 - Normal is noisy. Most sign-ins are Windows, not people.
+- Write down what you did and when, and screenshot what you found. Notes are
+  a responder's memory.
 
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/01-what-normal-looks-like.md).
 Spoilers, so finish the lab first.

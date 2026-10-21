@@ -14,4 +14,9 @@ needs no prior incident response experience.
 
 Do them in order. Each lab builds on the one before.
 
+**Keep notes as you go.** Copy the [notes template](notes-template.md) for
+each lab, write down what you did and when, and take a screenshot wherever a
+lab shows 📸. It's how real responders work, and it leaves you a record you
+can look back on.
+
 Finished a lab? Compare with [my notes](../../notes/README.md) from my own run.

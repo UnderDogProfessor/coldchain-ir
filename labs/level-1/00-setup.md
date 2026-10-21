@@ -126,7 +126,12 @@ to Snapshot**. WS-DSP-01 goes back to exactly how it is right now.
 
 ---
 
-✅ **Done.** Next: [Lab 1: What normal looks like](01-what-normal-looks-like.md)
+✅ **Done.** Before Lab 1, make a notes folder on your real computer (for
+example `Documents\Rimeport notes\`) and keep a copy of the
+[notes template](notes-template.md) there. Every lab asks you to fill it in and
+take screenshots.
+
+Next: [Lab 1: What normal looks like](01-what-normal-looks-like.md)
 
 ## Sources
 

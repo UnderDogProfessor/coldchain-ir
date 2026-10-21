@@ -8,6 +8,12 @@ sentences. Don't add generators, seeds, graders or automation unless Shreyas
 asks. Every technical claim in a lab must match a source listed at the bottom
 of that lab. Anything you couldn't test on a real VM gets hedged in the text.
 
+Every lab teaches the notes habit: point learners to
+`labs/level-1/notes-template.md`, include 📸 screenshot prompts at the moments
+that prove an answer, and give each screenshot a suggested file name
+(`labN-what-it-shows.png`). Screenshots are saved on the learner's real
+computer, never inside the VM.
+
 `notes/` holds Shreyas's own findings from each lab. They're his words: give
 him an empty page to fill in, and help tidy it when he asks, but never write
 his answers or findings for him. Lab pages link to his notes with a spoiler

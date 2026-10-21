@@ -44,7 +44,9 @@ Anything here gets fixed in the lab.
 
 ## Screenshots
 
-Save them in `images/` next to this file, then add them here like this:
-`![What it shows](images/lab1-unlock.png)`
+Save them in `images/` next to this file, using the names from the lab:
+`lab1-auditpol.png`, `lab1-filtered-list.png`, `lab1-q1-signin.png`,
+`lab1-q2-unlock.png`, `lab1-q3-not-me.png`. Then add each one here like this:
+`![What it shows](images/lab1-q2-unlock.png)`
 
 Crop each screenshot to the VM window only.
