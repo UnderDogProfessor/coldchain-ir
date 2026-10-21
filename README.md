@@ -1,31 +1,23 @@
 # COLD CHAIN
 
-An open incident response lab, beginner to expert, built around one fictional
-company that keeps getting breached: Rimeport Cold Logistics, a
-temperature-controlled food distributor.
+Hands-on incident response labs, starting from the basics. Every lab takes
+place at the same made-up company: **Rimeport Cold Logistics**, which stores
+and delivers chilled and frozen food.
 
-**Status: design stage. This repo stays private until v0.1.** Start with
-[`docs/DESIGN.md`](docs/DESIGN.md). It's the contract everything else gets
-built against.
+**Status:** early. This repo stays private until the first labs are tested.
 
-## What's different
+## Start here
 
-- **Every learner gets a different incident.** A seed picks the victim, the
-  lure, the attacker infrastructure, the timing and the techniques. The method
-  is public and the answers aren't, so writeups help without spoiling.
-- **One company, many incidents.** Rimeport carries its history from one
-  incident to the next, and you learn what normal looks like before anything
-  breaks.
-- **A telemetry dial.** The same incident at three logging levels, so you can
-  see what each control actually buys you.
-- **Response, not just investigation.** From v0.3 on, containment changes what
-  the attacker does next, and a business clock runs while you decide.
-- **Cited sources.** Every attacker stage traces back to a public primary
-  source.
+👉 **[Level 1: Basics](labs/level-1/README.md)**
 
-Tiers 0–2 ship as evidence packs that need only a laptop and Python 3.
+One Windows computer, one small thing to find, about an hour each.
+
+## Later
+
+[`docs/DESIGN.md`](docs/DESIGN.md) holds the long-term ideas: unique
+incidents per learner, a live range, more advanced levels. None of it is
+needed for Level 1.
 
 ## License
 
-Proposed: Apache-2.0 for code, CC BY 4.0 for scenarios, world and docs. Not
-applied yet.
+Proposed: Apache-2.0 for code, CC BY 4.0 for labs and docs. Not applied yet.

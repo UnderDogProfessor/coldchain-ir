@@ -7,6 +7,10 @@
 | Owner | Shreyas Lipare |
 | Repo slug | `coldchain-ir` |
 
+> **Parked (2026-10-19).** We're starting with hand-built Level 1 labs in
+> `labs/level-1/`. Read this file as the long-term direction, not the current
+> plan. Nothing here gets built until the basics are done.
+
 COLD CHAIN is an open incident response lab, beginner to expert, built around
 one fictional company that keeps getting breached. This document is the
 contract every part of the repo is built against. When code and this document
