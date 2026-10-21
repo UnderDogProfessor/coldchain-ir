@@ -23,7 +23,7 @@ named **WS-DSP-01 Clean**, then I started the PC.
 | # | What I did | Time |
 |---|---|---|
 | 1 | Signed in as dana | 09:50 AM Eastern (my computer's clock) |
-| 2 | Locked the screen | |
+| 2 | Locked the screen | 09:52 AM Eastern |
 | 3 | Unlocked it | |
 | 4 | Restarted | |
 | 5 | Signed in again | |
