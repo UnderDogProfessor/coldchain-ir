@@ -3,7 +3,7 @@
 > ⚠️ Spoilers. Try [the lab](../../labs/level-1/01-what-normal-looks-like.md)
 > first.
 
-**Date done:**
+**Date done:** 2026-10-21
 **Lab computer:** WS-DSP-01, Windows 11 Enterprise Evaluation (build 26100), VMware Workstation
 
 ## Attempts
@@ -134,9 +134,21 @@ unlock, which would explain Logon Type 2 again. Not confirmed yet.
 
 **5. Normal on WS-DSP-01, in three sentences:**
 
+1. When Dana signs in, the log shows two Logon Type 2 records and one Logon
+   Type 5 in the same second. That's expected for this account: Dana is an
+   administrator, so her sign-in gets both an admin key and an everyday key,
+   which makes two Logon Type 2 records.
+2. When she unlocks her screen, it shows as Logon Type 2, the same as a
+   sign-in.
+3. Most sign-in records on this computer are SYSTEM.
+
 ---
 
 ## What surprised me
+
+When I first signed in and looked at the event log, I found three records with
+the same timestamp: two Logon Type 2 and one Logon Type 5. It was a little
+confusing, but with a little research it became clear.
 
 ## What didn't match the lab page
 
@@ -166,6 +178,9 @@ them in Event Viewer (**Action → Open Saved Log**).
   sign-in records, 10:25:57 to 10:26:21
 
 ## Screenshots
+
+For questions 1 to 3 I copied the records as text and exported them as `.evtx`
+files (see Evidence files above) instead of taking screenshots.
 
 Save them in `images/` next to this file, using the names from the lab:
 `lab1-auditpol.png`, `lab1-filtered-list.png`, `lab1-q1-signin.png`,

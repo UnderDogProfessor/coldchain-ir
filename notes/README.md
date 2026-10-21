@@ -12,6 +12,6 @@ be different, and that's expected.
 
 | Lab | My notes | Status |
 |---|---|---|
-| 1. What normal looks like | [Notes](level-1/01-what-normal-looks-like.md) | Not done yet |
+| 1. What normal looks like | [Notes](level-1/01-what-normal-looks-like.md) | Done, 2026-10-21 |
 
 Screenshots for each level live in that level's `images/` folder.
