@@ -65,6 +65,10 @@ VM on.
 Do the following, and **write down the time of each step in your notes.** Your
 notes are your answer key: you know exactly what happened because you did it.
 
+Your first time is your **starting line**. Anything in the log before it, like
+updates or an earlier try, isn't part of this run. If you forget a time, start
+Part 1 again. Without times, there's nothing to check the log against.
+
 | # | Do this | Time you did it |
 |---|---|---|
 | 1 | Sign in as **dana** with your password | |

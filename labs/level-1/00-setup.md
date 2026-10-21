@@ -116,13 +116,23 @@ Inside the VM:
 
 ## Step 7: Take a "clean" snapshot
 
-1. Inside the VM, shut down Windows: **Start**, **Power**, **Shut down**.
-2. When the VM is off, open the **VM** menu and choose **Snapshot**, then
+First, bring Windows fully up to date. Otherwise every time you revert, the
+updates come back, and they can restart the VM in the middle of a lab.
+
+1. Inside the VM, open **Settings**, then **Windows Update**, then **Check for
+   updates**. Install everything and restart. Repeat until it says you're up to
+   date.
+2. Shut down Windows: **Start**, **Power**, **Shut down**.
+3. When the VM is off, open the **VM** menu and choose **Snapshot**, then
    **Take Snapshot**.
-3. Name it **clean** and click **OK**.
+4. Name it **clean** and click **OK**.
 
 **Before each lab:** open the **VM** menu, choose **Snapshot**, then **Revert
 to Snapshot**. WS-DSP-01 goes back to exactly how it is right now.
+
+> **Already took your snapshot before updating?** No problem. Update, shut
+> down, and take another snapshot named **clean-updated**. Revert to Snapshot
+> goes back to the newest one.
 
 ---
 
