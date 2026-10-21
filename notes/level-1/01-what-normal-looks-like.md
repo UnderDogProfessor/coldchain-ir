@@ -63,6 +63,10 @@ Filtering the Security log to event 4624 left **153** records. I see at least
 The two Dana records point at each other. Logon ID `0xF2FC3` has Linked
 Logon ID `0xF3008`, and `0xF3008` links back to `0xF2FC3`.
 
+Just before my starting line, at **09:49:49**, there's one more record:
+**SYSTEM, Logon Type 5, services.exe**. That's a background service from
+Windows starting up, not me.
+
 **1. My two sign-ins: logon type, and did the times match?**
 
 First sign-in (09:50): two Dana records at 09:50:15, both Logon Type 2. That
@@ -85,7 +89,8 @@ matches my note.
 Anything here gets fixed in the lab.
 
 - The lab said DWM- and UMFD- accounts start whenever someone signs in. None
-  of my eight 09:50 records were DWM or UMFD, only Dana and SYSTEM.
+  of my eight 09:50 records were DWM or UMFD, only Dana and SYSTEM. The
+  09:49:49 record from startup was SYSTEM too.
 
 ## Screenshots
 
