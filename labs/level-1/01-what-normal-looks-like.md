@@ -173,6 +173,8 @@ answer, with **Logon Type** and **Account Name** visible:
 
 - The newest records are at the top. Use the times from your notes to jump to
   the right place.
+- For question 2, look at your **unlock** time, not your lock time. Locking
+  doesn't create a sign-in record, because nobody signs in when you lock.
 - For question 3, look at the **Account Name** under **New Logon**, not under
   **Subject**.
 - For question 4, you don't need an exact number. Scroll and estimate.
@@ -197,8 +199,8 @@ signing in through the VMware window. Use the VMware window for this lab.
 
 **2. It depends, so check yours.** Microsoft's list says Logon Type **7** means
 "Unlock." But on the computer this lab was tested on (Windows 11 Enterprise
-Evaluation, build 26100), the unlock showed up as **Logon Type 2**: a fresh
-pair of records for Dana, exactly like a sign-in.
+Evaluation, build 26100), the unlock showed up as **Logon Type 2** in two
+separate tests: a fresh pair of records for Dana, exactly like a sign-in.
 
 Whatever yours shows, write it down. On *this* computer, that's what normal
 looks like. And notice what told you it was an unlock, not a sign-in: **your
