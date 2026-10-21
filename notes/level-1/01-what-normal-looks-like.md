@@ -25,7 +25,7 @@ match.
 | # | What I did | Time |
 |---|---|---|
 | 1 | Signed in as dana | 09:50 AM Eastern (my computer's clock) |
-| 2 | Locked the screen | 09:52 AM Eastern |
+| 2 | Locked the screen with **Windows key + L**. Both my real computer and the VM locked. | 09:52 AM Eastern |
 | 3a | Typed the wrong password by accident while unlocking | 09:54 AM Eastern |
 | 3 | Unlocked it | 09:55 AM Eastern |
 | 4 | Restarted (clicked Restart) | 09:57 AM Eastern |
@@ -99,7 +99,8 @@ Anything here gets fixed in the lab.
   from the lab on 2026-10-21, to add back later only if I find them.
 - The lab said an unlock is usually Logon Type 7. Mine was **Logon Type 2**: a
   fresh pair of Dana records that looks just like a sign-in. Only my notes told
-  me it was the unlock.
+  me it was the unlock. But I locked with Windows key + L (both computers
+  locked) and typed a wrong password first, so this wasn't a clean test.
 
 ## Screenshots
 
