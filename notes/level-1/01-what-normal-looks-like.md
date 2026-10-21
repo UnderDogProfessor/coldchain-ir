@@ -13,7 +13,8 @@ in, when I locked my screen and when I restarted the computer. Without them I
 had nothing to check the log against, so I'm doing it again.
 
 **Attempt 2 (2026-10-21):** I'll start noting timestamps right after all the
-Windows updates finish and the PC restarts.
+Windows updates finish and the PC restarts. Updates done, snapshot taken and
+named **WS-DSP-01 Clean**, then I started the PC.
 
 ---
 
@@ -21,7 +22,7 @@ Windows updates finish and the PC restarts.
 
 | # | What I did | Time |
 |---|---|---|
-| 1 | Signed in as dana | |
+| 1 | Signed in as dana | 09:50 AM Eastern (my computer's clock) |
 | 2 | Locked the screen | |
 | 3 | Unlocked it | |
 | 4 | Restarted | |
