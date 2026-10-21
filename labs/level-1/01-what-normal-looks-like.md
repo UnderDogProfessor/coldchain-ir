@@ -181,6 +181,14 @@ answer, with **Logon Type** and **Account Name** visible:
 
 **1. Logon Type 2.** You were at the keyboard. The time should match your
 notes to within a minute.
+
+You'll probably see **two** records for your account in the same second. Look
+at **Elevated Token**: one says **Yes** and the other **No**. Each one's
+**Linked Logon ID** points at the other's **Logon ID**. That's still one
+sign-in. Because dana is an administrator, Windows gives her two keys at once:
+an everyday key, and an admin key that's only used when you approve a "Run as
+administrator" prompt.
+
 *If you see **10** instead:* you connected with Remote Desktop rather than
 signing in through the VMware window. Use the VMware window for this lab.
 
@@ -190,9 +198,10 @@ the whole idea of the lab.
 
 **3. You'll find accounts that aren't people.** The most common one is
 **SYSTEM**, usually with Logon Type **5**: Windows starting its own background
-services. You'll probably also see names starting with **DWM-** or **UMFD-**.
-Those are parts of Windows that draw your screen and handle fonts, and they
-start every time someone signs in.
+services, started by `services.exe`. You may also see names starting with
+**DWM-** or **UMFD-**. Those are parts of Windows that draw the screen and
+handle fonts. Look for them around startup, before anyone signs in, rather
+than at your own sign-in.
 
 **4. Lots, maybe dozens.** Windows and its services sign in all the time. Only
 a few records were *you*. That's the most important lesson here: **most
