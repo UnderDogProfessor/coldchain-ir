@@ -144,6 +144,9 @@ Those two lines are most of what you need today.
 | **7** | Someone unlocked a locked screen |
 | **10** | Someone signed in over Remote Desktop |
 
+This list comes from Microsoft's documentation. Your computer won't always
+match it exactly, as Question 2 shows.
+
 Times in the list are shown in this computer's own time zone.
 
 ---
@@ -192,9 +195,14 @@ administrator" prompt.
 *If you see **10** instead:* you connected with Remote Desktop rather than
 signing in through the VMware window. Use the VMware window for this lab.
 
-**2. Usually Logon Type 7, "Unlock."** If yours shows something else, write
-down what you saw. On *this* computer, that's what normal looks like. That's
-the whole idea of the lab.
+**2. It depends, so check yours.** Microsoft's list says Logon Type **7** means
+"Unlock." But on the computer this lab was tested on (Windows 11 Enterprise
+Evaluation, build 26100), the unlock showed up as **Logon Type 2**: a fresh
+pair of records for Dana, exactly like a sign-in.
+
+Whatever yours shows, write it down. On *this* computer, that's what normal
+looks like. And notice what told you it was an unlock, not a sign-in: **your
+notes.** The log alone didn't say. That's why responders write down times.
 
 **3. You'll find accounts that aren't people.** The most common one is
 **SYSTEM**, usually with Logon Type **5**: Windows starting its own background
@@ -207,8 +215,9 @@ sign-ins on a computer aren't people.** When you hunt for something bad later,
 you'll be looking for one strange line among many normal ones.
 
 **5. Something like:** "Dana signs in at the keyboard (type 2) during her
-shift. She locks and unlocks her screen (type 7). Everything else is Windows
-signing itself in (SYSTEM, type 5)."
+shift, and each sign-in leaves a pair of records. Unlocking her screen looks
+the same as signing in. Everything else is Windows signing itself in (SYSTEM,
+type 5)."
 
 </details>
 
