@@ -47,7 +47,26 @@ Filtering the Security log to event 4624 left **153** records. I see at least
 
 ![Security log filtered to 4624](images/lab1-filtered-list.png)
 
+### The 8 records from my 09:50 sign-in
+
+| Time | Account Name | Logon Type | Elevated Token | Process |
+|---|---|---|---|---|
+| 09:50:15 | Dana | 2 | Yes | svchost.exe |
+| 09:50:15 | Dana | 2 | No | svchost.exe |
+| 09:50:15 | SYSTEM | 5 | Yes | services.exe |
+| 09:50:20 | SYSTEM | 5 | Yes | services.exe |
+| 09:50:27 | SYSTEM | 5 | Yes | services.exe |
+| 09:50:28 | SYSTEM | 5 | Yes | services.exe |
+| 09:50:28 | SYSTEM | 5 | Yes | services.exe |
+| 09:50:34 | SYSTEM | 5 | Yes | services.exe |
+
+The two Dana records point at each other. Logon ID `0xF2FC3` has Linked
+Logon ID `0xF3008`, and `0xF3008` links back to `0xF2FC3`.
+
 **1. My two sign-ins: logon type, and did the times match?**
+
+First sign-in (09:50): two Dana records at 09:50:15, both Logon Type 2. That
+matches my note.
 
 **2. My unlock: logon type?**
 
@@ -64,6 +83,9 @@ Filtering the Security log to event 4624 left **153** records. I see at least
 ## What didn't match the lab page
 
 Anything here gets fixed in the lab.
+
+- The lab said DWM- and UMFD- accounts start whenever someone signs in. None
+  of my eight 09:50 records were DWM or UMFD, only Dana and SYSTEM.
 
 ## Screenshots
 
