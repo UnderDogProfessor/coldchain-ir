@@ -12,6 +12,12 @@ and delivers chilled and frozen food.
 
 One Windows computer, one small thing to find, about an hour each.
 
+## My notes
+
+[`notes/`](notes/README.md) holds my own findings from each lab, kept separate
+from the lab pages. They're one real run, not an answer key, and they contain
+spoilers.
+
 ## Later
 
 [`docs/DESIGN.md`](docs/DESIGN.md) holds the long-term ideas: unique

@@ -13,3 +13,5 @@ needs no prior incident response experience.
 | 5 | Write it up | Turn what you found into a one-page summary | Coming soon |
 
 Do them in order. Each lab builds on the one before.
+
+Finished a lab? Compare with [my notes](../../notes/README.md) from my own run.

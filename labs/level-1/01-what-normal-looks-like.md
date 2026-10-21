@@ -176,6 +176,9 @@ signing itself in (SYSTEM, type 5, plus DWM and UMFD accounts)."
 - Recording sign-ins is a **setting**, so always check that it's on.
 - Normal is noisy. Most sign-ins are Windows, not people.
 
+**Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/01-what-normal-looks-like.md).
+Spoilers, so finish the lab first.
+
 **Next:** Lab 2, "Someone is guessing passwords." Coming soon.
 
 ## Sources

@@ -8,6 +8,11 @@ sentences. Don't add generators, seeds, graders or automation unless Shreyas
 asks. Every technical claim in a lab must match a source listed at the bottom
 of that lab. Anything you couldn't test on a real VM gets hedged in the text.
 
+`notes/` holds Shreyas's own findings from each lab. They're his words: give
+him an empty page to fill in, and help tidy it when he asks, but never write
+his answers or findings for him. Lab pages link to his notes with a spoiler
+warning.
+
 `docs/DESIGN.md` is the parked long-term design. Read it for direction, but
 don't build from it yet.
 
