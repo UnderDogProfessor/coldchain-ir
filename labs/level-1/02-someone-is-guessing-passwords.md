@@ -138,8 +138,11 @@ Write your answers in your notes. For each answer, say where you found it.
    to the last?
 2. Which account were they trying? What does the **Sub Status** tell you about
    that account?
-3. Where did the guesses come from? Look at **Logon Type**, **Workstation
-   Name** and **Source Network Address**.
+3. Where did the guesses come from? In a 4625 record, write down the
+   **Logon Type**, **Workstation Name** and **Source Network Address**
+   exactly as they appear (`127.0.0.1` means "this computer itself"). Then say
+   in one sentence whether the guesser was at this computer's keyboard or
+   somewhere else on the network.
 4. Compare your Lab 1 typo (if you had one) with the guesses in Part 2. Write
    a rule of thumb, in your own words, for telling a typo from guessing.
 5. When was Dana's next successful sign-in after the guesses? Can the log
