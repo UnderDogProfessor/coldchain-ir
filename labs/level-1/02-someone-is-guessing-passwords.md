@@ -121,6 +121,10 @@ Network Information:
 | `0xC0000064` | That account doesn't exist |
 | `0xC0000234` | The account is locked out |
 
+You'll also see a **Status** line above the Sub Status, probably
+`0xC000006D`. That's the general "this sign-in failed because of the username
+or the password." The **Sub Status** is the specific reason, so read that one.
+
 📸 **Screenshot:** one failed record with these parts visible. Save it as
 `lab2-one-guess.png`.
 
@@ -204,6 +208,10 @@ whether she was back at her desk at that time.
 - The log shows **accounts**, not people.
 - **Collect evidence before you clean up.** Reverting, rebooting or
   reinstalling can wipe the very records you need.
+- **Clearing a log leaves a mark.** If you clear the Security log to start
+  fresh, the first record afterward is event **1102**, "the audit log was
+  cleared." (The author found this by accident.) Someone hiding their tracks
+  would leave that trace too.
 
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/02-someone-is-guessing-passwords.md).
 Spoilers, so finish the lab first.
