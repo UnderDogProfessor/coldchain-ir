@@ -13,6 +13,12 @@ real Windows 11 VM.
 
 One Windows computer, one small thing to find, about an hour each.
 
+## Read the writeups
+
+Each lab also has a short writeup on my website, with what I found and what I
+got wrong:
+[COLD CHAIN on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/)
+
 ## My notes
 
 [`notes/`](notes/README.md) holds my own findings from each lab, kept separate

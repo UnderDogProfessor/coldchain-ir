@@ -229,6 +229,8 @@ whether she was back at her desk at that time.
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/02-someone-is-guessing-passwords.md).
 Spoilers, so finish the lab first.
 
+**Writeup:** [Lab 2 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/lab-2/)
+
 **Next:** [Lab 3: A new account appeared](03-a-new-account-appeared.md).
 
 ## Sources

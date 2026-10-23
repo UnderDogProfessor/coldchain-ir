@@ -24,6 +24,12 @@ him an empty page to fill in, and help tidy it when he asks, but never write
 his answers or findings for him. Lab pages link to his notes with a spoiler
 warning.
 
+When a lab's writeup goes live on cyberneticsintern.com, link it both ways:
+the lab page ends with a "Writeup" line, `labs/level-1/README.md` lists it,
+and the website entry links back to the lab and the notes on GitHub. Website
+URLs live under `/projects/lab-builds-and-writeups/coldchain-ir/lab-N/`. After
+any change, check every link in both places.
+
 `docs/DESIGN.md` is the parked long-term design. Read it for direction, but
 don't build from it yet.
 

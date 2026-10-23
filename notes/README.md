@@ -17,3 +17,6 @@ be different, and that's expected.
 | 3. A new account appeared | [Notes](level-1/03-a-new-account-appeared.md) | Not done yet |
 
 Screenshots for each level live in that level's `images/` folder.
+
+Short writeups of each lab are on my website:
+[COLD CHAIN on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/)
