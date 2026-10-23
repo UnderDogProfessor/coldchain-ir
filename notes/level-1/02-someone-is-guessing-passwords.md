@@ -38,7 +38,7 @@ My accidental wrong password from Lab 1 was at **09:54 AM Eastern** on
 
 **2. Which account, and what does the Sub Status say?**
 
-**3. Where did the guesses come from?**
+**3. Where did the guesses come from?** (Read three fields in a 4625 record, exactly as they appear: **Logon Type** = how they tried, 2 means at the keyboard; **Workstation Name** = which computer; **Source Network Address** = which address, `127.0.0.1` means this computer itself. Then answer in one sentence: at this computer's keyboard, or somewhere else on the network. The process name isn't needed.)
 
 **4. My rule of thumb for a typo vs. guessing:**
 
