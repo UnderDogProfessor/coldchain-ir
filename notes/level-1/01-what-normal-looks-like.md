@@ -132,6 +132,18 @@ in automatically after the restart and then locked the screen. Microsoft calls
 this automatic restart sign-on (ARSO). If so, my 09:58 "sign-in" was really an
 unlock, which would explain Logon Type 2 again. Not confirmed yet.
 
+**Update, 2026-10-23.** I later read my full Security log from Lab 1 (22,314
+events). It has the same pattern twice: a Dana pair of 4624 records at
+**09:49:26**, about 49 seconds *before* my first sign-in at 09:50:15, and the
+09:58:30 pair, 14 seconds before my sign-in at 09:58:44. Both come right after
+Windows started, before I typed anything. Microsoft's documentation says
+automatic restart sign-on is on by default and, on a computer that isn't joined
+to a domain, applies to restarts I start myself as well as Windows Update
+restarts ([source](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/component-updates/winlogon-automatic-restart-sign-on--arso-)).
+That fits, but I still haven't seen LSA event 320, which would confirm it, so
+it stays unconfirmed. I missed the 09:49:26 pair at first because I only looked
+at the records near my own times.
+
 **5. Normal on WS-DSP-01, in three sentences:**
 
 1. When Dana signs in, the log shows two Logon Type 2 records and one Logon
@@ -179,12 +191,16 @@ them in Event Viewer (**Action → Open Saved Log**).
 
 ## Screenshots
 
+Lab 1 was written before screenshots were numbered, so its files keep
+descriptive names.
+
+| File | Lab part | What it shows |
+|---|---|---|
+| `lab1-auditpol.webp` | Part 2 | `auditpol` showing Logon: Success and Failure |
+| `lab1-filtered-list.png` | Part 3, the filter | The Security log filtered to 4624 (153 records) |
+| `lab1-q1-signin.png` | Question 1 | **Not taken** |
+| `lab1-q2-unlock.png` | Question 2 | **Not taken** |
+| `lab1-q3-not-me.png` | Question 3 | **Not taken** |
+
 For questions 1 to 3 I copied the records as text and exported them as `.evtx`
 files (see Evidence files above) instead of taking screenshots.
-
-Save them in `images/` next to this file, using the names from the lab:
-`lab1-auditpol.png`, `lab1-filtered-list.png`, `lab1-q1-signin.png`,
-`lab1-q2-unlock.png`, `lab1-q3-not-me.png`. Then add each one here like this:
-`![What it shows](images/lab1-q2-unlock.png)`
-
-Crop each screenshot to the VM window only.
