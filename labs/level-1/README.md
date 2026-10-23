@@ -7,7 +7,7 @@ needs no prior incident response experience.
 |---|---|---|---|
 | 0 | [Before you start](00-setup.md) | Build the lab computer in VMware (once) | Ready, tested |
 | 1 | [What normal looks like](01-what-normal-looks-like.md) | Read sign-in records in Event Viewer | Ready, tested |
-| 2 | [Someone is guessing passwords](02-someone-is-guessing-passwords.md) | Find failed sign-ins: who, when, from where | Ready, not yet tested |
+| 2 | [Someone is guessing passwords](02-someone-is-guessing-passwords.md) | Find failed sign-ins: who, when, from where | Ready, tested |
 | 3 | [A new account appeared](03-a-new-account-appeared.md) | Find who created an account and whether it got admin rights | Ready, not yet tested |
 | 4 | Something runs at startup | Find what was set up to survive a reboot | Coming soon |
 | 5 | Write it up | Turn what you found into a one-page summary | Coming soon |

@@ -162,9 +162,11 @@ Write your answers in your notes. For each answer, say where you found it.
 <details>
 <summary><strong>Answers explained</strong> (try first)</summary>
 
-**1. Five, within about a minute.** Both the count and the timing matter. A
-person typing takes a few seconds per try. Guessing *programs* can try many
-times a second, which is something to watch for in later labs.
+**1. Five, and your times will vary.** Both the count and the timing matter.
+In the author's run the five guesses were spread over about 4 minutes 40
+seconds, because he typed slowly and checked the screen between tries. A
+person typing takes seconds to minutes per try. Guessing *programs* can try
+many times a second, which is something to watch for in later labs.
 
 **2. Dana. `0xC000006A` means the account is real and only the password was
 wrong.** So the guesser already knew Dana's account name. If you saw
@@ -181,7 +183,7 @@ probably a typo. Several failures in a row, close together, is guessing."
 Then look at what comes **next**: a success straight after a run of failures
 could mean the guess worked.
 
-**5. At your unlock time, two minutes after the last guess. But no, the log
+**5. At your unlock time, a few minutes after the last guess. But no, the log
 can't prove it was Dana.** Windows checks the *password*, not the *person*.
 Whoever typed the right password became "Dana" as far as the log is
 concerned. That's why responders also talk to people: Dana can tell you
