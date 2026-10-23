@@ -60,6 +60,9 @@ I also saw several successful logins during the time I was entering the 5
 wrong passwords. All of them were Logon Type 5 and the account SYSTEM. So even
 though I didn't sign in, I see these SYSTEM successful logins with Logon Type 5.
 
+(Checked against my saved log: there are 6 of them between the first and last
+guess, at 2:32:02 (three), 2:32:03, 2:32:09 and 2:34:11 PM.)
+
 **3. Where did the guesses come from?**
 
 (Read three fields in a 4625 record, exactly as they appear: **Logon Type** =
@@ -70,7 +73,10 @@ somewhere else on the network. The process name isn't needed.)
 
 - Workstation Name: WS-DSP-01
 - Source Network Address: 127.0.0.1
-- Logon Type: *(not written down for the 5 guesses; the Part 1 typo was 2)*
+- Logon Type: 2 (all five guesses, read from my saved log
+  [evidence/lab2-complete-log.evtx](evidence/lab2-complete-log.evtx); the
+  records also show Status `0xc000006d`, Sub Status `0xc000006a`, Source Port
+  0 and Process `svchost.exe`)
 - One-sentence answer: the guesses came from this computer itself
   (WS-DSP-01, 127.0.0.1), not from the network, and I typed them at the
   keyboard of WS-DSP-01.
@@ -100,6 +106,13 @@ Name Dana, which proves my successful sign-in.
 Details of that record (screenshot below): Logon Type 2, Elevated Token Yes,
 Account Name Dana, Logon ID `0x1827A47`, Linked Logon ID `0x1827A75`.
 
+Checked against my saved log: the 7 SYSTEM, Logon Type 5 records are at
+2:36:39, 2:37:09 (two), 2:37:10, 2:37:11, 2:37:21 and 2:37:47 PM. At 2:38:22 PM
+there is a Dana pair (Elevated Token Yes and No, linked to each other) plus one
+more SYSTEM record. One thing the log can't tell me: whether the person typing
+the password was really Dana. It only shows that the account's password was
+typed correctly.
+
 ![The 4624 for Dana at 2:38:22 PM: Logon Type 2, Elevated Token Yes](images/lab2-unlock.png)
 
 ---
@@ -121,7 +134,18 @@ Anything here gets fixed in the lab.
 
 ## Evidence files
 
-None exported this time. I took screenshots only.
+- [lab2-complete-log.evtx](evidence/lab2-complete-log.evtx): my whole Security
+  log from when I cleared it until I finished the lab. 431 events, from
+  2:25:27 PM to 3:09:11 PM on 2026-10-23.
+
+**The log clear left a mark.** The very first record in the file is event
+**1102**, "The audit log was cleared," at 2:25:27 PM. That's my own clear
+before Part 2. Clearing a log doesn't hide that it happened.
+
+Counts in the file: 45 successful sign-ins (4624), of which 41 are SYSTEM and
+4 are Dana (two pairs: 2:29:30 PM and 2:38:22 PM), and 5 failed sign-ins
+(4625). The rest are other event types, such as 4672, 4798, 4799 and 5379,
+which I haven't looked into.
 
 ## Screenshots
 
