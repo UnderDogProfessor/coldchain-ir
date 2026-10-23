@@ -94,6 +94,9 @@ Account Name Dana, Logon ID `0x1827A47`, Linked Logon ID `0x1827A75`.
 
 ## What surprised me
 
+In Lab 2 I saw so many successful login records that I didn't do myself. All
+of them were from the account SYSTEM with Logon Type 5.
+
 ## What didn't match the lab page
 
 Anything here gets fixed in the lab.
