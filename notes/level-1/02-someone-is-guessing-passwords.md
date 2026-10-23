@@ -28,6 +28,11 @@ My accidental wrong password from Lab 1 was at **09:54 AM Eastern** on
 
 Done on 2026-10-23. Times are Eastern.
 
+Before this part I saved the Security log and then cleared it, so Part 2 starts
+with a fresh log (my screenshot shows 134 events in total, compared with
+22,273 in the Part 1 screenshot). My attempt at about 02:27 PM was me starting
+from scratch, so I'm ignoring it.
+
 | # | What I did | Time |
 |---|---|---|
 | 1 | Signed in as Dana | 02:29 PM |
