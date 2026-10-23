@@ -132,6 +132,46 @@ Anything here gets fixed in the lab.
 - The unlock at 2:38:22 PM was Logon Type 2 again, the third time I've seen an
   unlock logged as type 2 on this computer, not type 7.
 
+## What I missed, and noticed later
+
+After finishing, I compared my notes against my saved log. My times and counts
+were right, but I missed or got wrong the things below. I'm leaving them here
+so you can learn from my misses instead of repeating them.
+
+1. **I said the log "proves my successful sign-in."** It doesn't. It proves
+   that *the account's password was typed correctly*. It can't show who was
+   typing. I only noticed when I re-read the lab's own question.
+2. **I didn't notice the lock isn't in the log.** My 2:30 PM lock appears
+   nowhere in my saved log (there are no lock or unlock events). The only
+   record of it is the time I wrote down. Notes can be the only evidence for
+   something that happened.
+3. **I missed the fingerprint of a real sign-in.** At 2:29:30 and 2:38:22 PM
+   the log has, besides the Dana pair of 4624 records, one **4648** (a sign-in
+   using explicit credentials) and one **4672** (special privileges assigned,
+   which is the admin key). My failed guesses left only a 4625 each. That's
+   how you can tell "someone got it right" from "someone got it wrong."
+4. **I didn't notice that clearing the log was itself recorded.** I cleared
+   the log to start fresh, and the very first record in my saved log is event
+   **1102**, "the audit log was cleared," at 2:25:27 PM. I only saw it when I
+   looked for it. Clearing doesn't hide that it happened.
+5. **I didn't write down the Logon Type of the guesses, or how long they
+   took.** I recorded the times but didn't work out the span (4 min 39 s) or
+   check the Logon Type (2). A rule of thumb needs numbers.
+6. **I wrote the wrong event ID.** I typed "4654" when I meant **4624**.
+   Double-check event IDs before you share them.
+7. **I wrote a rule of thumb that wasn't a rule.** My first attempt was "typo
+   rather keyboard hits." A better rule uses the count and the timing: one
+   failure then a success a minute later looks like a typo, five failures in
+   under five minutes looks like guessing.
+8. **I didn't dig into the extra records.** My log has 431 events, and I only
+   looked at the sign-in ones. There were 260 records of event 4799 that I
+   haven't looked into. One 4798 record from `LogonUI.exe` (the sign-in
+   screen) at 2:27:38 PM may be my "starting from scratch" attempt, but I'm
+   not sure.
+
+**Tip for next time:** put my notes next to the log. For each note I wrote,
+write the exact log time and what the log can and can't prove.
+
 ## Evidence files
 
 - [lab2-complete-log.evtx](evidence/lab2-complete-log.evtx): my whole Security
