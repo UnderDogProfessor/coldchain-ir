@@ -15,7 +15,8 @@ inbox/
   lab-3/   the same for Lab 3
 ```
 
-Name files the way the lab suggests, for example `lab3-created.png` and
+Number screenshots in the order the lab asks for them: `lab3-1.png`,
+`lab3-2.png`, and so on. Name exports as the lab suggests, for example
 `lab3-new-account.evtx`.
 
 ## Your notes

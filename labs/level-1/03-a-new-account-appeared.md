@@ -33,8 +33,10 @@ Your team lead asks: **who created it, when, and was it given admin rights?**
 ## Keep notes like a responder
 
 Copy the [notes template](notes-template.md) and write times as you go, same
-as before. Take a screenshot wherever you see 📸. **Export the records** with
-**Save Filtered Log File As...** before you clean anything up.
+as before. Take a screenshot wherever you see 📸, and **number them in the
+order the lab asks for them**: `lab3-1.png`, `lab3-2.png`, and so on.
+**Export the records** with **Save Filtered Log File As...** before you clean
+anything up.
 
 ---
 
@@ -53,7 +55,7 @@ Like sign-ins in Lab 1, account changes are a setting. Check both:
 
 3. Each should say **Success** or **Success and Failure**.
 
-📸 **Screenshot:** both results. Save it as `lab3-audit.png`.
+📸 **Screenshot 1:** both results. Save it as `lab3-1.png`.
 
 **If one says No Auditing,** you'd have no evidence to find. You can turn it
 on for this lab, for example:
@@ -81,8 +83,8 @@ Snapshot**. Power it on, sign in as Dana, then right-click **Start** and open
 > This account is for the lab only, and the password means nothing. You'll
 > delete it at the end. Never do this on a computer that isn't yours.
 
-📸 **Screenshot:** the result of step 3, showing **svc-backup2** in the
-Administrators list. Save it as `lab3-now.png`.
+📸 **Screenshot 2:** the result of step 3, showing **svc-backup2** in the
+Administrators list. Save it as `lab3-2.png`.
 
 ## Part 3: Find the trail (20 minutes)
 
@@ -103,8 +105,8 @@ New Account:
     Security ID:     S-1-5-21-...      ← its unique ID
 ```
 
-📸 **Screenshot:** the record with **Subject** and **New Account** visible.
-Save it as `lab3-created.png`.
+📸 **Screenshot 3:** the record with **Subject** and **New Account** visible.
+Save it as `lab3-3.png`.
 
 ### Admin rights given: 4732
 
@@ -129,7 +131,7 @@ For local groups, Microsoft says the member's **Account Name** is usually just
 **Security ID** in the 4720 record? That's how you prove they're about the same
 account.
 
-📸 **Screenshot:** the 4732 record. Save it as `lab3-admin-add.png`.
+📸 **Screenshot 4:** the 4732 record. Save it as `lab3-4.png`.
 
 ### The neighbors
 
@@ -137,12 +139,17 @@ Creating an account can write a few other records right next to it. Change the
 filter to **4720-4740** to see them. Don't worry about understanding every one.
 **Write down the event IDs you see**, because a later lab can look them up.
 
+📸 **Screenshot 5:** the list of neighboring records. Save it as `lab3-5.png`.
+
 ### Which sign-in was it?
 
 The **Logon ID** in the 4720's **Subject** section says which sign-in did it.
 Change the filter to **4624** and find the sign-in with that same Logon ID. In
 Lab 1 you saw that Dana's sign-in left a pair of records. **Which one matches?
 Is its Elevated Token Yes or No?**
+
+📸 **Screenshot 6:** the matching 4624 record, with **Logon ID** and
+**Elevated Token** visible. Save it as `lab3-6.png`.
 
 ### Export the evidence
 
@@ -156,6 +163,9 @@ Name it `lab3-new-account.evtx` and drag it to your real computer.
 2. In Event Viewer, click **Refresh** and filter for **4720-4740**.
 
 **Is the account's creation still in the log?**
+
+📸 **Screenshot 7:** the list after the delete, showing the creation and the
+new record. Save it as `lab3-7.png`.
 
 ---
 

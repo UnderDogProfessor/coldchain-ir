@@ -22,7 +22,7 @@ My accidental wrong password from Lab 1 was at **09:54 AM Eastern** on
 | Sub Status | 0xC000006A |
 | Next successful sign-in for Dana after it | 10/21/2026 9:55:17 AM |
 
-![The 4625 at 09:54:07 and the sign-in records at 09:55:17](images/lab2-old-typo.png)
+![The 4625 at 09:54:07 and the sign-in records at 09:55:17](images/lab2-1.png)
 
 ## Part 2: What I did as the guesser
 
@@ -43,7 +43,7 @@ from scratch, so I'm ignoring it.
 
 ## Part 3: My answers
 
-![Security log filtered to 4624 and 4625: five failures and the records around them](images/lab2-guesses.png)
+![Security log filtered to 4624 and 4625: five failures and the records around them](images/lab2-2.png)
 
 **1. How many failed sign-ins, and how long from first to last?**
 
@@ -113,7 +113,7 @@ more SYSTEM record. One thing the log can't tell me: whether the person typing
 the password was really Dana. It only shows that the account's password was
 typed correctly.
 
-![The 4624 for Dana at 2:38:22 PM: Logon Type 2, Elevated Token Yes](images/lab2-unlock.png)
+![The 4624 for Dana at 2:38:22 PM: Logon Type 2, Elevated Token Yes](images/lab2-4.png)
 
 ---
 
@@ -169,6 +169,13 @@ so you can learn from my misses instead of repeating them.
    screen) at 2:27:38 PM may be my "starting from scratch" attempt, but I'm
    not sure.
 
+9. **I skipped a screenshot the lab asked for.** Screenshot 3 is one failed
+   record with its Logon Type, Workstation Name and Source Network Address
+   visible. I only wrote those values down, which is the weaker evidence. I
+   did take a screenshot of my unlock record, which the lab hadn't asked for
+   yet, so it now does (Screenshot 4). I also didn't number my screenshots
+   at first, which made it hard to match them to the lab afterward.
+
 **Tip for next time:** put my notes next to the log. For each note I wrote,
 write the exact log time and what the log can and can't prove.
 
@@ -189,7 +196,11 @@ which I haven't looked into.
 
 ## Screenshots
 
-- `lab2-old-typo.png`: the Lab 1 typo (4625 at 09:54:07 AM) and the sign-in at
-  09:55:17 AM
-- `lab2-guesses.png`: the five failures between 2:30:26 PM and 2:35:05 PM
-- `lab2-unlock.png`: Dana's sign-in record at 2:38:22 PM
+Numbered in the order the lab first asks for them.
+
+| # | File | Lab part | What it shows |
+|---|---|---|---|
+| 1 | `lab2-1.png` | Part 1 | The Lab 1 typo (4625 at 09:54:07 AM) and the sign-in at 09:55:17 AM |
+| 2 | `lab2-2.png` | Part 3, the list | The five failures between 2:30:26 PM and 2:35:05 PM |
+| 3 | `lab2-3.png` | Part 3, one failed record | **Not taken** (see "What I missed", item 9) |
+| 4 | `lab2-4.png` | Part 3, your unlock | Dana's sign-in record at 2:38:22 PM |

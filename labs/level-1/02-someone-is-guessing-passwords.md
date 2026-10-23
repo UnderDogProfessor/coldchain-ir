@@ -35,6 +35,10 @@ Same as Lab 1: copy the [notes template](notes-template.md) into a new
 `lab-2` folder on your real computer, write down times as you go, and take a
 screenshot wherever you see 📸.
 
+**Number your screenshots in the order the lab asks for them:** `lab2-1.png`,
+`lab2-2.png`, and so on. The same numbers appear in the lab and in the notes
+page, so you always know which picture goes where.
+
 **New habit: export the records.** In Event Viewer, **Save Filtered Log File
 As...** saves exactly the records you're looking at into an `.evtx` file that
 anyone can open later. A screenshot shows a record; an export *is* the record.
@@ -57,7 +61,7 @@ up later.
 5. Export it: **Save Filtered Log File As...**, name it `lab2-old-typo.evtx`,
    then drag the file out of the VM window onto your real computer.
 
-📸 **Screenshot:** the record. Save it as `lab2-old-typo.png`.
+📸 **Screenshot 1:** the record. Save it as `lab2-1.png`.
 
 **Found nothing?** That's fine. It means you didn't make a typo in Lab 1.
 Carry on to Part 2.
@@ -91,8 +95,8 @@ You'll play two people: the **guesser** sitting at Dana's desk, and then
 Now successes and failures sit together, in time order. Find your guesses
 and Dana's unlock.
 
-📸 **Screenshot:** the list showing the failures and the unlock after them.
-Save it as `lab2-guesses.png`.
+📸 **Screenshot 2:** the list showing the failures and the unlock after them.
+Save it as `lab2-2.png`.
 
 ### Read one failed sign-in
 
@@ -125,8 +129,17 @@ You'll also see a **Status** line above the Sub Status, probably
 `0xC000006D`. That's the general "this sign-in failed because of the username
 or the password." The **Sub Status** is the specific reason, so read that one.
 
-📸 **Screenshot:** one failed record with these parts visible. Save it as
-`lab2-one-guess.png`.
+📸 **Screenshot 3:** one failed record with these parts visible. Save it as
+`lab2-3.png`.
+
+### Find your unlock
+
+Find the **4624** record at the time you unlocked in step 5. Read its **Logon
+Type** and **Account Name**, and note whether **Elevated Token** says Yes or
+No.
+
+📸 **Screenshot 4:** the record at your unlock, with **Logon Type** and
+**Account Name** visible. Save it as `lab2-4.png`.
 
 **Export the evidence:** with the **4624,4625** filter still on, use **Save
 Filtered Log File As...**, name it `lab2-guesses.evtx`, and drag it to your

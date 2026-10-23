@@ -30,9 +30,13 @@ One answer per question, in your own words. Say *where* you found it, too
 
 ## Screenshots
 
-| File | What it shows |
-|---|---|
-| `labN-....png` | |
+Number them in the order the lab asks for them.
+
+| # | File | Lab part | What it shows |
+|---|---|---|---|
+| 1 | `labN-1.png` | | |
+| 2 | `labN-2.png` | | |
+| 3 | `labN-3.png` | | |
 
 ## What surprised me
 

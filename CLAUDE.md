@@ -10,9 +10,14 @@ of that lab. Anything you couldn't test on a real VM gets hedged in the text.
 
 Every lab teaches the notes habit: point learners to
 `labs/level-1/notes-template.md`, include 📸 screenshot prompts at the moments
-that prove an answer, and give each screenshot a suggested file name
-(`labN-what-it-shows.png`). Screenshots are saved on the learner's real
-computer, never inside the VM.
+that prove an answer. **Number every screenshot in the order the lab first asks
+for it:** "📸 **Screenshot 1:** ... Save it as `labN-1.png`", then 2, 3, and so
+on, and never skip a screenshot that the learner would need for their notes.
+Shreyas names his files the same way. The notes page for the lab shows each
+numbered screenshot under the part where the lab first asks for it, and ends
+with a table of number, file, lab part and what it shows. Screenshots are saved
+on the learner's real computer, never inside the VM. (Lab 1 predates this and
+keeps its descriptive names.)
 
 `notes/` holds Shreyas's own findings from each lab. They're his words: give
 him an empty page to fill in, and help tidy it when he asks, but never write
