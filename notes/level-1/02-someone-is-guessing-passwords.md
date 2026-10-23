@@ -19,8 +19,14 @@ My accidental wrong password from Lab 1 was at **09:54 AM Eastern** on
 | Account Name (Account For Which Logon Failed) | Dana |
 | Logon Type | 2 |
 | Failure Reason | Unknown user name or bad password. |
-| Sub Status | 0xC000006A |
+| Sub Status | 0xC000006A (Status `0xC000006D`) |
+| Workstation Name / Source Network Address | WS-DSP-01 / 127.0.0.1 |
 | Next successful sign-in for Dana after it | 10/21/2026 9:55:17 AM |
+
+I saved this one record as its own export **before** I cleared the log for
+Part 2: [evidence/lab2-old-typo.evtx](evidence/lab2-old-typo.evtx). It holds
+exactly one event, the 4625 at 09:54:07 AM, and it matches the values above.
+Clearing the log would have erased it for good, so exporting first mattered.
 
 ![The 4625 at 09:54:07 and the sign-in records at 09:55:17](images/lab2-1.png)
 
@@ -181,6 +187,8 @@ write the exact log time and what the log can and can't prove.
 
 ## Evidence files
 
+- [lab2-old-typo.evtx](evidence/lab2-old-typo.evtx): the one 4625 from my Lab 1
+  typo (09:54:07 AM on 2026-10-21), saved before I cleared the log.
 - [lab2-complete-log.evtx](evidence/lab2-complete-log.evtx): my whole Security
   log from when I cleared it until I finished the lab. 431 events, from
   2:25:27 PM to 3:09:11 PM on 2026-10-23.
