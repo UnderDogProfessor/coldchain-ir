@@ -26,3 +26,8 @@ __pycache__/
 *.pyc
 .venv/
 .pytest_cache/
+
+# Private staging area: raw screenshots, exports and rough notes.
+# Nothing here is published until it's reviewed and copied into notes/.
+inbox/*
+!inbox/README.md
