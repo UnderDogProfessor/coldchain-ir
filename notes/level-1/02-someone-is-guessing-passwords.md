@@ -71,12 +71,19 @@ somewhere else on the network. The process name isn't needed.)
 - Workstation Name: WS-DSP-01
 - Source Network Address: 127.0.0.1
 - Logon Type: *(not written down for the 5 guesses; the Part 1 typo was 2)*
-- One-sentence answer: *(still to add)*
+- One-sentence answer: the guesses came from this computer itself
+  (WS-DSP-01, 127.0.0.1), not from the network, and I typed them at the
+  keyboard of WS-DSP-01.
 
 **4. My rule of thumb for a typo vs. guessing:**
 
-Typo rather keyboard hits. *(To rewrite in my own words. The data to compare
-is below.)*
+One failure followed by a successful sign-in about a minute later looks like a
+typo (my Lab 1 typo: 1 failure, success 1 min 10 s later). Several failures in
+a row, close together, before a success looks like guessing (my Part 2: 5
+failures within 4 min 39 s, then a success).
+
+*(Drafted from the table below at my request. My first note was "typo rather
+keyboard hits".)*
 
 | | Failures | Time from first to last failure | Next success |
 |---|---|---|---|
