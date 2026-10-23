@@ -194,6 +194,13 @@ sign-in. Because dana is an administrator, Windows gives her two keys at once:
 an everyday key, and an admin key that's only used when you approve a "Run as
 administrator" prompt.
 
+You may also see **another** pair for Dana, a few seconds to a minute *earlier*,
+right after Windows started and before you typed a password. In the author's
+log there was one at 09:49:26, before his sign-in at 09:50:15. It may be
+Windows signing Dana in by itself after a restart and then locking the screen
+(Microsoft calls this automatic restart sign-on). That isn't confirmed, so
+write down what you see and the times.
+
 *If you see **10** instead:* you connected with Remote Desktop rather than
 signing in through the VMware window. Use the VMware window for this lab.
 
