@@ -6,6 +6,19 @@
 **Date done:** 2026-10-25
 **Lab computer:** WS-DSP-01, Windows 11 Enterprise Evaluation (build 26100), VMware Workstation
 
+> **At a glance**
+>
+> - **The goal:** trace a new admin account: who made it, when, and how.
+> - **Created 4:36:29 PM, made an administrator 10 seconds later**, both by
+>   Dana's session (Logon ID `0x76354`). The two Security IDs matched.
+> - **Windows added more by itself:** the account joined the groups Users and
+>   None at creation, and the log also shows it enabled, changed and given a
+>   password.
+> - **Deleting added four records, it didn't remove any.** The same Logon ID
+>   deleted it 2 hours 48 minutes later.
+> - **The sign-in I wanted isn't in the log.** I cleared the log first and
+>   erased it.
+
 Screenshots are numbered in the order the lab asks for them. Each one sits
 under the part where the lab first asks for it. Times are Eastern.
 

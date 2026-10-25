@@ -6,6 +6,19 @@
 **Date done:** 2026-10-21
 **Lab computer:** WS-DSP-01, Windows 11 Enterprise Evaluation (build 26100), VMware Workstation
 
+> **At a glance**
+>
+> - **The goal:** learn what a normal morning looks like in the sign-in log
+>   (event 4624), before anything goes wrong.
+> - **One sign-in leaves a pair of records.** Dana is an administrator, so each
+>   sign-in wrote two linked Logon Type 2 records, one with Elevated Token Yes
+>   and one with No.
+> - **Most sign-ins aren't people.** After my restart the log recorded 50
+>   sign-ins in 24 seconds, and only 4 were Dana.
+> - **Unlock looked like a sign-in:** Logon Type 2, not 7, in two tests.
+> - **Still unconfirmed:** whether Windows signed Dana in automatically after
+>   restarts (09:49:26 and 09:58:30).
+
 ## Attempts
 
 **Attempt 1:** I completely forgot to note down timestamps for when I signed

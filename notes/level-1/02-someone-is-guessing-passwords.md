@@ -6,6 +6,18 @@
 **Date done:** 2026-10-23
 **Lab computer:** WS-DSP-01, Windows 11 Enterprise Evaluation (build 26100), VMware Workstation
 
+> **At a glance**
+>
+> - **The goal:** find password guesses in the Security log (event 4625) and
+>   tell them apart from a typo.
+> - **Five failures in 4 minutes 39 seconds**, all Dana, all Logon Type 2, all
+>   from this computer itself (`WS-DSP-01`, `127.0.0.1`), Sub Status
+>   `0xC000006A` (right account, wrong password).
+> - **A typo versus guessing:** one failure then a success 70 seconds later,
+>   against five failures before a success.
+> - **The log shows accounts, not people.** It also has no record of my lock,
+>   and my log clear left event 1102.
+
 ---
 
 ## Part 1: The evidence I already had

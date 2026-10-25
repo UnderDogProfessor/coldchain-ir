@@ -24,6 +24,7 @@ Finished a lab? Compare with [my notes](../../notes/README.md) from my own run.
 **Writeups on my website:**
 [Lab 1](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/lab-1/),
 [Lab 2](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/lab-2/),
+[Lab 3](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/lab-3/),
 or the whole [COLD CHAIN series](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/).
 
 **Explainers** go deeper on things the labs turn up:
