@@ -81,3 +81,13 @@ VM. Never leave finished work sitting uncommitted at the end of a session.
 
 There's no code yet. Once `engine/` exists, run the scenario validator and the
 grader tests before finishing, and never finish on a failing check.
+
+## LinkedIn cards
+
+Every lab's LinkedIn card gets its **own composition**, never a recolored copy
+of the last one. Keep the series signature so they read as a set: the "Incident
+Response Home Lab Series" pill, the outlined lab number, the Rimeport footer
+and the site palette. Change everything else: format (square or 4:5), layout
+and the central illustration. So far: Lab 1 is a bar chart of the 50 sign-ins,
+Lab 2 is a cartoon scene, Lab 3 is an evidence board. The cards and posts live
+in the Portfolio repo's untracked `social/` folder, not in this repo.
