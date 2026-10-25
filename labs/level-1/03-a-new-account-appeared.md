@@ -68,6 +68,11 @@ Note that this only records changes **from now on**. It can't go back and
 record what already happened. That's a real finding: if auditing is off when
 something happens, there's nothing to find later.
 
+> **Don't clear the Security log before this lab.** A clean log is tidy, but
+> Part 3 traces the account back to the sign-in that created it, and clearing
+> the log can erase that sign-in. (The author did, and couldn't answer that
+> part.) If you must clear it, use **Save and Clear** and keep the file.
+
 ## Part 2: Play the intruder (10 minutes)
 
 Put WS-DSP-01 back to its clean state: **VM → Snapshot → Revert to
@@ -92,6 +97,8 @@ Administrators list. Save it as `lab3-2.png`.
 
 1. Open **Event Viewer**, then **Windows Logs**, then **Security**.
 2. Click **Filter Current Log...**, type **4720,4732**, and click **OK**.
+   You'll see **three** records: one 4720 and **two** 4732s. More on that
+   below.
 3. Find the **4720** record from your step 1. Scroll down in the bottom half.
 
 ```
@@ -110,7 +117,9 @@ Save it as `lab3-3.png`.
 
 ### Admin rights given: 4732
 
-Click the **4732** record from step 2.
+There are two 4732 records. Windows adds every new account to the **Users**
+group by itself, and that's the first 4732. Yours is the one whose **Group
+Name** is **Administrators**, a few seconds later. Click that one.
 
 ```
 Member:
@@ -135,9 +144,12 @@ account.
 
 ### The neighbors
 
-Creating an account can write a few other records right next to it. Change the
+Creating an account writes a few other records right next to it. Change the
 filter to **4720-4740** to see them. Don't worry about understanding every one.
-**Write down the event IDs you see**, because a later lab can look them up.
+**Write down the event IDs you see.** In the author's run there were seven:
+4720 (created), 4722 (enabled), 4738 (changed), 4724 (password set), 4728 (added
+to the global group *None*), and two 4732s (Users, then Administrators).
+Compare yours.
 
 📸 **Screenshot 5:** the list of neighboring records. Save it as `lab3-5.png`.
 
@@ -148,8 +160,13 @@ Change the filter to **4624** and find the sign-in with that same Logon ID. In
 Lab 1 you saw that Dana's sign-in left a pair of records. **Which one matches?
 Is its Elevated Token Yes or No?**
 
+**Can't find it?** That's a real result, not a mistake. If the sign-in happened
+before the log was cleared (or the log has wrapped), the record is gone. Write
+down the Logon ID you were looking for and say why you can't match it.
+
 📸 **Screenshot 6:** the matching 4624 record, with **Logon ID** and
-**Elevated Token** visible. Save it as `lab3-6.png`.
+**Elevated Token** visible. If you can't find it, take a screenshot of your
+search and write what's missing. Save it as `lab3-6.png`.
 
 ### Export the evidence
 
@@ -162,10 +179,14 @@ Name it `lab3-new-account.evtx` and drag it to your real computer.
    `net user svc-backup2 /delete`
 2. In Event Viewer, click **Refresh** and filter for **4720-4740**.
 
-**Is the account's creation still in the log?**
+**Is the account's creation still in the log?** Count the new records the
+delete wrote at the top of the list. Then compare the **Logon ID** under
+**Subject** in the delete record with the one in the creation record. Are they
+the same?
 
-📸 **Screenshot 7:** the list after the delete, showing the creation and the
-new record. Save it as `lab3-7.png`.
+📸 **Screenshots 7.1 to 7.4:** click each new record in turn and capture it
+(in the author's run: two 4733s, a 4729 and the 4726). Save them as
+`lab3-7.1.png`, `lab3-7.2.png`, and so on.
 
 ---
 
@@ -203,22 +224,33 @@ match your note to within a few seconds.
 it. It can't prove which *person* did, the same lesson as Lab 2: Windows
 checks the password, not the human.
 
-**3. Yes, the 4732 record, in the Administrators group (Builtin).** The record
-shows the new member as an ID, not a name. That ID matches the **Security ID**
-in the 4720 record, which is how you know they're about the same account.
+**3. Yes, the 4732 record whose Group Name is Administrators (Builtin).** The
+record shows the new member as an ID, not a name. That ID matches the
+**Security ID** in the 4720 record, which is how you know they're about the
+same account. The other 4732 (the group **Users**) is Windows adding every new
+account to that group automatically.
 
-**4. It should match the sign-in with Elevated Token Yes.** That's expected:
-creating accounts needs admin power, and you opened **Terminal (Admin)**, which
-uses Dana's admin key. If yours doesn't match, write down what you see. That's
-what normal looks like on your computer.
+**4. Look at the Logon ID in the 4720's Subject.** If the sign-in is still in
+the log, expect it to match the pair record with Elevated Token **Yes**,
+because creating accounts needs admin power and you opened **Terminal
+(Admin)**, which uses Dana's admin key. That's an expectation, not something
+the author could confirm: in his run the sign-in had been erased by clearing
+the log, so the Logon ID matched nothing. If that happens to you, the honest
+answer is "I can't tell, and here's why."
 
-**5. Yes, the log still shows the creation.** Deleting the account leaves its
-own record (event 4726, "a user account was deleted") on top of the 4720, so
-the trail got longer, not shorter. Something like: "Dana's account created
-svc-backup2 at 11:02, then added it to Administrators at 11:03, using an
-elevated sign-in. I can't tell whether Dana herself did it." Remember that a
-name like *svc-backup2* looks like IT made it, so **check who created an
-account, not what it's called**.
+What the author *could* show: the delete records carry the **same Logon ID** as
+the creation, even though nearly three hours passed and Dana had locked and
+unlocked the screen in between. The same sign-in session did both.
+
+**5. Yes, the log still shows the creation.** Deleting the account doesn't
+remove anything. It adds records: in the author's run, four of them (two 4733s
+for leaving the Users and Administrators groups, a 4729 for leaving the global
+group None, and the 4726 "a user account was deleted"). So the trail got
+longer, not shorter. Something like: "Dana's account created svc-backup2 at
+11:02, then added it to Administrators at 11:03, and the same session deleted
+it at 2:00. I can't tell whether Dana herself did it." Remember that a name
+like *svc-backup2* looks like IT made it, so **check who created an account,
+not what it's called**.
 
 </details>
 
@@ -232,7 +264,10 @@ account, not what it's called**.
 - IDs like the **Security ID** and **Logon ID** let you follow a trail from
   record to record. Names can lie, IDs can't.
 - The log shows **accounts**, not people.
-- Deleting an account doesn't delete its history.
+- Deleting an account doesn't delete its history. It adds more.
+- **Clearing a log can erase the very sign-in you need to trace.** Export first.
+- One **Logon ID** appearing in both the creation and the delete shows the same
+  session did both.
 
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/03-a-new-account-appeared.md).
 Spoilers, so finish the lab first.
@@ -244,3 +279,7 @@ Spoilers, so finish the lab first.
 - Microsoft, "4720(S): A user account was created": <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4720>
 - Microsoft, "4732(S): A member was added to a security-enabled local group": <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4732>
 - Microsoft, "4624(S): An account was successfully logged on": <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624>
+- Microsoft, "4722(S): A user account was enabled": <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4722>
+- Microsoft, "4724(S, F): An attempt was made to reset an account's password": <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4724>
+- Microsoft, "4738(S): A user account was changed": <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4738>
+- The event names for 4726, 4728, 4729 and 4733 come from the records themselves in the author's Event Viewer.
