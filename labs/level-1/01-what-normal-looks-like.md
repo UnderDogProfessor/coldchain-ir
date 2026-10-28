@@ -259,7 +259,7 @@ type 5)."
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/01-what-normal-looks-like.md).
 Spoilers, so finish the lab first.
 
-**Writeup:** [Lab 1 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/lab-1/)
+**Writeup:** [Lab 1 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-1/)
 
 **Next:** [Lab 2: Someone is guessing passwords](02-someone-is-guessing-passwords.md).
 **Don't revert your snapshot first.** Lab 2 starts with any typo you made

@@ -272,7 +272,7 @@ not what it's called**.
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/03-a-new-account-appeared.md).
 Spoilers, so finish the lab first.
 
-**Writeup:** [Lab 3 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/lab-3/)
+**Writeup:** [Lab 3 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-3/)
 
 **Next:** Lab 4, "Something runs at startup." Coming soon.
 
