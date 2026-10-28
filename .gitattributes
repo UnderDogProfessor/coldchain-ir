@@ -4,6 +4,7 @@
 # Binary files: never touch.
 *.png binary
 *.jpg binary
+*.webp binary
 *.zip binary
 # Evidence files are kept byte for byte as exported from the lab VM.
 notes/**/evidence/* -text

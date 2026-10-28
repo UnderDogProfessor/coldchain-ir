@@ -4,8 +4,13 @@ Hands-on incident response labs, starting from the basics. Every lab takes
 place at the same made-up company: **Rimeport Cold Logistics**, which stores
 and delivers chilled and frozen food.
 
-**Status:** early. Level 1 is being built and tested one lab at a time, on a
-real Windows 11 VM.
+[![The COLD CHAIN roadmap: six levels and 34 labs on glowing platforms joined by a route. Level 1 is complete.](docs/images/roadmap-preview.webp)](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/)
+
+**[Explore the interactive map →](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/)** Click any lab for its summary,
+the writeup, the lab itself and my notes.
+
+**Status:** Level 1 is complete: five labs, each tested on a real Windows 11
+VM. Level 2 is planned next.
 
 ## Start here
 
