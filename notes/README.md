@@ -16,6 +16,7 @@ be different, and that's expected.
 | 2. Someone is guessing passwords | [Notes](level-1/02-someone-is-guessing-passwords.md) | Done, 2026-10-23 |
 | 3. A new account appeared | [Notes](level-1/03-a-new-account-appeared.md) | Done, 2026-10-25 |
 | 4. Something runs at startup | [Notes](level-1/04-something-runs-at-startup.md) | Done, 2026-10-28 |
+| 5. Write it up | [Notes](level-1/05-write-it-up.md) and [my page](level-1/05-incident-report.md) | Done, 2026-10-28 |
 
 Screenshots for each level live in that level's `images/` folder.
 

@@ -61,6 +61,12 @@ delete it first (`net user svc-backup2 /delete`) so step 4 works.
 | 6 | Create the task: <br>`schtasks /create /tn "PrintDriverUpdate" /tr "cmd.exe /c echo Lab 5 task ran >> C:\Users\Public\lab5-proof.txt" /sc onlogon /rl highest /f` | |
 | 7 | Restart, sign in as Dana, and wait a minute | |
 
+📸 **Screenshot 1:** after step 5, the output of steps 4 and 5. Save it as
+`lab5-1.png`.
+
+📸 **Screenshot 2:** after step 6, the task being created. Save it as
+`lab5-2.png`.
+
 > Same rules as before: the account and the task are for this lab only, and
 > you'll throw them away at the end by reverting the snapshot.
 
@@ -69,13 +75,16 @@ delete it first (`net user svc-backup2 /delete`) so step 4 works.
 1. In Event Viewer, filter the Security log for
    **4624,4625,4698,4720,4732**.
 2. Find each of your steps from Part 1 in the list. Ignore any 4698 that Windows
-   or OneDrive made itself: check the Task Name.
+   or OneDrive made itself, such as OneDrive's update task or Windows'
+   "SoftLanding" tasks: check the Task Name.
 
-📸 **Screenshot 1:** the list, showing the failures, the account records and
-the task record together. Save it as `lab5-1.png`.
+📸 **Screenshot 3:** the list itself (close the filter box first), showing the
+failures, the account records and the task record together. Save it as
+`lab5-3.png`.
 
 3. Export it: **Save Filtered Log File As...**, named `lab5-incident.evtx`.
-4. In **Terminal (Admin)**, save two more pieces of evidence as text files:
+4. In **Terminal (Admin)**, save two more pieces of evidence as text files.
+   Don't skip the second one: it's Windows' own record of when the task ran.
 
    ```
    net localgroup Administrators > C:\Users\Public\lab5-admins.txt
@@ -83,6 +92,14 @@ the task record together. Save it as `lab5-1.png`.
    ```
 
 5. Drag all three files (and `lab5-proof.txt`) to your real computer.
+
+**Which sign-in did the work?** Look at the **Logon ID** under Subject in the
+4720 and the 4698. Now find the 4624 records from your first sign-in and from
+the unlock after the guesses. Which one matches? In the author's run the
+account and the task carried the Logon ID of the *first* sign-in, from before
+the guessing, even though he opened a new Terminal (Admin) after the unlock.
+The unlock wrote its own records, but the work was credited to the original
+session. Whatever yours shows, it belongs in "How sure we are".
 
 ## Part 3: Write the page (30 minutes)
 
@@ -100,9 +117,13 @@ it in. Some rules that make a page easy to trust:
   finding, not a failure.
 - **Recommendations follow from findings.** Each one should answer something
   in your timeline or your gaps.
-- **Give the time zone.** A time without one is a guess for the reader.
+- **Give the time zone.** A time without one is a guess for the reader. Check
+  whether daylight time is on: in late October, Toronto is on EDT (UTC−4), not
+  EST.
+- **No "100% sure".** Say what the evidence shows and what it doesn't. The log
+  shows accounts, not people.
 
-📸 **Screenshot 2:** your finished page. Save it as `lab5-2.png`, and keep the
+📸 **Screenshot 4:** your finished page. Save it as `lab5-4.png`, and keep the
 page itself as `lab5-report.md` (or a PDF).
 
 ## Part 4: Clean up (5 minutes)
@@ -116,7 +137,7 @@ in one step.
 ```
 schtasks /delete /tn "PrintDriverUpdate" /f
 net user svc-backup2 /delete
-Remove-Item C:UsersPubliclab5-*.txt
+Remove-Item C:\Users\Public\lab5-*.txt
 ```
 
 ---
@@ -144,7 +165,9 @@ it an administrator, and set up a task that runs a program every time anyone
 signs in. Both the account and the task were still there when we checked.
 
 **How sure we are.** The Security log shows every step, all from Dana's
-account and the same sign-in. It can't show who was at the keyboard.
+account. It can't show who was at the keyboard. It also can't connect the
+guessing to the new account: the account and the task came from the sign-in
+Dana's account started earlier, not from the unlock after the guesses.
 
 **Timeline** (a few rows):
 
@@ -157,8 +180,9 @@ account and the same sign-in. It can't show who was at the keyboard.
 | 10:06 | Task PrintDriverUpdate created, runs at every sign-in | Security log, 4698 |
 | 10:09 | Task ran after a restart | `lab5-task.txt`, Last Run Time |
 
-**What we can't tell yet.** Who was at the keyboard. What else the session did,
-because this computer doesn't record which programs run.
+**What we can't tell yet.** Who was at the keyboard. Whether the guessing and
+the new account are connected. What else the session did, because we only
+looked at sign-ins, account changes and tasks.
 
 **What we recommend.** Now: disable svc-backup2 and the task, and change Dana's
 password. Next: ask Dana where she was at 10:02, and check other computers for
@@ -179,8 +203,9 @@ That's the end of Level 1. You've read normal sign-ins, spotted guessing,
 traced a new admin account, found something that survives a restart, and
 written it all up.
 
-**Compare notes:** the author's page from his own run will be added after he
-runs this lab.
+**Compare notes:** [Shreyas's notes](../../notes/level-1/05-write-it-up.md) and
+[his finished page](../../notes/level-1/05-incident-report.md) from his own run.
+Spoilers, so write yours first.
 
 **Next:** Level 2, "A small company", is coming later.
 

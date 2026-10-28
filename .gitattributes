@@ -5,3 +5,5 @@
 *.png binary
 *.jpg binary
 *.zip binary
+# Evidence files are kept byte for byte as exported from the lab VM.
+notes/**/evidence/* -text
