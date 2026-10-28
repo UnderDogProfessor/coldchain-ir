@@ -274,7 +274,7 @@ Spoilers, so finish the lab first.
 
 **Writeup:** [Lab 3 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-3/)
 
-**Next:** Lab 4, "Something runs at startup." Coming soon.
+**Next:** [Lab 4: Something runs at startup](04-something-runs-at-startup.md).
 
 ## Sources
 
