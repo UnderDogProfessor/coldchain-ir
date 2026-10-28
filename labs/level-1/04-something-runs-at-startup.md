@@ -52,6 +52,9 @@ Put WS-DSP-01 back to its clean state first, so the setting you change below
 isn't undone: **VM → Snapshot → Revert to Snapshot**. Power it on and sign in
 as Dana.
 
+**No snapshot?** That's fine. Skip the revert and start from where your VM is
+now. Everything below works the same, and Part 4 cleans up by hand.
+
 Scheduled tasks are recorded by a different audit setting from the one you
 checked in Lab 3, and it may well be off.
 

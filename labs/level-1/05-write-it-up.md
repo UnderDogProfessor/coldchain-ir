@@ -48,6 +48,9 @@ tells one true story.
 Revert WS-DSP-01: **VM → Snapshot → Revert to Snapshot**. Power it on and
 sign in as Dana. Write down every time.
 
+**No snapshot?** Skip the revert. If svc-backup2 is still there from Lab 3,
+delete it first (`net user svc-backup2 /delete`) so step 4 works.
+
 | # | Do this | Time |
 |---|---|---|
 | 1 | Open **Terminal (Admin)** and turn on task auditing (from Lab 4): <br>`auditpol /set /subcategory:"Other Object Access Events" /success:enable` | |
@@ -106,6 +109,14 @@ page itself as `lab5-report.md` (or a PDF).
 Once your evidence and your page are safe on your real computer, revert
 WS-DSP-01 to its snapshot. That removes the account, the task and the files
 in one step.
+
+**No snapshot?** Clean up by hand in **Terminal (Admin)**:
+
+```
+schtasks /delete /tn "PrintDriverUpdate" /f
+net user svc-backup2 /delete
+Remove-Item C:UsersPubliclab5-*.txt
+```
 
 ---
 
