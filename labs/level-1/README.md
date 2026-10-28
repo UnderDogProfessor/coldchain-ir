@@ -26,6 +26,7 @@ Finished a lab? Compare with [my notes](../../notes/README.md) from my own run.
 [Lab 2](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-2/),
 [Lab 3](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-3/),
 [Lab 4](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-4/),
+[Lab 5](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-5/),
 the [Level 1 page](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/), or the whole [COLD CHAIN series](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/).
 
 **Explainers** go deeper on things the labs turn up:

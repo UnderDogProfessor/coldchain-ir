@@ -207,6 +207,8 @@ written it all up.
 [his finished page](../../notes/level-1/05-incident-report.md) from his own run.
 Spoilers, so write yours first.
 
+**Writeup:** [Lab 5 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-5/)
+
 **Next:** Level 2, "A small company", is coming later.
 
 ## Sources
