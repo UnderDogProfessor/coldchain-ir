@@ -67,8 +67,10 @@ VM storage lives on `E:`.
 
 ## Voice
 
-This is built in public by an early-career practitioner. The README, docs and
-release notes never claim operational experience. Use North American spelling.
+This is built in public by a practitioner three years into the cybersecurity
+industry. Never call him early career, and never claim experience he hasn't
+described: the README, docs and release notes stay on what the labs show. Use
+North American spelling.
 
 ## Keeping GitHub current
 

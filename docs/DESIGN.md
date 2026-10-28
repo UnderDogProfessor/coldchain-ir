@@ -643,8 +643,9 @@ tier requires it.
 - **No real-world identities.** See §3.6.
 - **Licenses (proposed).** Apache-2.0 for code, CC BY 4.0 for scenarios,
   world and docs. Third-party tools are dependencies, not vendored.
-- **Voice.** This is built in public by an early-career practitioner. Neither
-  the README nor the docs claim operational experience.
+- **Voice.** This is built in public by a practitioner three years into the
+  cybersecurity industry. Neither the README nor the docs claim experience
+  beyond what the labs themselves show.
 
 ---
 
