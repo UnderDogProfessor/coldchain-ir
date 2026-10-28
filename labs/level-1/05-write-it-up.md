@@ -68,7 +68,8 @@ delete it first (`net user svc-backup2 /delete`) so step 4 works.
 
 1. In Event Viewer, filter the Security log for
    **4624,4625,4698,4720,4732**.
-2. Find each of your steps from Part 1 in the list.
+2. Find each of your steps from Part 1 in the list. Ignore any 4698 that Windows
+   or OneDrive made itself: check the Task Name.
 
 📸 **Screenshot 1:** the list, showing the failures, the account records and
 the task record together. Save it as `lab5-1.png`.

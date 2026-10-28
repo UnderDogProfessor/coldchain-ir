@@ -20,8 +20,9 @@ on the learner's real computer, never inside the VM. (Lab 1 predates this and
 keeps its descriptive names.)
 
 `notes/` holds Shreyas's own findings from each lab. They're his words: give
-him an empty page to fill in, and help tidy it when he asks, but never write
-his answers or findings for him. Lab pages link to his notes with a spoiler
+him an empty page to fill in and help tidy it. Write his answers only when he
+asks, in first person from his screenshots and logs, with no AI-drafted line,
+and never invent what only he saw. Lab pages link to his notes with a spoiler
 warning.
 
 When a lab's writeup goes live on cyberneticsintern.com, link it both ways:

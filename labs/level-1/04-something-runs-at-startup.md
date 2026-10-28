@@ -6,9 +6,8 @@
 
 ## The story
 
-Dana says her computer "does something" every time she signs in. A black
-window flashes up for a moment, then disappears. Nobody in IT installed
-anything new.
+Dana says her computer "does something" every time she signs in. She thinks
+she saw a window flash up for a moment. Nobody in IT installed anything new.
 
 Your team lead asks: **is something set up to run every time someone signs
 in? If so, what is it, who set it up, and when?**
@@ -20,7 +19,8 @@ in? If so, what is it, who set it up, and when?**
 - Creating a scheduled task leaves its own record: event **4698**.
 - That record holds the **whole task**: what it runs, when, and who made it.
 - How to prove a task actually ran, not just that it exists.
-- Deleting a task doesn't delete the trail: event **4699** keeps a copy.
+- Deleting a task doesn't delete the trail, though the deletion record (event
+  **4699**) may not say what the task did.
 
 ## Words you'll see
 
@@ -89,7 +89,7 @@ Stay in **Terminal (Admin)**. Write down every time.
 | 1 | Note the time, then create the task: <br>`schtasks /create /tn "PrintDriverUpdate" /tr "cmd.exe /c echo Lab 4 task ran >> C:\Users\Public\lab4-proof.txt" /sc onlogon /rl highest /f` | |
 | 2 | Check it's there: <br>`schtasks /query /tn "PrintDriverUpdate"` | |
 | 3 | Restart the VM: **Start**, **Power**, **Restart** | |
-| 4 | Sign in as Dana and note the time. Watch the screen as you sign in. | |
+| 4 | Sign in as Dana and note the time. Watch the screen as you sign in: a window may flash up, but it can be too quick to notice. | |
 | 5 | Open **File Explorer** and go to `C:\Users\Public`. Is `lab4-proof.txt` there? Open it. | |
 
 > The task only writes one line to a text file each time someone signs in.
@@ -100,8 +100,9 @@ What the command means: `/sc onlogon` runs it whenever anyone signs in,
 `/rl highest` runs it with the highest rights the account has, and `/tr` is
 the program it runs.
 
-📸 **Screenshot 2:** `lab4-proof.txt` open, with the folder showing its
-**Date modified**. Save it as `lab4-2.png`.
+📸 **Screenshots 2.1 and 2.2:** the output of steps 1 and 2, then
+`lab4-proof.txt` open with the folder showing its **Date modified**. Save them
+as `lab4-2.1.png` and `lab4-2.2.png`.
 
 ## Part 3: Find it (20 minutes)
 
@@ -110,7 +111,9 @@ the program it runs.
 1. Click **Start**, type **Task Scheduler**, and open it.
 2. In the left pane, click **Task Scheduler Library**, the top folder.
 3. Find **PrintDriverUpdate** in the list. Notice where it sits: in the top
-   folder itself, not inside one of the folders below it.
+   folder itself, not inside one of the folders below it. You'll probably see
+   real software there too, such as Microsoft Edge and OneDrive update tasks.
+   The top folder is a reason to look closer, not proof on its own.
 4. Click it, then look at the tabs at the bottom: **General** (who it runs
    as, and whether "Run with highest privileges" is ticked), **Triggers**
    (when), and **Actions** (what).
@@ -121,13 +124,17 @@ as `lab4-3.png`.
 While you're here, look at the right-hand pane. Does it offer **Enable All
 Tasks History** or **Disable All Tasks History**? That tells you whether Task
 Scheduler is keeping its own history of runs on this computer. Write down which
-one you see. Don't change it.
+one you see. Don't change it. (In the author's run the History tab said
+"disabled", so there was no history to read.)
 
 ### When, and by whom: 4698
 
 1. Open **Event Viewer**, then **Windows Logs**, then **Security**.
 2. Click **Filter Current Log...**, type **4698**, and click **OK**.
-3. Click the record from your step 1 and scroll down in the bottom half.
+3. You'll probably see **more than one** 4698. Windows and apps like OneDrive
+   create their own tasks, sometimes with Dana as the Subject. Click the one
+   whose **Task Name** is `\PrintDriverUpdate`, at the time of your step 1,
+   and scroll down in the bottom half.
 
 ```
 Subject:
@@ -146,8 +153,13 @@ Task Information:
 - `<RunLevel>`: the rights it runs with
 - `<Command>` and `<Arguments>`: the *what*
 
-📸 **Screenshot 4:** the 4698 record with **Subject** and the start of **Task
-Content** visible. Save it as `lab4-4.png`.
+📸 **Screenshot 4:** the 4698 record for PrintDriverUpdate, with **Subject**
+and the start of **Task Content** visible. Check the Task Name before you take
+it. Save it as `lab4-4.png`.
+
+**Which sign-in did it?** Do what Lab 3 asked: filter for **4624** and find the
+record with the same **Logon ID** as the 4698's Subject. Is its Elevated Token
+Yes or No? (You haven't cleared the log this time, so it should be there.)
 
 ### Did it actually run?
 
@@ -177,11 +189,14 @@ Name it `lab4-startup-task.evtx` and drag it to your real computer.
 2. Delete `C:\Users\Public\lab4-proof.txt`.
 3. In Event Viewer, click **Refresh** and filter for **4698,4699**.
 
-**Is the creation still in the log?** Click the new **4699** record. Microsoft
-documents that its **Task Content** is the full task that was deleted. Is it
-the same as in the 4698?
+**Is the creation still in the log?** Click the new **4699** record and read
+its **Task Content**. Microsoft's page for 4699, written for Windows 10, says it
+holds the full task that was deleted. In the author's run on Windows 11 (build
+26100) it was **empty**: the 4699 kept the task's name, but only the 4698 said
+what it did. What does yours show?
 
-📸 **Screenshot 6:** the 4699 record. Save it as `lab4-6.png`.
+📸 **Screenshot 6:** the 4699 record, with its **Task Content** visible. Save
+it as `lab4-6.png`.
 
 ---
 
@@ -215,13 +230,17 @@ Write your answers in your notes. For each answer, say where you found it.
 <summary><strong>Answers explained</strong> (try first)</summary>
 
 **1. A task named PrintDriverUpdate, in the top folder of the Task Scheduler
-Library.** Most of Windows' own tasks live in folders underneath. Microsoft's
-guidance for event 4698 says tasks made by hand or by malware are often in
-that top folder, so a task there is worth a closer look.
+Library.** Microsoft's guidance for event 4698 says tasks made by hand or by
+malware are often in that top folder, so a task there is worth a closer look.
+But it isn't proof: in the author's run, Microsoft Edge and OneDrive tasks sat
+there too. What gives it away is what it runs.
 
 **2. At the time of your step 1, by Dana's account.** The 4698 **Subject** and
-the `<Author>` in **Task Content** both name it. Same lesson as Labs 2 and 3:
-the log shows the *account*, not the *person*.
+the `<Author>` in **Task Content** both name it. In the author's run the
+Logon ID matched the Elevated Token **Yes** half of Dana's sign-in, the admin
+half that Terminal (Admin) uses. Same lesson as Labs 2 and 3: the log shows the
+*account*, not the *person*. In fact OneDrive created a task "as Dana" two
+minutes before his, with nobody typing.
 
 **3. It runs `cmd.exe` with the arguments that write a line to
 `lab4-proof.txt`.** It runs at every sign-in (`<LogonTrigger>`) with the
@@ -230,13 +249,15 @@ point the action at their own program instead of a text file.
 
 **4. Yes, and you can show it two ways.** The proof file gained a line when you
 signed in, and `schtasks /query /v` shows a **Last Run Time** close to your
-sign-in time. Two separate sources agreeing is stronger than one.
+sign-in time. In the author's run it was 3 seconds after. Two separate sources
+agreeing is stronger than one.
 
-**5. The log kept both the creation (4698) and the deletion (4699).** Microsoft
-documents that the 4699 carries the deleted task's full content, so even after
-it's gone you can still say exactly what it did. Something like: "Dana's account
-created a task called PrintDriverUpdate at 10:12 that ran a command at every
-sign-in. It ran at 10:15 after a restart and was deleted at 10:40."
+**5. The log kept both the creation (4698) and the deletion (4699).** But check
+what each one holds. In the author's run the 4699 named the task and the account
+with an empty Task Content, so only the 4698 said what the task did. That's why
+you export before you delete. Something like: "Dana's account created a task
+called PrintDriverUpdate at 10:12 that ran a command at every sign-in. It ran at
+10:15 after a restart and was deleted at 10:40."
 
 </details>
 
@@ -250,11 +271,15 @@ sign-in. It ran at 10:15 after a restart and was deleted at 10:40."
   Access Events" auditing is on.
 - **Task Content** is the whole task: author, trigger, rights and action.
 - A task existing isn't proof it ran. Look for the run itself.
+- Windows and apps create and update tasks all the time. A 4698 isn't
+  suspicious by itself. What's inside it is.
+- The deletion record may keep only the name. Export the creation record
+  before you clean up.
 - A name can look official and still be the problem. Check what a task *does*,
   not what it's called.
 
-**Compare notes:** the author's notes from his own run will be added after he
-runs this lab.
+**Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/04-something-runs-at-startup.md).
+Spoilers, so finish the lab first.
 
 **Next:** [Lab 5: Write it up](05-write-it-up.md).
 
