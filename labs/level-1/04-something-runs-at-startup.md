@@ -281,6 +281,8 @@ called PrintDriverUpdate at 10:12 that ran a command at every sign-in. It ran at
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-1/04-something-runs-at-startup.md).
 Spoilers, so finish the lab first.
 
+**Writeup:** [Lab 4 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-4/)
+
 **Next:** [Lab 5: Write it up](05-write-it-up.md).
 
 ## Sources
