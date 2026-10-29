@@ -37,9 +37,10 @@ server, a second staff computer, and a computer of your own for investigating.
 | **WS-IT-01** | Your computer, where the investigation tools live | You | 10.20.20.30 |
 
 Every machine uses subnet mask **255.255.0.0** and DNS server **10.20.10.10**,
-and has **no default gateway**, because the network has no way out. Servers sit
-at `10.20.10.x` and staff computers at `10.20.20.x`, so an address in a log
-tells you what kind of machine it was.
+and has **no default gateway**, because the network has no way out. That mask
+means only the first two numbers have to match, so every `10.20.x.x` address
+is on the same network. Servers sit at `10.20.10.x` and staff computers at
+`10.20.20.x`, so an address in a log tells you what kind of machine it was.
 
 **Lab 7 adds one more machine:** a Kali Linux VM playing the attacker. Don't
 connect it to the Rimeport network until Lab 7 says so.
@@ -342,7 +343,9 @@ It makes three shared folders, each one open only to its team:
 3. Move it to **Rimeport** (**VM**, **Settings**, **Network Adapter**,
    **LAN segment**, **Rimeport**).
 4. Set its address with `ncpa.cpl` as you did for DC01: IP **10.20.20.11**,
-   mask **255.255.0.0**, no gateway, DNS **10.20.10.10**.
+   mask **255.255.0.0**, no gateway, DNS **10.20.10.10**. The `20` in the
+   third place is right: staff computers use `10.20.20.x`, and the mask puts
+   them on the same network as DC01.
 5. Open **Terminal (Admin)** and join the domain with the same three lines as
    FS01, one at a time:
 
