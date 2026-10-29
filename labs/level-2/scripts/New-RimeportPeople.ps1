@@ -23,8 +23,8 @@ $ErrorActionPreference = 'Stop'
 Import-Module ActiveDirectory
 
 $domain   = Get-ADDomain
-$domainDN = $domain.DistinguishedName   # DC=corp,DC=rimeport,DC=example
-$dnsName  = $domain.DNSRoot             # corp.rimeport.example
+$domainDN = $domain.DistinguishedName   # DC=corp,DC=rimeport,DC=internal
+$dnsName  = $domain.DNSRoot             # corp.rimeport.internal
 
 $staffPassword     = Read-Host -AsSecureString 'Password for all six staff accounts'
 $responderPassword = Read-Host -AsSecureString 'Password for your responder account'

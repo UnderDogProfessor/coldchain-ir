@@ -92,8 +92,9 @@ written down, not just a passing build.
    real company wouldn't run (the user simulator, provisioning traces) is
    documented in the Orientation episode and in every pack README as out of
    scope.
-5. **Nothing points at the real world.** Domains use `.example`, IPs come from
-   documentation ranges, and the company and people are fictional (§3.6).
+5. **Nothing points at the real world.** Domains use `.example` (except the AD
+   domain, which uses `.internal`), IPs come from documentation ranges, and
+   the company and people are fictional (§3.6).
 6. **No hidden exclusions.** Defender stays on wherever a real company would
    have it on. If the story needs Defender to look away, the attacker does that
    in the story, and the evidence shows it.
@@ -138,7 +139,7 @@ the company teaches without any extra effort.
 
 | Host | Role | First used in |
 |---|---|---|
-| `DC01` | AD DS + DNS, `corp.rimeport.example` | S1E0 |
+| `DC01` | AD DS + DNS, `corp.rimeport.internal` | S1E0 |
 | `WS-DSP-*` | Dispatch workstations, Windows 11 | S1E1 |
 | `WS-FIN-*`, `WS-IT-*` | Finance and IT workstations | S1E2 |
 | `FS01` | File server with shared drives | S1E2 |
@@ -179,7 +180,7 @@ from new activity.
 | Thing | Rule |
 |---|---|
 | Public domain | `rimeport.example` (`.example` is reserved by RFC 2606) |
-| AD domain | `corp.rimeport.example`, NetBIOS `RIMEPORT` |
+| AD domain | `corp.rimeport.internal`, NetBIOS `RIMEPORT`. Not `.example`: Windows Server 2025's DNS refused to create a `.example` zone (error 123, 2026-10-29). ICANN reserved `.internal` for private use (resolution 2024.07.29.06). |
 | Attacker domains | Generated per seed, always under `.example` |
 | Internal IPs | `10.20.0.0/16` |
 | "Internet" IPs | RFC 5737 documentation ranges `192.0.2.0/24`, `198.51.100.0/24`, `203.0.113.0/24`; IPv6 `2001:db8::/32` |

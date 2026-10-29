@@ -264,7 +264,7 @@ proves it and number it from 8 on.
   one, so the times should line up across machines.
 - In Event Viewer, **Find...** searches only the records the filter shows.
   If it finds nothing, check the filter first.
-- On DC01, Dana's records may show her name as `dana.reyes@CORP.RIMEPORT.EXAMPLE`.
+- On DC01, Dana's records may show her name as `dana.reyes@CORP.RIMEPORT.INTERNAL`.
   That's still her.
 - For question 7, remember the `Copy-Item` to `\\FS01\Evidence`. That was you
   signing in to FS01 over the network.

@@ -72,7 +72,10 @@ against fictional appliances with fictional flaws.
 
 **Nothing points at the real world.** Domains use `.example`, external IPs come
 from RFC 5737 / RFC 3849 documentation ranges, and the people and companies are
-fictional (DESIGN §3.6).
+fictional (DESIGN §3.6). The one exception is the Active Directory domain,
+`corp.rimeport.internal`: Windows Server 2025's DNS refused to create a
+`.example` zone (error 123, seen 2026-10-29), and ICANN reserves `.internal`
+for private networks.
 
 **Plumbing is named, never disguised.** Don't hide lab machinery, and don't add
 Defender exclusions that aren't part of the story (DESIGN §2).

@@ -18,7 +18,7 @@ server, a second staff computer, and a computer of your own for investigating.
 
 | Word | What it means |
 |---|---|
-| **Domain** | One shared set of accounts for the whole company. Rimeport's is `corp.rimeport.example`, short name **RIMEPORT**. |
+| **Domain** | One shared set of accounts for the whole company. Rimeport's is `corp.rimeport.internal`, short name **RIMEPORT**. |
 | **Domain controller** | The server that holds the domain's accounts and checks every password. Rimeport's is **DC01**. |
 | **Domain account** | An account that lives on DC01 and works on every Rimeport computer, written `RIMEPORT\dana.reyes`. |
 | **Local account** | An account that lives on one computer only, like the `dana` account you made in Level 1. |
@@ -176,11 +176,21 @@ gets a fixed one.
 
 ### Make DC01 the domain controller
 
-In PowerShell (Admin):
+First check the name. In PowerShell (Admin):
+
+```
+hostname
+```
+
+It must say **DC01**. If it says anything else, run
+`Rename-Computer -NewName DC01 -Restart` and check again after the restart. A
+domain controller's name is hard to change later, so get it right now.
+
+Then make it the domain controller:
 
 ```
 Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
-Install-ADDSForest -DomainName corp.rimeport.example -DomainNetbiosName RIMEPORT
+Install-ADDSForest -DomainName corp.rimeport.internal -DomainNetbiosName RIMEPORT
 ```
 
 The second command asks for a **Safe Mode Administrator Password**. It's a
@@ -189,10 +199,37 @@ spare password for repairing DC01, so write it in your lab notes too. Answer
 on its own, and the first start takes a few minutes.
 
 Without `-DomainNetbiosName`, Windows would make the short name **CORP** from
-the first part of `corp.rimeport.example`. Rimeport's is **RIMEPORT**.
+the first part of `corp.rimeport.internal`. Rimeport's is **RIMEPORT**.
+
+> **Why `.internal`?** The rest of the series uses `.example` names, which are
+> reserved for examples and never belong to a real website. But on the Windows
+> Server 2025 used to test this guide, DNS refused to create a zone ending in
+> `.example` (error 123, "The filename, directory name, or volume label syntax
+> is incorrect"), and promotion finished without the domain's DNS. `.internal`
+> is safe too: ICANN reserved it permanently in 2024 for private networks, so
+> it will never be a real website either.
 
 Sign in again as Administrator, with the same password. The sign-in screen
 should now say **RIMEPORT\Administrator**.
+
+### Check DC01's DNS
+
+Every other machine finds DC01 through DNS, so check it before going on. Wait
+a few minutes after signing in, then in PowerShell (Admin):
+
+```
+Get-DnsServerZone
+Resolve-DnsName _ldap._tcp.dc._msdcs.corp.rimeport.internal -Type SRV -Server 127.0.0.1
+```
+
+- The zone list should include **corp.rimeport.internal** and
+  **_msdcs.corp.rimeport.internal**.
+- The second command should name **DC01.corp.rimeport.internal** on port
+  **389**. That's the record a computer looks up to find DC01 when it joins
+  the domain.
+
+If either is missing, stop here. Nothing else can join the domain until this
+works. See **If something doesn't work** at the end of this guide.
 
 ### Turn on the records Level 2 needs
 
@@ -268,7 +305,7 @@ to the domain. In PowerShell (Admin), run these three lines one at a time:
 ```
 $pw = Read-Host -AsSecureString 'Password for RIMEPORT\Administrator'
 $cred = New-Object System.Management.Automation.PSCredential -ArgumentList 'RIMEPORT\Administrator', $pw
-Add-Computer -DomainName corp.rimeport.example -Credential $cred -Restart
+Add-Computer -DomainName corp.rimeport.internal -Credential $cred -Restart
 ```
 
 The first line asks for the password you sign in to DC01 with, right there in
@@ -311,7 +348,7 @@ It makes three shared folders, each one open only to its team:
    ```
    $pw = Read-Host -AsSecureString 'Password for RIMEPORT\Administrator'
    $cred = New-Object System.Management.Automation.PSCredential -ArgumentList 'RIMEPORT\Administrator', $pw
-   Add-Computer -DomainName corp.rimeport.example -Credential $cred -Restart
+   Add-Computer -DomainName corp.rimeport.internal -Credential $cred -Restart
    ```
 
 The local **dana** account from Level 1 is still on this computer, and it's
@@ -405,7 +442,16 @@ moments can stop trusting each other.
 
 - **"The domain could not be contacted"** when joining: check the machine's
   IP, mask and DNS (10.20.10.10), check it's on the **Rimeport** LAN segment,
-  and check DC01 is running.
+  and check DC01 is running. Then run **Check DC01's DNS** on DC01 again.
+- **Check DC01's DNS finds no zones:** promotion didn't set up DNS. Its log
+  says why. On DC01:
+
+  ```
+  Select-String -Path C:\Windows\debug\dcpromoui.log -Pattern 'error configuring DNS' -Context 0,1
+  ```
+
+  Write down what it says and open an issue on this repo. A domain's name
+  can't simply be changed afterward, so the fix may mean building DC01 again.
 - **"Cannot validate argument on parameter 'Credential'. The argument is null
   or empty"** when joining: no password reached `Add-Computer`. Run the three
   lines again, one at a time, and type the password when the first one asks.
@@ -442,6 +488,8 @@ Next: [Lab 6: Meet the network](06-meet-the-network.md)
 - Microsoft, Install-ADDSForest (DomainNetbiosName defaults from the domain
   name; DSRM password prompt; restarts on completion; DNS installed by
   default): <https://learn.microsoft.com/en-us/powershell/module/addsdeployment/install-addsforest>
+- ICANN Board resolution 2024.07.29.06 (reserves `.INTERNAL` permanently for
+  private use): <https://www.icann.org/en/board-activities-and-meetings/materials/approved-resolutions-special-meeting-of-the-icann-board-29-07-2024-en>
 - Microsoft, Advanced Audit Policy Configuration settings (defaults for
   Credential Validation, Kerberos Authentication Service and Kerberos Service
   Ticket Operations): <https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/advanced-audit-policy-configuration>
