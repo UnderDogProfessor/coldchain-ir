@@ -303,14 +303,15 @@ Skip **Make DC01 the domain controller**. Instead, with DC01 running, join FS01
 to the domain. In PowerShell (Admin), run these three lines one at a time:
 
 ```
-$pw = Read-Host -AsSecureString 'Password for RIMEPORT\Administrator'
+$pw = Read-Host -AsSecureString 'Password for RIMEPORT\Administrator (the one you use on DC01)'
 $cred = New-Object System.Management.Automation.PSCredential -ArgumentList 'RIMEPORT\Administrator', $pw
 Add-Computer -DomainName corp.rimeport.internal -Credential $cred -Restart
 ```
 
-The first line asks for the password you sign in to DC01 with, right there in
-the PowerShell window, and shows `*` as you type. The second puts the name and
-password together. The third joins the domain, and FS01 restarts.
+The first line asks for **DC01's** Administrator password, the one you sign in
+to DC01 with, not FS01's. It asks right there in the PowerShell window and
+shows `*` as you type. The second puts the name and password together. The
+third joins the domain, and FS01 restarts.
 
 Now sign in to FS01 as **RIMEPORT\responder**: on the sign-in screen choose
 **Other user** and type the name with the `RIMEPORT\` in front. Read and run
@@ -346,7 +347,7 @@ It makes three shared folders, each one open only to its team:
    FS01, one at a time:
 
    ```
-   $pw = Read-Host -AsSecureString 'Password for RIMEPORT\Administrator'
+   $pw = Read-Host -AsSecureString 'Password for RIMEPORT\Administrator (the one you use on DC01)'
    $cred = New-Object System.Management.Automation.PSCredential -ArgumentList 'RIMEPORT\Administrator', $pw
    Add-Computer -DomainName corp.rimeport.internal -Credential $cred -Restart
    ```
@@ -455,6 +456,9 @@ moments can stop trusting each other.
 - **"Cannot validate argument on parameter 'Credential'. The argument is null
   or empty"** when joining: no password reached `Add-Computer`. Run the three
   lines again, one at a time, and type the password when the first one asks.
+- **"The user name or password is incorrect"** when joining: the computer
+  found DC01, so the network is fine. The password is wrong. Type DC01's
+  Administrator password, not the password of the computer you're joining.
 - **A shared folder won't open:** check FS01 is running, then run
   `New-RimeportShares.ps1` on FS01 again. It's safe to run twice.
 - **Sign-in fails with a message about the time:** domain sign-ins need clocks
