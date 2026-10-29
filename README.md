@@ -10,13 +10,26 @@ and delivers chilled and frozen food.
 the writeup, the lab itself and my notes.
 
 **Status:** Level 1 is complete: five labs, each tested on a real Windows 11
-VM. Level 2 is planned next.
+VM. Level 2 is under way: the network build guide and Lab 6 are written and
+about to be tested.
 
 ## Start here
 
 👉 **[Level 1: Basics](labs/level-1/README.md)**
 
 One Windows computer, one small thing to find, about an hour each.
+
+👉 **[Level 2: A small company](labs/level-2/README.md)**
+
+A domain controller, a file server and three computers. Follow one person,
+then one attacker, across the network.
+
+## Same answer, another tool
+
+From Level 2 on, labs repeat a task with a second tool that responders use,
+starting with Eric Zimmerman's EvtxECmd and Timeline Explorer. The
+[tool bench](labs/tool-bench.md) records whether the tools agree, how long
+each took, and the pros and cons.
 
 ## Read the writeups
 
@@ -34,7 +47,7 @@ spoilers.
 
 [`docs/DESIGN.md`](docs/DESIGN.md) holds the long-term ideas: unique
 incidents per learner, a live range, more advanced levels. None of it is
-needed for Level 1.
+needed for Levels 1 and 2.
 
 ## License
 

@@ -1,15 +1,33 @@
 # Working in this repo
 
-## Right now: Level 1 basics
+## Right now: Level 2, a small company
 
-The current work is the hand-built labs in `labs/level-1/`. Keep them simple:
-one Windows VM, one thing to find, about an hour, plain words, and short
-sentences. Don't add generators, seeds, graders or automation unless Shreyas
-asks. Every technical claim in a lab must match a source listed at the bottom
-of that lab. Anything you couldn't test on a real VM gets hedged in the text.
+Level 1 (`labs/level-1/`) is finished and tested on a real VM. The current
+work is Level 2 in `labs/level-2/`: five Windows VMs on a VMware LAN segment
+named Rimeport (DC01, FS01, WS-DSP-01, WS-FIN-01, WS-IT-01), plus Shreyas's
+Kali VM as the attacker from Lab 7. Labs are numbered across the series, so
+Level 2 is Labs 6 to 11 (files `06-...md`, website `level-2/lab-6/`). Write
+one lab at a time, after he has run the one before.
 
-Every lab teaches the notes habit: point learners to
-`labs/level-1/notes-template.md`, include 📸 screenshot prompts at the moments
+Keep every lab to one main path of about an hour, in plain words and short
+sentences. Level 2 may use short PowerShell scripts in `labs/level-2/scripts/`
+(automation stage 1). Keep them commented, ASCII only (Windows PowerShell 5.1
+misreads UTF-8 without a BOM) and safe to run twice. The lab must tell the
+learner to read them before running them. Don't add generators, seeds or
+graders unless Shreyas asks. Every technical claim in a lab must match a
+source listed at the bottom of that lab. Anything not yet tested on the real
+network gets hedged in the text, and the lab carries a "Not yet tested" note
+until his run.
+
+**Same answer, another tool.** Where a second tool fits naturally, add a part
+that repeats a task with it. Add one or two extra tools, never all of them.
+Free tools go on the main path. Trial or commercial tools (AXIOM and the like)
+are optional extras only. Read each tool's license before a lab depends on it,
+and before publishing any comparison. Results go in `labs/tool-bench.md`, and
+only from Shreyas's real runs.
+
+Every lab teaches the notes habit: point learners to that level's
+`notes-template.md`, include 📸 screenshot prompts at the moments
 that prove an answer. **Number every screenshot in the order the lab first asks
 for it:** "📸 **Screenshot 1:** ... Save it as `labN-1.png`", then 2, 3, and so
 on, and never skip a screenshot that the learner would need for their notes. A group of related shots can share a number (7.1, 7.2, ...), as in Lab 3.
@@ -26,9 +44,9 @@ and never invent what only he saw. Lab pages link to his notes with a spoiler
 warning.
 
 When a lab's writeup goes live on cyberneticsintern.com, link it both ways:
-the lab page ends with a "Writeup" line, `labs/level-1/README.md` lists it,
+the lab page ends with a "Writeup" line, that level's `README.md` lists it,
 and the website entry links back to the lab and the notes on GitHub. Website
-URLs live under `/projects/lab-builds-and-writeups/coldchain-ir/level-1/lab-N/`. After
+URLs live under `/projects/lab-builds-and-writeups/coldchain-ir/level-N/lab-N/`. After
 any change, check every link in both places.
 
 `docs/DESIGN.md` is the parked long-term design. Read it for direction, but
@@ -63,8 +81,11 @@ Defender exclusions that aren't part of the story (DESIGN §2).
 scenario instead.
 
 **Lab VMs stay off the real network.** Level 1 runs on VMware Workstation with
-NAT networking. Labs that run attacks use host-only networking, never bridged.
-VM storage lives on `E:`.
+NAT networking. From Level 2 the lab runs on a VMware LAN segment named
+Rimeport, which has no internet and no link to the host. Machines use NAT only
+while they're being built and updated, before they join Rimeport. Kali attacks
+only from the Rimeport segment, never on NAT or bridged. VM storage lives on
+`E:`.
 
 ## Voice
 
@@ -82,7 +103,8 @@ VM. Never leave finished work sitting uncommitted at the end of a session.
 
 ## Checks
 
-There's no code yet. Once `engine/` exists, run the scenario validator and the
+Before committing a lab script, parse it with PowerShell's parser and check
+it's ASCII only. Once `engine/` exists, run the scenario validator and the
 grader tests before finishing, and never finish on a failing check.
 
 ## LinkedIn cards

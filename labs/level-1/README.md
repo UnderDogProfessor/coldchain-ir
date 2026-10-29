@@ -33,3 +33,5 @@ the [Level 1 page](https://cyberneticsintern.com/projects/lab-builds-and-writeup
 
 - [DWM and UMFD, explained](../explainers/dwm-and-umfd.md): the "accounts"
   that sign in when Windows starts, and what they tell you (Lab 1)
+
+**Finished Level 1?** Next is [Level 2: A small company](../level-2/README.md).
