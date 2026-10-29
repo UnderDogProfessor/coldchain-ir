@@ -263,13 +263,17 @@ Rimeport**, with these changes:
 - **IP address:** 10.20.10.20. **Preferred DNS server:** 10.20.10.10.
 
 Skip **Make DC01 the domain controller**. Instead, with DC01 running, join FS01
-to the domain. In PowerShell (Admin):
+to the domain. In PowerShell (Admin), run these three lines one at a time:
 
 ```
-Add-Computer -DomainName corp.rimeport.example -Credential RIMEPORT\Administrator -Restart
+$pw = Read-Host -AsSecureString 'Password for RIMEPORT\Administrator'
+$cred = New-Object System.Management.Automation.PSCredential -ArgumentList 'RIMEPORT\Administrator', $pw
+Add-Computer -DomainName corp.rimeport.example -Credential $cred -Restart
 ```
 
-Type the Administrator password when it asks. FS01 restarts.
+The first line asks for the password you sign in to DC01 with, right there in
+the PowerShell window, and shows `*` as you type. The second puts the name and
+password together. The third joins the domain, and FS01 restarts.
 
 Now sign in to FS01 as **RIMEPORT\responder**: on the sign-in screen choose
 **Other user** and type the name with the `RIMEPORT\` in front. Read and run
@@ -301,10 +305,13 @@ It makes three shared folders, each one open only to its team:
    **LAN segment**, **Rimeport**).
 4. Set its address with `ncpa.cpl` as you did for DC01: IP **10.20.20.11**,
    mask **255.255.0.0**, no gateway, DNS **10.20.10.10**.
-5. Open **Terminal (Admin)** and join the domain:
+5. Open **Terminal (Admin)** and join the domain with the same three lines as
+   FS01, one at a time:
 
    ```
-   Add-Computer -DomainName corp.rimeport.example -Credential RIMEPORT\Administrator -Restart
+   $pw = Read-Host -AsSecureString 'Password for RIMEPORT\Administrator'
+   $cred = New-Object System.Management.Automation.PSCredential -ArgumentList 'RIMEPORT\Administrator', $pw
+   Add-Computer -DomainName corp.rimeport.example -Credential $cred -Restart
    ```
 
 The local **dana** account from Level 1 is still on this computer, and it's
@@ -324,7 +331,7 @@ changes:
 
 Check `slmgr /dli`, then move WS-FIN-01 to **Rimeport**, give it IP
 **10.20.20.12** (mask 255.255.0.0, no gateway, DNS 10.20.10.10), and join it to
-the domain with the same `Add-Computer` command as WS-DSP-01.
+the domain with the same three lines as FS01.
 
 ## Part 6: Build WS-IT-01, your computer (about 2 hours)
 
@@ -361,7 +368,7 @@ the investigation tools Lab 6 uses, while it can still reach the internet:
 
 Then check `slmgr /dli`, move WS-IT-01 to **Rimeport**, give it IP
 **10.20.20.30** (mask 255.255.0.0, no gateway, DNS 10.20.10.10), and join the
-domain.
+domain with the same three lines as FS01.
 
 > The tools are free downloads. If Microsoft Defender flags one, don't add an
 > exclusion. Write down what it said, and open an issue on this repo.
@@ -399,6 +406,9 @@ moments can stop trusting each other.
 - **"The domain could not be contacted"** when joining: check the machine's
   IP, mask and DNS (10.20.10.10), check it's on the **Rimeport** LAN segment,
   and check DC01 is running.
+- **"Cannot validate argument on parameter 'Credential'. The argument is null
+  or empty"** when joining: no password reached `Add-Computer`. Run the three
+  lines again, one at a time, and type the password when the first one asks.
 - **A shared folder won't open:** check FS01 is running, then run
   `New-RimeportShares.ps1` on FS01 again. It's safe to run twice.
 - **Sign-in fails with a message about the time:** domain sign-ins need clocks
@@ -435,7 +445,8 @@ Next: [Lab 6: Meet the network](06-meet-the-network.md)
 - Microsoft, Advanced Audit Policy Configuration settings (defaults for
   Credential Validation, Kerberos Authentication Service and Kerberos Service
   Ticket Operations): <https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/advanced-audit-policy-configuration>
-- Microsoft, Add-Computer: <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/add-computer>
+- Microsoft, Add-Computer (`-Credential` takes a user name or a PSCredential
+  object, and a user name makes it ask for a password): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/add-computer?view=powershell-5.1>
 - Microsoft, about_Execution_Policies (RemoteSigned and `Unblock-File` for
   downloaded scripts): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies>
 - Microsoft, .NET 10 downloads (.NET Desktop Runtime): <https://dotnet.microsoft.com/en-us/download/dotnet/10.0>
