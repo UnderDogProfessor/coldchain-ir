@@ -434,8 +434,15 @@ Each first sign-in takes a minute while Windows sets up the account. Sign
 everyone out when you're done.
 
 Then shut down all five: the PCs first, then FS01, then DC01 last. With every
-VM off, take a snapshot of each one named **rimeport-ready** (**VM**,
-**Snapshot**, **Take Snapshot**).
+VM off, take a snapshot of each one:
+
+1. Select the VM, then **VM**, **Snapshot**, **Take Snapshot**.
+2. **Name:** `rimeport-ready`, the same on all five.
+3. **Description:** `Level 2 setup done, before Lab 6`.
+4. Click **Take Snapshot**.
+
+WS-DSP-01 still has its Level 1 snapshots. Keep them: `rimeport-ready` is
+added next to them.
 
 **Before every Level 2 lab:** go to **rimeport-ready** on **all five** with
 **Snapshot Manager**, then start them in order, DC01 first. Always revert them
