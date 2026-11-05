@@ -22,7 +22,7 @@ be different, and that's expected.
 
 | Lab | My notes | Status |
 |---|---|---|
-| 6. Meet the network | [Notes](level-2/06-meet-the-network.md) | Lab done 2026-11-04, answers still to write |
+| 6. Meet the network | [Notes](level-2/06-meet-the-network.md) | Done, 2026-11-04 |
 
 Screenshots for each level live in that level's `images/` folder.
 
