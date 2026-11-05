@@ -369,6 +369,9 @@ changes:
   for setting up the computer.
 - **Step 7:** install the updates, but skip the snapshot. You take one at the
   end of this guide.
+- **Time zone:** Level 1 setup doesn't set one, so it may not match DC01. In
+  PowerShell (Admin), run `Set-TimeZone -Id "Eastern Standard Time"`, the same
+  as DC01.
 
 Check `slmgr /dli`, then move WS-FIN-01 to **Rimeport**, give it IP
 **10.20.20.12** (mask 255.255.0.0, no gateway, DNS 10.20.10.10), and join it to
@@ -377,7 +380,7 @@ the domain with the same three lines as FS01.
 ## Part 6: Build WS-IT-01, your computer (about 2 hours)
 
 Build it the same way as WS-FIN-01: name **WS-IT-01**, local account
-**itsetup**, all updates installed. **Before** you move it to Rimeport, install
+**itsetup**, time zone set to Eastern, all updates installed. **Before** you move it to Rimeport, install
 the investigation tools Lab 6 uses, while it can still reach the internet:
 
 1. **.NET 10 Desktop Runtime.** In Edge, go to
@@ -436,6 +439,14 @@ Each time, choose **Other user** and type the full name, with `RIMEPORT\` in
 front. Each first sign-in takes a minute while Windows sets up the account.
 Signing in to DC01 and FS01 as responder here also means their sign-in screens
 should offer responder, not Administrator, when you go back to this snapshot.
+
+**Check the time zones match.** While you're signed in to each of the five,
+open PowerShell and run `Get-TimeZone`. The **Id** line should say **Eastern
+Standard Time** on every one. If one doesn't, fix it in an admin PowerShell
+window with `Set-TimeZone -Id "Eastern Standard Time"`. Otherwise, the same
+moment shows up as different times on different machines, and your notes stop
+lining up with the logs.
+
 Sign everyone out when you're done.
 
 Then shut down all five: the PCs first, then FS01, then DC01 last. With every
@@ -526,3 +537,5 @@ Next: [Lab 6: Meet the network](06-meet-the-network.md)
 - EvtxECmd on GitHub (`--sync` updates the maps): <https://github.com/EricZimmerman/evtx>
 - Microsoft, whoami (with no parameters, prints the current domain and user
   name): <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/whoami>
+- Microsoft, Get-TimeZone (shows the current time zone): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-timezone?view=powershell-5.1>
+- Microsoft, Set-TimeZone (sets the system time zone, by `-Id`): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-timezone?view=powershell-5.1>

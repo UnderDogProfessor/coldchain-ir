@@ -46,9 +46,10 @@ more than one place.
 ## Keep notes like a responder
 
 Copy the [Level 2 notes template](notes-template.md) into
-`Documents\Rimeport notes\level-2\lab-6\`. Write the time **and the machine**
-for every step. Number screenshots `lab6-1.png`, `lab6-2.png`, and so on, and
-save them on your real computer, not inside a VM.
+`Documents\Rimeport notes\level-2\lab-6\`. Write the time, **its time zone**
+and **the machine** for every step, like `10:42 ET, DC01`. Number screenshots
+`lab6-1.png`, `lab6-2.png`, and so on, and save them on your real computer, not
+inside a VM.
 
 **This time you're in the logs too.** Every time you sign in as `responder`,
 write it down. By the end you'll see why.
@@ -109,8 +110,9 @@ explain it.
 
 If any of them says **No Auditing**, the setting didn't survive. That's a real
 finding: write it down, turn it back on with the `auditpol /set` commands from
-[setup](00-setup.md#turn-on-the-records-level-2-needs), and take a new
-**rimeport-ready** snapshot of DC01 after this lab.
+[setup](00-setup.md#turn-on-the-records-level-2-needs), and after this lab,
+take a new **rimeport-ready** snapshot of all five together, with every VM
+off.
 
 **Why check:** Microsoft lists **Kerberos Service Ticket Operations** as "Not
 configured" by default. That's the setting behind 4769, the record that
@@ -198,7 +200,7 @@ Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security.evtx" \\FS01\Evidence\
 ```
 
 - `wevtutil epl` saves a copy of the Security log as a file. Write down the
-  time: anything after it isn't in the copy.
+  time and time zone: anything after it isn't in the copy.
 - `Get-FileHash` prints the file's SHA-256 fingerprint. Copy it into the
   evidence table in your notes.
 - `Copy-Item` puts the copy on the Evidence share, where only IT can reach it.
@@ -257,6 +259,12 @@ record, and the **Computer** column says which machine wrote it.
 You should now see Dana's whole morning from all three machines, in time order,
 in one list.
 
+**Check which time zone it shows.** Event Viewer shows each record in the time
+zone of the machine it's on. EvtxECmd's documentation says its JSON output
+uses UTC, but it doesn't say which zone the CSV's **Time Created** uses. So
+test it: find Dana's sign-in on WS-DSP-01, compare the time here with the time
+Event Viewer showed you in Part 4, and write down the difference.
+
 📸 **Screenshot 7:** Timeline Explorer showing Dana's records from more than
 one machine. Save it as `lab6-7.png`.
 
@@ -303,8 +311,10 @@ proves it and number it from 8 on.
 <details>
 <summary><strong>Hints</strong> (open if you're stuck)</summary>
 
-- Every machine shows times in its own time zone. Setup gave them all the same
-  one, so the times should line up across machines.
+- Every machine shows times in its own time zone. Setup sets them all to
+  Eastern, but if one machine's times look a few hours off, run `Get-TimeZone`
+  on it. If it's different, convert its times before you compare, and write
+  down that you did.
 - In Event Viewer, **Find...** searches only the records the filter shows.
   If it finds nothing, check the filter first.
 - On DC01, Dana's records may show her name as `dana.reyes@CORP.RIMEPORT.INTERNAL`.
@@ -425,5 +435,7 @@ Kali VM as the attacker.
   contents): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash>
 - Eric Zimmerman's tools (EvtxECmd and Timeline Explorer):
   <https://ericzimmerman.github.io/>
-- EvtxECmd on GitHub (`-d`, `--csv`, `--csvf`; maps; MIT license):
+- EvtxECmd on GitHub (`-d`, `--csv`, `--csvf`; maps; MIT license; JSON
+  output time stamps in UTC, with no zone given for the CSV):
   <https://github.com/EricZimmerman/evtx>
+- Microsoft, Get-TimeZone (shows the current time zone): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-timezone?view=powershell-5.1>
