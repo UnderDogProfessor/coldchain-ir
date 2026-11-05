@@ -425,13 +425,18 @@ its name in File Explorer's address bar and press Enter.
 
 | On | Sign in as | Open | Should |
 |---|---|---|---|
+| DC01 | `RIMEPORT\responder` | PowerShell, then run `whoami` | Say `rimeport\responder` |
+| FS01 | `RIMEPORT\responder` | PowerShell, then run `whoami` | Say `rimeport\responder` |
 | WS-DSP-01 | `RIMEPORT\dana.reyes` | `\\FS01\Dispatch` | Show two files |
 | WS-FIN-01 | `RIMEPORT\owen.tran` | `\\FS01\Finance` | Show two files |
 | WS-FIN-01 | (still Owen) | `\\FS01\Dispatch` | Say access is denied: Owen isn't in Dispatch |
 | WS-IT-01 | `RIMEPORT\responder` | `\\FS01\Evidence` | Open, empty |
 
-Each first sign-in takes a minute while Windows sets up the account. Sign
-everyone out when you're done.
+Each time, choose **Other user** and type the full name, with `RIMEPORT\` in
+front. Each first sign-in takes a minute while Windows sets up the account.
+Signing in to DC01 and FS01 as responder here also means their sign-in screens
+should offer responder, not Administrator, when you go back to this snapshot.
+Sign everyone out when you're done.
 
 Then shut down all five: the PCs first, then FS01, then DC01 last. With every
 VM off, take a snapshot of each one:
@@ -484,6 +489,10 @@ issue on this repo.
 example `Documents\Rimeport notes\level-2\`, with a copy of the
 [Level 2 notes template](notes-template.md).
 
+> **From here on, investigate as `RIMEPORT\responder`.** Administrator,
+> itsetup and the local dana were for building the network. Every lab says
+> which account to use at each step.
+
 Next: [Lab 6: Meet the network](06-meet-the-network.md)
 
 ## Sources
@@ -515,3 +524,5 @@ Next: [Lab 6: Meet the network](06-meet-the-network.md)
 - Eric Zimmerman's tools (EvtxECmd and Timeline Explorer downloads, .NET 10
   Desktop runtime for GUI tools): <https://ericzimmerman.github.io/>
 - EvtxECmd on GitHub (`--sync` updates the maps): <https://github.com/EricZimmerman/evtx>
+- Microsoft, whoami (with no parameters, prints the current domain and user
+  name): <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/whoami>

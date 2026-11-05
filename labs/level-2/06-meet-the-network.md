@@ -53,6 +53,28 @@ save them on your real computer, not inside a VM.
 **This time you're in the logs too.** Every time you sign in as `responder`,
 write it down. By the end you'll see why.
 
+## Which account, where
+
+Every step names the machine and the account. Sign in with exactly that one.
+
+| When you're | Sign in as |
+|---|---|
+| Investigating: reading logs or collecting evidence, on any machine | `RIMEPORT\responder` |
+| Being Dana, on WS-DSP-01 | `RIMEPORT\dana.reyes` |
+| Being Owen, on WS-FIN-01 | `RIMEPORT\owen.tran` |
+
+**Administrator**, **itsetup** and the local **dana** were for building the
+network. Don't use them unless a lab tells you to.
+
+The sign-in screen may offer the last account used, which is often
+Administrator. Don't click it. Choose **Other user** and type the full name,
+with `RIMEPORT\` in front. To check who you are, run `whoami` in PowerShell.
+It prints the domain and the account, like `rimeport\responder`.
+
+**Signed in as the wrong account?** Sign out, sign in as the right one, and
+write down both times. The wrong sign-in is in the logs now, and your notes
+explain it.
+
 ---
 
 ## Part 1: Get ready (10 minutes)
@@ -66,14 +88,18 @@ write it down. By the end you'll see why.
 
 ## Part 2: Check what's being written down (10 minutes)
 
-1. Sign in to **DC01** as `RIMEPORT\responder` (on the sign-in screen, choose
-   **Other user**). Write down the time.
+1. Sign in to **DC01** as `RIMEPORT\responder`: choose **Other user**, not
+   the Administrator tile if the screen offers one. Write down the time.
 2. Right-click **Start**, open **Terminal (Admin)** or **Windows PowerShell
    (Admin)**, and run:
 
    ```
+   whoami
    auditpol /get /category:"Account Logon"
    ```
+
+   `whoami` should say `rimeport\responder`. If it doesn't, see **Which
+   account, where**.
 
 3. **Credential Validation**, **Kerberos Authentication Service** and
    **Kerberos Service Ticket Operations** should each say **Success and
@@ -96,6 +122,7 @@ Leave DC01 signed in.
 ## Part 3: Make a normal morning (15 minutes)
 
 Do these steps and **write down each time**. Your notes are your answer key.
+Sign in with **Other user** and the full name each time.
 
 | # | Machine | Do this | Time |
 |---|---|---|---|
@@ -114,8 +141,9 @@ and **FS01**. You don't need WS-FIN-01 or WS-IT-01 for this part. Read each
 one's own log with **Event Viewer**, the tool you used in Level 1. On each of
 the three:
 
-- Sign in as `RIMEPORT\responder` if you aren't already, and **write down the
-  time**.
+- Sign in as `RIMEPORT\responder` (**Other user**, then the full name) and
+  **write down the time**. On DC01 you should still be signed in from Part 2.
+  If you're not sure, run `whoami`.
 - Right-click **Start**, open **Event Viewer**, then **Windows Logs**,
   **Security**.
 - Use **Filter Current Log...** for the event IDs below. Then on the right,
@@ -159,8 +187,8 @@ Zimmerman, and you installed them on WS-IT-01 during setup.
 
 ### Collect the logs
 
-On **WS-DSP-01**, **DC01** and **FS01**, still signed in as `responder`, open
-an admin PowerShell window and run:
+On **WS-DSP-01**, **DC01** and **FS01**, still signed in as
+`RIMEPORT\responder`, open an admin PowerShell window and run:
 
 ```
 New-Item -ItemType Directory C:\Evidence -Force | Out-Null
@@ -180,7 +208,8 @@ Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security.evtx" \\FS01\Evidence\
 
 ### Check the copies on your computer
 
-Sign in to **WS-IT-01** as `responder`, open PowerShell, and run:
+Sign in to **WS-IT-01** as `RIMEPORT\responder` and write down the time. Open
+PowerShell and run:
 
 ```
 New-Item -ItemType Directory C:\Cases\lab6 -Force | Out-Null
@@ -376,6 +405,8 @@ Kali VM as the attacker.
 - Microsoft, Advanced Audit Policy Configuration settings (Kerberos Service
   Ticket Operations "Not configured" by default):
   <https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/advanced-audit-policy-configuration>
+- Microsoft, whoami (with no parameters, prints the current domain and user
+  name): <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/whoami>
 - Microsoft, wevtutil (`epl` exports a log to a file, `/ow` overwrites):
   <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil>
 - Microsoft, Get-FileHash (SHA-256 by default; identical hashes mean identical

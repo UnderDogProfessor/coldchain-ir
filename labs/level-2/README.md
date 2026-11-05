@@ -36,8 +36,10 @@ Do them in order. Each lab is written after the one before has been run on
 the real network, so the planned ones can still change.
 
 **Keep notes as you go.** Level 2 has its own [notes template](notes-template.md),
-with a column for the machine and a table for evidence fingerprints. You're in
-the logs too now, so write down every time you sign in.
+with columns for the machine and the account, and a table for evidence
+fingerprints. You're in the logs too now, so write down every time you sign
+in. Investigate as `RIMEPORT\responder`, never Administrator, so your own
+records are easy to find.
 
 ## Same answer, another tool
 

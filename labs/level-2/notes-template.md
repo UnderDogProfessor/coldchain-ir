@@ -14,11 +14,11 @@ Write the time **and the machine** next to every step, including every time
 you signed in as `responder`. In Level 2 you show up in the logs too, and your
 notes are how you tell yourself apart from everyone else.
 
-| # | Machine | What I did | Time |
-|---|---|---|---|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
+| # | Machine | Signed in as | What I did | Time |
+|---|---|---|---|---|
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
 
 ## What I found
 

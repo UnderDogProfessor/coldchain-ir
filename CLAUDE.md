@@ -19,6 +19,15 @@ source listed at the bottom of that lab. Anything not yet tested on the real
 network gets hedged in the text, and the lab carries a "Not yet tested" note
 until his run.
 
+**Name the machine and the account at every sign-in.** Every step that puts
+the learner at a machine says which machine and which account, written in full
+(`RIMEPORT\responder`), and tells them to choose **Other user** on the sign-in
+screen. Investigating is always `RIMEPORT\responder`, and a staff action uses
+that person's own account. Administrator, itsetup and the local dana are for
+setup only, unless a lab says otherwise. Each lab carries a short "Which
+account, where" table and a `whoami` check at its first sign-in. (On the first
+Lab 6 run, the sign-in screen offered Administrator and it got used.)
+
 **Same answer, another tool.** Where a second tool fits naturally, add a part
 that repeats a task with it. Add one or two extra tools, never all of them.
 Free tools go on the main path. Trial or commercial tools (AXIOM and the like)
