@@ -262,9 +262,14 @@ In Timeline Explorer, choose **File**, **Open**, and pick
 record, and the **Computer** column says which machine wrote it.
 
 1. Click the **Time Created** column title to sort by time.
-2. In the empty row just under the column titles, type `dana` in the box under
-   **User Name**. If nothing shows, press **Ctrl+F** and search for
-   `dana.reyes` instead.
+2. In the empty row just under the column titles, type `dana.reyes` in the box
+   under **Payload Data1**. That's where EvtxECmd puts the account that signed
+   in or got a ticket, after `Target:`.
+
+   Don't filter **User Name** for this. On the test run, sign-in records had
+   the computer there, like `WS-DSP-01$`, or `-\-`, not Dana. Filtering User
+   Name for her showed 248 rows from WS-DSP-01 alone, and none of her sign-ins
+   or tickets.
 
 You should now see Dana's whole morning from all three machines, in time order,
 in one list.
@@ -419,10 +424,14 @@ wrong passwords along the way, looks a lot like an attacker moving between
 computers. Lab 8 is about exactly that. Your notes, with times, are what
 separates you from them.
 
-**8. They should match.** If they don't, that's the most useful finding in the
-lab. Work out which one is wrong and why: a filter that hid something, a
-search that missed a different spelling of the name, or a column the tool
-didn't fill in.
+**8. They should match.** On the test run they didn't at first. Event Viewer
+found all of Dana's records. Timeline Explorer, filtered on **User Name**,
+showed 248 rows from WS-DSP-01 and none of her sign-ins or tickets, because
+EvtxECmd puts her name in **Payload Data1** for those. Filtered on Payload
+Data1, it found them on all three machines. If yours don't match, that's the
+most useful finding in the lab. Work out which one is wrong and why: a filter
+that hid something, a search that missed a different spelling of the name, or
+a column the tool filled in differently than you'd guess.
 
 **9. Something like:** "When Dana signs in at WS-DSP-01, her computer records
 her sign-in (Types 11 and 7 on the test run), and DC01 records a 4768 from her
