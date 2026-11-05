@@ -35,6 +35,10 @@ The labs are numbered across the whole series, so Level 2 starts at 6.
 Do them in order. Each lab is written after the one before has been run on
 the real network, so the planned ones can still change.
 
+**Writeups on my website:**
+[Lab 6](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/lab-6/),
+the [Level 2 page](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/), or the whole [COLD CHAIN series](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/).
+
 **Keep notes as you go.** Level 2 has its own [notes template](notes-template.md),
 with columns for the machine and the account, and a table for evidence
 fingerprints. You're in the logs too now, so write down every time you sign
