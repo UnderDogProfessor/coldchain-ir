@@ -41,6 +41,27 @@ fingerprints. You're in the logs too now, so write down every time you sign
 in. Investigate as `RIMEPORT\responder`, never Administrator, so your own
 records are easy to find.
 
+## Lessons from the first build
+
+These came from the first build and run of Level 2. The guides now cover
+each one, but they're worth knowing before you start.
+
+- **Keep every password in one place.** Building Rimeport sets eight
+  passwords. On the first build they were kept in each VM's description in
+  VMware, and after a short break they were hard to remember. The setup guide
+  now starts with a [password list](00-setup.md#keep-your-passwords-in-one-place).
+- **Set the same time zone everywhere.** Two machines were left on Pacific
+  time while the rest used Eastern, so the times written down while saving
+  logs didn't line up. Check each machine with `Get-TimeZone`, and write the
+  zone next to every time in your notes.
+- **Know which account you're typing.** Joining the domain wants DC01's
+  Administrator password, not the joining computer's own. And the sign-in
+  screen offers the last account used, often Administrator. Choose **Other
+  user** and type the full name, like `RIMEPORT\responder`.
+- **Take screenshots from your real computer.** Copying a screenshot out of
+  DC01 didn't work. Press **Ctrl + Alt**, then **Windows key + Shift + S** on
+  your real computer, and drag a box around the VM window.
+
 ## Same answer, another tool
 
 Wherever a second tool fits, a lab does the same task twice: once with

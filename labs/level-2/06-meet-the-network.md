@@ -51,6 +51,13 @@ and **the machine** for every step, like `10:42 ET, DC01`. Number screenshots
 `lab6-1.png`, `lab6-2.png`, and so on, and save them on your real computer, not
 inside a VM.
 
+**Take screenshots from your real computer**, the same way as in
+[Lab 1](../level-1/01-what-normal-looks-like.md): press **Ctrl + Alt** to get
+your mouse and keyboard back, then press **Windows key + Shift + S** and drag a
+box around the VM window. Don't take them inside a VM and try to copy them
+out. Copying pictures out of a VM may not work, and a revert wipes anything
+left inside.
+
 **This time you're in the logs too.** Every time you sign in as `responder`,
 write it down. By the end you'll see why.
 
@@ -400,6 +407,8 @@ which file she opened."
 - **FS01** sees who connected and from where, but not which file they opened.
 - Names ending in **$** are computers. Most records are machines, not people.
 - **You** are in the logs too. Write down your own times.
+- **Time zones matter.** The same moment can show up hours apart on two
+  machines. Check each machine's zone, and write it next to every time.
 - Collect, fingerprint, then analyze a copy. Matching hashes prove the copy is
   the original.
 - Two tools, one answer. When they agree, you can trust it more. When they

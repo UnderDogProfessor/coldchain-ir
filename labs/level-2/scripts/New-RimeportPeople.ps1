@@ -13,7 +13,7 @@ What it does, in order:
      2025. The account was disabled but never taken out of Domain Admins.
 
 It asks for two passwords: one shared by all six staff (a lab shortcut, never
-do this for real) and one for responder. Write both in your lab notes.
+do this for real) and one for responder. Add both to your password list.
 
 Running it twice is safe: anything that already exists is skipped.
 Read it before you run it.

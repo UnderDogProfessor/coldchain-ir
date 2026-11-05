@@ -75,6 +75,28 @@ finished first.
 > Licensed**. If it doesn't, run `slmgr /ato` while it's still on NAT, and
 > check again.
 
+## Keep your passwords in one place
+
+You'll set eight passwords while building Rimeport. Before you start, make one
+list for them on your real computer: an entry in your password manager, or a
+file you never publish (keep it out of any notes you share). Add each password
+the moment you set it.
+
+| Machine | Account | Password |
+|---|---|---|
+| DC01 | Administrator (becomes `RIMEPORT\Administrator`) | |
+| DC01 | Safe Mode Administrator (DSRM) | |
+| FS01 | Administrator, local | |
+| WS-DSP-01 | dana, local, from Level 1 | |
+| WS-FIN-01 | itsetup, local | |
+| WS-IT-01 | itsetup, local | |
+| Domain | The six staff accounts (one shared password) | |
+| Domain | responder | |
+
+These are lab passwords: never use one you use anywhere real. A VM's
+description in VMware isn't a good place for them. That's where the first
+build kept them, and after a short break they were hard to find.
+
 ---
 
 ## Part 1: Make the Rimeport network (5 minutes)
@@ -118,7 +140,7 @@ gets a fixed one.
    which one, pick **Windows Server 2025 Standard Evaluation (Desktop
    Experience)**. The versions without "Desktop Experience" have no desktop.
 3. Accept the license, pick the empty drive, and wait.
-4. Set a password for **Administrator** and write it in your lab notes.
+4. Set a password for **Administrator** and add it to your password list.
 5. To sign in, VMware needs Ctrl+Alt+Delete sent for you: open the **VM** menu
    and choose **Send Ctrl+Alt+Del**.
 
@@ -195,7 +217,7 @@ Install-ADDSForest -DomainName corp.rimeport.internal -DomainNetbiosName RIMEPOR
 ```
 
 The second command asks for a **Safe Mode Administrator Password**. It's a
-spare password for repairing DC01, so write it in your lab notes too. Answer
+spare password for repairing DC01, so add it to your password list too. Answer
 **Y** when it asks to continue. Yellow warnings are normal here. DC01 restarts
 on its own, and the first start takes a few minutes.
 
@@ -270,8 +292,9 @@ Then run it:
 .\New-RimeportPeople.ps1
 ```
 
-It asks for two passwords. Windows will refuse a password that's too simple,
-so use something like the Administrator one.
+It asks for two passwords, so add both to your password list. Windows will
+refuse a password that's too simple, so use something like the Administrator
+one.
 
 - **Staff password:** shared by all six staff accounts. That's a lab shortcut;
   real companies never do it.
@@ -366,7 +389,7 @@ changes:
 
 - **Name:** WS-FIN-01, in the VM wizard and in Step 6.
 - **Local account (Step 4):** name it **itsetup** instead of dana. It's only
-  for setting up the computer.
+  for setting up the computer. Add its password to your password list.
 - **Step 7:** install the updates, but skip the snapshot. You take one at the
   end of this guide.
 - **Time zone:** Level 1 setup doesn't set one, so it may not match DC01. In
