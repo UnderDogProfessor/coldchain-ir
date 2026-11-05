@@ -109,8 +109,10 @@ Do these steps and **write down each time**. Your notes are your answer key.
 
 ## Part 4: Follow Dana across three machines (30 minutes)
 
-Dana's morning touched three machines. Read each one's own log with **Event
-Viewer**, the tool you used in Level 1. On each machine:
+Dana's morning touched three machines: **WS-DSP-01** (her computer), **DC01**
+and **FS01**. You don't need WS-FIN-01 or WS-IT-01 for this part. Read each
+one's own log with **Event Viewer**, the tool you used in Level 1. On each of
+the three:
 
 - Sign in as `RIMEPORT\responder` if you aren't already, and **write down the
   time**.
