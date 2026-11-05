@@ -4,9 +4,11 @@
 stop between parts.
 **You do this once.** Every Level 2 lab uses the same network.
 
-> **Not yet tested.** This guide is written but hasn't been run end to end on a
-> real computer yet. If a screen or step doesn't match, pick the closest option
-> and write down what you saw. It gets fixed after the first full run.
+> **Tested from October 29 to November 4, 2026,** by building the whole network
+> on the author's PC. What went wrong on that build is fixed in this guide,
+> and the lessons are in the [Level 2 README](README.md#lessons-from-the-first-build).
+> Some steps were reworded after the build and haven't been run again in their
+> new form. If a screen or step doesn't match, write down what you saw.
 
 ## The story
 

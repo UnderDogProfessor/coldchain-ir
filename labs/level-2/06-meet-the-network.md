@@ -5,9 +5,9 @@
 **You need:** the five machines from [Level 2 setup](00-setup.md), at their
 **rimeport-ready** snapshot
 
-> **Not yet tested.** This lab is written but hasn't been run on the real
-> network yet. If something doesn't match, write down what you saw. That's
-> how the Level 1 labs got better.
+> **Tested on November 4, 2026,** on the author's Rimeport network. Where the
+> logs didn't match what Microsoft's documentation suggests, the answers say
+> what the test run showed. If yours differs, write down what you saw.
 
 ## The story
 
@@ -161,11 +161,12 @@ the three:
 
 ### Her computer: WS-DSP-01
 
-Filter for **4624**. Find Dana's sign-in at the time of step 1. Note the
-**Logon Type**, **Account Name**, **Account Domain** and **Authentication
-Package**.
+Filter for **4624**. Find Dana's sign-in at the time of step 1. There may be
+two records in the same second. For each one, note the **Logon Type**,
+**Account Name**, **Account Domain** and **Authentication Package**.
 
-📸 **Screenshot 2:** Dana's sign-in on WS-DSP-01. Save it as `lab6-2.png`.
+📸 **Screenshot 2:** Dana's sign-in on WS-DSP-01. Save it as `lab6-2.png`, or
+as `lab6-2.1.png` and `lab6-2.2.png` if there are two records.
 
 ### The domain controller: DC01
 
@@ -173,7 +174,9 @@ Filter for **4768, 4769** (type both, with a comma). Then:
 
 - Find a **4768** for `dana.reyes` close to step 1. Note the **Client
   Address**.
-- Find a **4769** for Dana close to step 2. Note the **Service Name**.
+- Dana gets several **4769**s, each with its own **Service Name**. Find the
+  one closest to the time of step 2 and note its Service Name. Note the
+  Service Names on her other 4769s too.
 
 📸 **Screenshot 3:** Dana's 4768 on DC01. Save it as `lab6-3.png`.
 📸 **Screenshot 4:** the 4769 near step 2, with **Service Name** visible. Save
@@ -268,9 +271,12 @@ in one list.
 
 **Check which time zone it shows.** Event Viewer shows each record in the time
 zone of the machine it's on. EvtxECmd's documentation says its JSON output
-uses UTC, but it doesn't say which zone the CSV's **Time Created** uses. So
-test it: find Dana's sign-in on WS-DSP-01, compare the time here with the time
-Event Viewer showed you in Part 4, and write down the difference.
+uses UTC, but it doesn't say which zone the CSV's **Time Created** uses. On
+the test run it was UTC: Dana's sign-in at 8:41:29 PM Eastern showed as
+01:41:29 the next day, five hours later (four in summer, when Eastern is on
+daylight time). Check yours the same way: find Dana's sign-in on WS-DSP-01,
+compare the time here with the time Event Viewer showed you in Part 4, and
+write down the difference. Notice that the date can change too.
 
 📸 **Screenshot 7:** Timeline Explorer showing Dana's records from more than
 one machine. Save it as `lab6-7.png`.
@@ -290,12 +296,13 @@ machine, which record.
 
 1. On **WS-DSP-01**, what **Logon Type**, **Account Domain** and
    **Authentication Package** does Dana's sign-in show? Does the time match
-   step 1?
+   step 1? Now find your own `responder` sign-in on the same machine. Is its
+   Logon Type the same as Dana's?
 2. On **DC01**, what **Client Address** is on Dana's 4768? Which machine has
    that address? (The table in [setup](00-setup.md#what-youll-build) tells
    you.)
-3. On **DC01**, what **Service Name** is on the 4769 near step 2? What does it
-   tell you Dana was about to do?
+3. On **DC01**, Dana has several 4769s. Which **Service Names** did you see?
+   Which one matches step 2, and what does it tell you Dana was about to do?
 4. On **FS01**, what **Logon Type**, **Source Network Address** and
    **Workstation Name** does Dana's sign-in show? Dana never typed her password
    on FS01. So how did FS01 know who she was?
@@ -328,61 +335,89 @@ proves it and number it from 8 on.
   That's still her.
 - For question 7, remember the `Copy-Item` to `\\FS01\Evidence`. That was you
   signing in to FS01 over the network.
+- Mistyped a name or password? That's in the logs too: a **4625** on the
+  computer you typed it into and, for a domain account, a **4771** on DC01.
+  Lab 7 is about those.
 
 </details>
 
 <details>
 <summary><strong>Answers explained</strong> (try first)</summary>
 
-These come from Microsoft's documentation. They'll be checked against a real
-run and updated. Wherever yours differs, yours is the evidence: write it down.
+These come from Microsoft's documentation and from the author's test run on
+November 4, 2026. Times are Eastern. Wherever yours differs, yours is the
+evidence: write it down.
 
-**1. Logon Type 2, Account Domain RIMEPORT.** Type 2 means she was at the
-keyboard. **RIMEPORT** means a domain account. The local `dana` from Level 1
-would show **WS-DSP-01** as its domain, because a local account belongs to the
-computer it lives on. For **Authentication Package**, write down what yours
-says. Microsoft explains that **Negotiate** picks Kerberos unless Kerberos
-can't be used.
+**1. Account Domain RIMEPORT and Authentication Package Negotiate. The Logon
+Type is the surprise.** **RIMEPORT** means a domain account. The local `dana`
+from Level 1 would show **WS-DSP-01** as its domain, because a local account
+belongs to the computer it lives on. Microsoft explains that **Negotiate**
+picks Kerberos unless Kerberos can't be used.
 
-In Level 1 you saw each sign-in as a *pair* of records, because local `dana`
-was an administrator. `dana.reyes` isn't an administrator, so you may see one
-record instead of two. Check yours.
+You'd expect Logon Type **2**, which Microsoft describes as someone signing in
+at this computer. On the test run, Dana's sign-in at 8:41:29 PM wasn't a 2. It
+was two records in the same second:
 
-**2. Most likely `::ffff:10.20.20.11`, which is WS-DSP-01.** Microsoft lists
-three forms for Client Address: a plain IPv4 address, an IPv6 address, or
-`::ffff:` followed by an IPv4 address, which is IPv4 written the IPv6 way. If
-yours starts with `fe80`, that's an IPv6 address. Write it down; the test run
-will show whether that happens here. The 4768's **Service Name** is
-**krbtgt**, the part of DC01 that hands out first tickets.
+- **Type 11**, which Microsoft calls *CachedInteractive*: signing in with
+  credentials saved on the computer, without asking the domain controller.
+- **Type 7**, which Microsoft calls an *unlock*, though nothing was locked.
 
-**3. FS01$.** Microsoft describes Service Name as the account or computer the
-ticket was for. So DC01 knew Dana was about to use something on FS01, just
-before she did. It doesn't know which folder or which file.
+Yet DC01 handed Dana her first ticket one second later (question 2), so DC01
+was involved after all. Her second sign-in, at 8:50 PM, looked the same.
+
+The author's own `responder` sign-ins on WS-DSP-01, at 8:52 and 9:09 PM, were
+each a pair of **Type 2** records, like the administrator pairs you saw in
+Level 1. `responder` is an administrator and Dana isn't. Why Dana's came out as
+11 and 7 isn't confirmed. Write down what yours shows: on this network, that's
+what normal looks like.
+
+**2. `::ffff:10.20.20.11`, which is WS-DSP-01.** Microsoft lists three forms
+for Client Address: a plain IPv4 address, an IPv6 address, or `::ffff:`
+followed by an IPv4 address, which is IPv4 written the IPv6 way. The test run
+showed the third form. The 4768's **Service Name** is **krbtgt**, the part of
+DC01 that hands out first tickets.
+
+**3. FS01$, at 8:42:49 PM on the test run.** Microsoft describes Service Name
+as the account or computer the ticket was for. So DC01 knew Dana was about to
+use something on FS01, and FS01 recorded her sign-in in the same second. DC01
+doesn't know which folder or which file.
+
+Her other 4769s were for **WS-DSP-01$**, at the moment she signed in, which is
+a ticket for her own computer, and for **DC01$**, several times, which are
+tickets for something on DC01 itself. That's why the time matters: the first
+4769 you find for Dana is probably not the one for step 2.
 
 **4. Logon Type 3, Source Network Address 10.20.20.11.** Type 3 is a network
-sign-in: Dana used FS01 from her own computer. **Workstation Name** is probably
-empty, because Microsoft notes that network sign-ins with Kerberos usually
-don't record the workstation. On FS01 the address is how you tell which
+sign-in: Dana used FS01 from her own computer. **Workstation Name** was empty
+(`-`) on the test run, and the Authentication Package was **Kerberos**.
+Microsoft notes that network sign-ins with Kerberos usually don't record the
+workstation. On FS01 the address is how you tell which
 computer she came from. And she didn't need a password, because her computer
 showed FS01 the ticket DC01 had given her.
 
 Notice what FS01 **didn't** write down: which file she opened. That needs file
 auditing, which Rimeport doesn't have turned on yet. Lab 9 deals with it.
 
-**5. The same pattern, from 10.20.20.12.** Owen's 4768 comes from WS-FIN-01,
-his 4769 near step 6 is for **FS01$**, and FS01 records a type 3 sign-in from
-10.20.20.12. Which method you prefer is your call. Say why in your notes.
+**5. The same pattern, from 10.20.20.12.** On the test run, Owen's 4768 came
+from `::ffff:10.20.20.12` at 8:44:20 PM, his 4769 for **FS01$** at 8:46:06
+PM, and FS01 recorded a Type 3 sign-in from 10.20.20.12 in the same second.
+Which method you prefer is your call. Say why in your notes.
 
 **6. Computers, like `WS-DSP-01$` or `FS01$`.** Microsoft notes that computer
 account names end in **$**. Computers sign in to the domain and ask for
-tickets all day. You'll probably find more computer records than people
-records, which is the Level 1 lesson again, now across the whole network.
+tickets all day. On the test run, between 8:30 and 9:30 PM, 83 of DC01's 138
+4768 and 4769 records were for computers, about three in five. That's the
+Level 1 lesson again, now across the whole network.
 
-**7. More than you'd think.** You signed in to each machine at the keyboard,
-and every `Copy-Item` to `\\FS01\Evidence` was a network sign-in to FS01. One
-admin account signing in to machine after machine within a few minutes looks
-a lot like an attacker moving between computers. Lab 8 is about exactly that.
-Your notes, with times, are what separates you from them.
+**7. More than you'd think.** On the test run, `responder` showed up dozens of
+times in one hour: a sign-in at the keyboard of each machine, network sign-ins
+to DC01 and FS01, and five failed sign-ins on WS-DSP-01 from mistyped
+passwords. Each failure left a 4625 on WS-DSP-01 and a 4771 on DC01, which
+Microsoft says DC01 writes when the wrong password is given. One admin
+account signing in to machine after machine within a few minutes, with a few
+wrong passwords along the way, looks a lot like an attacker moving between
+computers. Lab 8 is about exactly that. Your notes, with times, are what
+separates you from them.
 
 **8. They should match.** If they don't, that's the most useful finding in the
 lab. Work out which one is wrong and why: a filter that hid something, a
@@ -390,7 +425,8 @@ search that missed a different spelling of the name, or a column the tool
 didn't fill in.
 
 **9. Something like:** "When Dana signs in at WS-DSP-01, her computer records
-a type 2 sign-in, and DC01 records a 4768 from her computer's address. When
+her sign-in (Types 11 and 7 on the test run), and DC01 records a 4768 from her
+computer's address. When
 she opens `\\FS01\Dispatch`, DC01 records a 4769 for FS01$, and FS01 records a
 type 3 sign-in from her computer's address. Neither DC01 nor FS01 records
 which file she opened."
@@ -409,6 +445,9 @@ which file she opened."
 - **You** are in the logs too. Write down your own times.
 - **Time zones matter.** The same moment can show up hours apart on two
   machines. Check each machine's zone, and write it next to every time.
+- **The logs don't always match the documentation.** Dana's sign-in wasn't
+  the Type 2 you'd expect. Write down what yours shows, because that's what
+  normal looks like on your network.
 - Collect, fingerprint, then analyze a copy. Matching hashes prove the copy is
   the original.
 - Two tools, one answer. When they agree, you can trust it more. When they
@@ -421,9 +460,9 @@ Kali VM as the attacker.
 
 ## Sources
 
-- Microsoft, "4624(S): An account was successfully logged on" (Logon Types 2
-  and 3, Account Domain for local accounts, Source Network Address, Workstation
-  Name often empty for Kerberos network sign-ins, Negotiate):
+- Microsoft, "4624(S): An account was successfully logged on" (Logon Types 2,
+  3, 7 and 11, Account Domain for local accounts, Source Network Address,
+  Workstation Name often empty for Kerberos network sign-ins, Negotiate):
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624>
 - Microsoft, "4768(S, F): A Kerberos authentication ticket (TGT) was
   requested" (domain controllers only, Client Address formats, krbtgt,
@@ -433,6 +472,9 @@ Kali VM as the attacker.
   controllers only, Service Name is the account or computer the ticket was
   for, account shown as name@DOMAIN):
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4769>
+- Microsoft, "4771(F): Kerberos pre-authentication failed" (domain controllers
+  only; failure code 0x18 means the wrong password was given):
+  <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4771>
 - Microsoft, Advanced Audit Policy Configuration settings (Kerberos Service
   Ticket Operations "Not configured" by default):
   <https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/advanced-audit-policy-configuration>

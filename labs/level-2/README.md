@@ -24,8 +24,8 @@ The labs are numbered across the whole series, so Level 2 starts at 6.
 
 | # | Lab | You'll learn | Status |
 |---|---|---|---|
-| 0 | [Before you start](00-setup.md) | Build Rimeport's network (once) | Written, not yet tested |
-| 6 | [Meet the network](06-meet-the-network.md) | Where one sign-in gets written down: the computer, the domain controller and the file server | Written, not yet tested |
+| 0 | [Before you start](00-setup.md) | Build Rimeport's network (once) | Ready, tested |
+| 6 | [Meet the network](06-meet-the-network.md) | Where one sign-in gets written down: the computer, the domain controller and the file server | Ready, tested |
 | 7 | Password spraying over the network | Failed sign-ins from another machine, and where they came from | Planned |
 | 8 | Moving sideways | Follow one account as it hops between machines | Planned |
 | 9 | Who touched the files | Read the file server's access records | Planned |
