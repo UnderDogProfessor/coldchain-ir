@@ -18,6 +18,12 @@ be different, and that's expected.
 | 4. Something runs at startup | [Notes](level-1/04-something-runs-at-startup.md) | Done, 2026-10-28 |
 | 5. Write it up | [Notes](level-1/05-write-it-up.md) and [my page](level-1/05-incident-report.md) | Done, 2026-10-28 |
 
+## Level 2: A small company
+
+| Lab | My notes | Status |
+|---|---|---|
+| 6. Meet the network | [Notes](level-2/06-meet-the-network.md) | Lab done 2026-11-04, answers still to write |
+
 Screenshots for each level live in that level's `images/` folder.
 
 Short writeups of each lab are on my website:

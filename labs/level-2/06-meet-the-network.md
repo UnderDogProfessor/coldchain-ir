@@ -453,6 +453,9 @@ which file she opened."
 - Two tools, one answer. When they agree, you can trust it more. When they
   don't, you've learned something about one of them.
 
+**Compare notes:** [Shreyas's notes from his own run](../../notes/level-2/06-meet-the-network.md).
+Spoilers, so finish the lab first.
+
 **Tool bench:** add your comparison to the [tool bench](../tool-bench.md).
 
 **Next:** Lab 7: Password spraying over the network, coming next. It adds your
