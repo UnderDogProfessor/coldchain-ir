@@ -398,13 +398,13 @@ the investigation tools Lab 6 uses, while it can still reach the internet:
 
    **Write both paths in your lab notes.** Lab 6 needs them.
 4. **Update EvtxECmd's maps.** Maps tell EvtxECmd which parts of each record to
-   pull out. Using the EvtxECmd path from step 3:
+   pull out. The first line finds EvtxECmd in `C:\Tools`, wherever the zip
+   put it. The second updates the maps:
 
    ```
-   & "C:\Tools\EvtxECmd\EvtxECmd.exe" --sync
+   $evtx = (Get-ChildItem C:\Tools -Recurse -Filter EvtxECmd.exe | Select-Object -First 1).FullName
+   & $evtx --sync
    ```
-
-   Change the path if yours is different.
 5. Open Timeline Explorer once to check it starts.
 
 Then check `slmgr /dli`, move WS-IT-01 to **Rimeport**, give it IP

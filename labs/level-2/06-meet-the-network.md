@@ -225,16 +225,28 @@ from. If they match, your copies are exactly what each machine saved.
 
 ### Turn the logs into one timeline
 
-Use the EvtxECmd path you wrote down during setup:
+In the same PowerShell window on WS-IT-01:
 
 ```
-& "C:\Tools\EvtxECmd\EvtxECmd.exe" -d C:\Cases\lab6 --csv C:\Cases\lab6\csv --csvf lab6-security.csv
+$evtx = (Get-ChildItem C:\Tools -Recurse -Filter EvtxECmd.exe | Select-Object -First 1).FullName
+$evtx
+& $evtx -d C:\Cases\lab6 --csv C:\Cases\lab6\csv --csvf lab6-security.csv
 ```
 
-`-d` reads every log in the folder, and `--csv` says where to save the result.
+The first line finds EvtxECmd in `C:\Tools`, so you don't need to remember
+where it is. The second prints the path, which should match your setup notes.
+In the third, `-d` reads every log in the folder, and `--csv` says where to
+save the result.
 
-Open **Timeline Explorer** (the other path from setup), then **File**,
-**Open**, and pick `C:\Cases\lab6\csv\lab6-security.csv`. Every row is one
+Then start **Timeline Explorer** the same way:
+
+```
+$tle = (Get-ChildItem C:\Tools -Recurse -Filter TimelineExplorer.exe | Select-Object -First 1).FullName
+Start-Process $tle
+```
+
+In Timeline Explorer, choose **File**, **Open**, and pick
+`C:\Cases\lab6\csv\lab6-security.csv`. Every row is one
 record, and the **Computer** column says which machine wrote it.
 
 1. Click the **Time Created** column title to sort by time.
