@@ -465,14 +465,41 @@ front. Each first sign-in takes a minute while Windows sets up the account.
 Signing in to DC01 and FS01 as responder here also means their sign-in screens
 should offer responder, not Administrator, when you go back to this snapshot.
 
-**Check the time zones match.** While you're signed in to each of the five,
-open PowerShell and run `Get-TimeZone`. The **Id** line should say **Eastern
-Standard Time** on every one. If one doesn't, fix it in an admin PowerShell
-window with `Set-TimeZone -Id "Eastern Standard Time"`. Otherwise, the same
-moment shows up as different times on different machines, and your notes stop
-lining up with the logs.
-
 Sign everyone out when you're done.
+
+### Check everything with one script
+
+[`Test-Rimeport.ps1`](scripts/Test-Rimeport.ps1) checks each machine for you:
+its address, DNS server, domain, time zone, clock and activation, plus what
+that machine needs (the accounts and audit settings on DC01, the shared
+folders on FS01, the tools on WS-IT-01). It only reads settings and changes
+nothing. Read it first.
+
+Put it where every machine can reach it. On DC01, in an admin PowerShell
+window:
+
+```
+Copy-Item C:\Rimeport\coldchain-ir-main\labs\level-2\scripts\Test-Rimeport.ps1 \\DC01\NETLOGON\
+```
+
+`NETLOGON` is a shared folder on DC01 that every computer in the domain can
+read. Then on **each** of the five, starting with DC01, sign in as
+`RIMEPORT\responder`, open an admin PowerShell window and run:
+
+```
+powershell -ExecutionPolicy Bypass -File \\DC01\NETLOGON\Test-Rimeport.ps1
+```
+
+Windows 11 blocks scripts by default. `-ExecutionPolicy Bypass` lets this one
+run, in this one window only.
+
+Every line starts with **PASS**, **FAIL** or **INFO**, and each FAIL line says
+how to fix it. Fix them and run it again until the last line says the machine
+is ready. Watch the **time zone** above all: a machine on the wrong one shows
+the same moment as a different time, and your notes stop lining up with the
+logs.
+
+Run it again before any lab, after you go back to the snapshot.
 
 Then shut down all five: the PCs first, then FS01, then DC01 last. With every
 VM off, take a snapshot of each one:
@@ -555,7 +582,13 @@ Next: [Lab 6: Meet the network](06-meet-the-network.md)
 - Microsoft, Add-Computer (`-Credential` takes a user name or a PSCredential
   object, and a user name makes it ask for a password): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/add-computer?view=powershell-5.1>
 - Microsoft, about_Execution_Policies (RemoteSigned and `Unblock-File` for
-  downloaded scripts): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies>
+  downloaded scripts; Restricted is the default on Windows clients;
+  `powershell.exe -ExecutionPolicy` sets a policy for one session): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-5.1>
+- Microsoft, Windows Time service tools (`w32tm /stripchart` shows the offset
+  from another computer; `/samples`, `/dataonly`): <https://learn.microsoft.com/en-us/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings>
+- Microsoft, Test-ComputerSecureChannel (checks the trust between a computer
+  and its domain; returns True or False; not reliable on a domain controller): <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/test-computersecurechannel?view=powershell-5.1>
+- Microsoft, auditpol get (`/subcategory`, `/category`, `/r` for CSV output): <https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/auditpol-get>
 - Microsoft, .NET 10 downloads (.NET Desktop Runtime): <https://dotnet.microsoft.com/en-us/download/dotnet/10.0>
 - Eric Zimmerman's tools (EvtxECmd and Timeline Explorer downloads, .NET 10
   Desktop runtime for GUI tools): <https://ericzimmerman.github.io/>

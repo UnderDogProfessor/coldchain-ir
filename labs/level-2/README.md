@@ -76,7 +76,8 @@ results go on the [tool bench](../tool-bench.md).
 
 ## Scripts
 
-Level 2 uses two short PowerShell scripts in [`scripts/`](scripts/) to set up
-Rimeport's accounts and shared folders, instead of hundreds of clicks. They're
+Level 2 uses three short PowerShell scripts in [`scripts/`](scripts/). Two set
+up Rimeport's accounts and shared folders, instead of hundreds of clicks, and
+`Test-Rimeport.ps1` checks that each machine is ready before a lab. They're
 commented and plain. **Read a script before you run it**, every time,
 including these.
