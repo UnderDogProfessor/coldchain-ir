@@ -13,7 +13,7 @@ their logs into one story.
 | WS-DSP-01 | Dana's computer, the same VM as Level 1 | 10.20.20.11 |
 | WS-FIN-01 | Owen's computer, in Finance | 10.20.20.12 |
 | WS-IT-01 | Your computer, with the investigation tools | 10.20.20.30 |
-| Kali | The attacker's machine, from Lab 7 | Given in Lab 7 |
+| Kali | The attacker's machine, from Lab 7 | 10.20.99.50 |
 
 They all run on a private VMware network called **Rimeport**, with no way to
 the internet or your real network.
@@ -26,7 +26,7 @@ The labs are numbered across the whole series, so Level 2 starts at 6.
 |---|---|---|---|
 | 0 | [Before you start](00-setup.md) | Build Rimeport's network (once) | Ready, tested |
 | 6 | [Meet the network](06-meet-the-network.md) | Where one sign-in gets written down: the computer, the domain controller and the file server | Ready, tested |
-| 7 | Password spraying over the network | Failed sign-ins from another machine, and where they came from | Planned |
+| 7 | [Password spraying over the network](07-password-spraying.md) | One password against every account from a machine nobody owns: what the file server and the domain controller each wrote down | Written, not yet tested |
 | 8 | Moving sideways | Follow one account as it hops between machines | Planned |
 | 9 | Who touched the files | Read the file server's access records | Planned |
 | 10 | The new admin, domain-wide | Lab 3 again, now on the domain controller | Planned |

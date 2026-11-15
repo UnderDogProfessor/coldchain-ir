@@ -16,6 +16,7 @@ list from setup, in your password manager or a file you never publish.
 | WS-DSP-01 | 10.20.20.11 | Dana's PC | `RIMEPORT\dana.reyes` when you're Dana, `RIMEPORT\responder` when you investigate |
 | WS-FIN-01 | 10.20.20.12 | Owen's PC | `RIMEPORT\owen.tran` when you're Owen, `RIMEPORT\responder` when you investigate |
 | WS-IT-01 | 10.20.20.30 | Your PC, with the tools | `RIMEPORT\responder` |
+| Kali | 10.20.99.50 | The attacker, from Lab 7. Only on Rimeport while attacking. | Your own Kali account |
 
 All of them: mask 255.255.0.0, no gateway, DNS 10.20.10.10 (DC01 uses
 127.0.0.1). Domain `corp.rimeport.internal`, short name `RIMEPORT`. Time zone

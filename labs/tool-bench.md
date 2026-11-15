@@ -18,6 +18,8 @@ did it find what your notes say happened?
 |---|---|---|---|---|---|---|---|---|
 | Find one person's sign-in and shared-folder records on three machines | [6](level-2/06-meet-the-network.md) | Event Viewer, on each machine | | | | | | Not run yet |
 | Find one person's sign-in and shared-folder records on three machines | [6](level-2/06-meet-the-network.md) | EvtxECmd + Timeline Explorer, on collected copies | | | | | | Not run yet |
+| Count a password spray's guesses per account on the file server and the domain controller | [7](level-2/07-password-spraying.md) | Event Viewer, on each machine | | | | | | Not run yet |
+| Count a password spray's guesses per account on the file server and the domain controller | [7](level-2/07-password-spraying.md) | EvtxECmd + Timeline Explorer, grouped by account | | | | | | Not run yet |
 
 ## Tools so far
 
@@ -29,6 +31,7 @@ did it find what your notes say happened?
 | `Get-FileHash` | Fingerprints a file (SHA-256 by default) | Built into Windows PowerShell | [Lab 6](level-2/06-meet-the-network.md) |
 | [EvtxECmd](https://github.com/EricZimmerman/evtx) | Turns event logs into CSV, XML or JSON | Free, MIT license | [Lab 6](level-2/06-meet-the-network.md) |
 | [Timeline Explorer](https://ericzimmerman.github.io/) | Opens CSV files to sort, filter and search | Free download. The tools page doesn't state a license. | [Lab 6](level-2/06-meet-the-network.md) |
+| [NetExec](https://github.com/Pennyw0rth/NetExec) (`nxc`) | The attacker's tool on Kali: tries sign-ins over the network. Not an investigation tool, listed so you know what made the noise. | Free, BSD-2-Clause license | [Lab 7](level-2/07-password-spraying.md) |
 
 ## Coming later
 

@@ -469,8 +469,8 @@ Spoilers, so finish the lab first.
 
 **Tool bench:** add your comparison to the [tool bench](../tool-bench.md).
 
-**Next:** Lab 7: Password spraying over the network, coming next. It adds your
-Kali VM as the attacker.
+**Next:** [Lab 7: Password spraying over the network](07-password-spraying.md).
+It adds your Kali VM as the attacker.
 
 ## Sources
 
