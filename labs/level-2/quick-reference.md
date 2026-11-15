@@ -121,4 +121,5 @@ Data1** for a person's name, not **User Name**. **Time Created** is UTC.
 | Trust with the domain is broken | Go back to **rimeport-ready** on all five, together, and start DC01 first |
 | A shared folder won't open | Check FS01 is running, then run `New-RimeportShares.ps1` on FS01 again |
 | A command says "not recognized" | Check the spelling, or paste it instead of typing |
+| "Running scripts is disabled on this system" | Windows 11 blocks scripts by default. Start it with `powershell -ExecutionPolicy Bypass -File` and the script's path, as above |
 | Screenshot | **Ctrl + Alt**, then **Windows key + Shift + S** on your real computer, and drag around the VM window |
