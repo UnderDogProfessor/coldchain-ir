@@ -10,8 +10,8 @@ and delivers chilled and frozen food.
 the writeup, the lab itself and my notes.
 
 **Status:** Level 1 is complete: five labs, each tested on a real Windows 11
-VM. Level 2 is under way: the network build guide and Lab 6 are written and
-about to be tested.
+VM. Level 2 is under way: the network build guide and Lab 6 are tested on a
+real five-machine network, and Lab 7 is written and about to be tested.
 
 ## Start here
 

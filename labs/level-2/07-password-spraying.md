@@ -77,19 +77,21 @@ with `whoami` if you're not sure.
 
 ---
 
-## Part 1: Get ready (10 minutes)
+## Part 1: Get ready (15 minutes)
 
 1. Revert **all five** Windows machines to **rimeport-ready**, then start them
    in order: DC01, then FS01, then the three PCs.
-2. On **DC01** and **FS01**, sign in as `RIMEPORT\responder` and run the
-   readiness check from the [quick reference](quick-reference.md#check-every-machine-is-ready)
-   in an admin PowerShell window:
+2. On **each** of the five, starting with DC01, sign in as
+   `RIMEPORT\responder` and run the readiness check from the
+   [quick reference](quick-reference.md#check-every-machine-is-ready) in an
+   admin PowerShell window:
 
    ```
    powershell -ExecutionPolicy Bypass -File \\DC01\NETLOGON\Test-Rimeport.ps1
    ```
 
-   Both should finish with no FAIL lines.
+   Each should finish with no FAIL lines. Pay attention to the time zone: this
+   lab lines up times from DC01, FS01 and Kali.
 3. Write down the time. That's your **starting line**.
 
 ## Part 2: Set up the weakness (10 minutes)
@@ -103,6 +105,10 @@ Set-ADAccountPassword luis.ferreira -Reset -NewPassword (Read-Host -AsSecureStri
 ```
 
 When it asks, type `Rimeport2026!` and press Enter. Write down the time.
+
+DC01 should record your reset as a **4724**, "an attempt was made to reset an
+account's password," the same record you met in Lab 3. That one is yours, not
+the attacker's, and your notes are what say so.
 
 Now check whether Rimeport locks accounts after wrong passwords:
 
@@ -119,8 +125,11 @@ documentation lists 0 as the default.
 
 ### Install NetExec while Kali is still on NAT
 
-Start your Kali VM on **NAT**, so it can reach the internet. Open a terminal
-and run:
+In VMware, select Kali and open **VM**, **Settings**. Check it has exactly
+**one** **Network Adapter**, set to **NAT**. A second adapter could connect
+Kali to two networks at once.
+
+Start Kali so it can reach the internet. Open a terminal and run:
 
 ```
 sudo apt update
@@ -129,10 +138,20 @@ sudo apt install -y netexec
 
 If NetExec is already installed, the second line just says so.
 
+**Kali's clock:** on Kali, `date` prints the time with its time zone. Use it
+for every Kali time in your notes, or use your real computer's clock, and
+write down which.
+
+### Save Kali as it is now
+
+Shut Kali down. With it off, take a snapshot named **kali-nat** (**VM**,
+**Snapshot**, **Take Snapshot**). Going back to it after the lab puts Kali's
+network settings back the way they are now.
+
 ### Move Kali onto Rimeport
 
-1. Shut Kali down. In VMware, open **VM**, **Settings**, **Network Adapter**,
-   choose **LAN segment**, pick **Rimeport**, and click **OK**.
+1. With Kali still off, open **VM**, **Settings**, **Network Adapter**, choose
+   **LAN segment**, pick **Rimeport**, and click **OK**.
 2. Start Kali and open a terminal. List its network connections:
 
    ```
@@ -190,6 +209,10 @@ NetExec prints one line per account. Normally it stops at the first password
 that works. `--continue-on-success` makes it try the rest too. Look for the
 line that's different from the others.
 
+It won't be instant. Windows Server 2025 waits 2 seconds after each failed
+NTLM sign-in over SMB, to slow down exactly this kind of guessing. Write down
+the time it finishes, too.
+
 📸 **Screenshot 3:** NetExec's output. Save it as `lab7-3.png`.
 
 You're done being the attacker. Leave Kali running, but don't run anything
@@ -211,7 +234,10 @@ address, note:
 - **Workstation Name** and **Source Network Address**
 - for a 4625, **Failure Reason**, **Status** and **Sub Status**
 
-Find the one **4624** from `10.20.99.50`. That's the guess that worked.
+Find the **4624** from `10.20.99.50` for a Rimeport person. That's the guess
+that worked. If you also see an **ANONYMOUS LOGON** from that address, it may
+be NetExec's check from Part 3: compare its time with your notes and write
+down what you find.
 
 📸 **Screenshot 4:** one 4625 from `10.20.99.50`, with **Sub Status** visible.
 Save it as `lab7-4.png`.
@@ -234,6 +260,12 @@ Account**, **Source Workstation** and **Error Code**.
 Save it as `lab7-6.png`.
 
 Look closely at what a 4776 **doesn't** have.
+
+**Why 4776 and not 4771?** When someone types a wrong password at a Rimeport
+PC, DC01 writes a **4771**, because signing in at a PC uses Kerberos. The
+Lab 6 hints mention it. NetExec signs in to FS01 with **NTLM**, so DC01 writes
+a **4776** instead. Same wrong password, a different record, depending on how
+the sign-in happened.
 
 ## Part 7: Same answer, another tool (15 minutes)
 
@@ -316,6 +348,10 @@ proves it and number it from 8 on.
   then look again at the time from your notes.
 - `mike.chen` and `jordan.harlow` are on the list on purpose. Compare their
   records with everyone else's.
+- Kali's times may be in a different time zone from Rimeport's. Check with
+  `date` on Kali before you compare.
+- If you chose `Rimeport2026!` as the staff password during setup, every staff
+  account will "work." Use a different spray password in Part 2 and Part 4.
 
 </details>
 
@@ -326,10 +362,14 @@ These come from Microsoft's and the tools' documentation. They'll be checked
 against a real run and updated. Wherever yours differs, yours is the evidence:
 write it down.
 
-**1. The eight names in `users.txt`, in that order, most likely within a few
-seconds.** NetExec tries them one after another. A burst like that, one guess
-per account, is what password spraying looks like. Compare it with your notes
-to check the order.
+**1. The eight names in `users.txt`, in that order, most likely about 2
+seconds apart.** NetExec tries them one after another. Microsoft's page for
+the SMB authentication rate limiter says Windows Server 2025 waits 2 seconds
+after each failed NTLM sign-in, so seven failures take at least 14 seconds.
+Without that pause, a tool could go much faster: Lab 2 warned that guessing
+programs can try many times a second. A run like this, one guess per account
+from one address, is what password spraying looks like. Compare it with your
+notes to check the order.
 
 **2. `10.20.99.50`, which isn't one of Rimeport's machines.** Servers are
 `10.20.10.x` and staff PCs are `10.20.20.x`. Microsoft describes Source Network
@@ -365,7 +405,8 @@ guessing many passwords against one account, as in Lab 2. Against spraying,
 what helps is strong passwords, so the one common guess doesn't work, and
 someone watching for many failures from one address. Microsoft's security
 baselines recommend a threshold of 10, and its documentation says 0 should be
-chosen only in specific cases.
+chosen only in specific cases. Windows Server 2025's 2-second pause after each
+failed SMB sign-in slows a spray down, but it doesn't stop one.
 
 **7. Lab 2 was one account and many passwords. This was many accounts and one
 password.** In Lab 2 the failures piled up on one account. Here they spread
@@ -385,6 +426,16 @@ his account did after [time]."
 
 ---
 
+## When you're done
+
+- Your notes and screenshots are already on your real computer. Check every
+  time has its time zone.
+- **Kali:** shut it down. It's still on Rimeport with `10.20.99.50`. Before
+  you ever put it back on NAT, go back to its **kali-nat** snapshot, which puts
+  its network settings back.
+- **The Windows machines:** Luis's password is still `Rimeport2026!` until you
+  go back to **rimeport-ready**. Lab 8 will say where to start from.
+
 ## What you learned
 
 - **Password spraying** is one password against many accounts. In the logs
@@ -392,7 +443,10 @@ his account did after [time]."
 - The **file server** recorded each guess with the attacker's address
   (**4625**), and the one that worked (**4624**).
 - The **domain controller** checked each password (**4776**) but recorded only
-  a computer name, not an address.
+  a computer name, not an address. A wrong password typed at a PC (Kerberos)
+  leaves a **4771** there instead.
+- Windows Server 2025 waits **2 seconds** after each failed sign-in over SMB.
+  It slows a spray, but doesn't stop it.
 - The **Sub Status** code tells a wrong password from an account that doesn't
   exist.
 - A **lockout threshold** stops guessing against one account, not spraying.
@@ -421,6 +475,15 @@ moves between machines.
   for an account" (written where the credentials are checked, the domain
   controller for domain accounts; NTLM; Source Workstation is a computer name
   only; error codes): <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4776>
+- Microsoft, "4771(F): Kerberos pre-authentication failed" (domain controllers
+  only; `0x18` is a wrong password): <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4771>
+- Microsoft, "4724(S, F): An attempt was made to reset an account's password":
+  <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4724>
+- Microsoft, configure the SMB authentication rate limiter (on by default in
+  Windows Server 2025; the SMB server waits 2 seconds after each failed NTLM
+  sign-in; doesn't affect Kerberos): <https://learn.microsoft.com/en-us/windows-server/storage/file-server/configure-smb-authentication-rate-limiter>
+- Broadcom, "Take a Snapshot of a Virtual Machine": <https://techdocs.broadcom.com/us/en/vmware-cis/desktop-hypervisors/workstation-pro/17-0/using-vmware-workstation-pro/using-virtual-machines-in-workstation-pro-user-guide/taking-snapshots-of-virtual-machines/take-a-snapshot-of-a-virtual-machine.html>
+- Broadcom, "Revert to a Snapshot": <https://techdocs.broadcom.com/us/en/vmware-cis/desktop-hypervisors/workstation-pro/26H1/using-vmware-workstation-pro/using-virtual-machines-in-workstation-pro-user-guide/taking-snapshots-of-virtual-machines/revert-to-a-snapshot.html>
 - Microsoft, "Audit Logon" (for a network sign-in, events are written on the
   computer that hosts the resource): <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/audit-logon>
 - Microsoft, "Account lockout threshold" (default 0, which never locks;
