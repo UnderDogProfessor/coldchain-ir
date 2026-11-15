@@ -39,6 +39,10 @@ the real network, so the planned ones can still change.
 [Lab 6](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/lab-6/),
 the [Level 2 page](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/), or the whole [COLD CHAIN series](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/).
 
+**While the VMs run,** keep the [quick reference](quick-reference.md) open on
+your real computer: addresses, accounts, start order and every command you
+copy into a VM, on one page.
+
 **Keep notes as you go.** Level 2 has its own [notes template](notes-template.md),
 with columns for the machine and the account, and a table for evidence
 fingerprints. You're in the logs too now, so write down every time you sign

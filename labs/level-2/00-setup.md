@@ -554,7 +554,9 @@ example `Documents\Rimeport notes\level-2\`, with a copy of the
 
 > **From here on, investigate as `RIMEPORT\responder`.** Administrator,
 > itsetup and the local dana were for building the network. Every lab says
-> which account to use at each step.
+> which account to use at each step. The [quick reference](quick-reference.md)
+> has the addresses, accounts and commands on one page to keep open while the
+> VMs run.
 
 Next: [Lab 6: Meet the network](06-meet-the-network.md)
 
