@@ -16,10 +16,10 @@ did it find what your notes say happened?
 
 | Task | Lab | Tool | Same answer? | Time | Setup effort | Pros | Cons | Run |
 |---|---|---|---|---|---|---|---|---|
-| Find one person's sign-in and shared-folder records on three machines | [6](level-2/06-meet-the-network.md) | Event Viewer, on each machine | | | | | | Not run yet |
-| Find one person's sign-in and shared-folder records on three machines | [6](level-2/06-meet-the-network.md) | EvtxECmd + Timeline Explorer, on collected copies | | | | | | Not run yet |
-| Count a password spray's guesses per account on the file server and the domain controller | [7](level-2/07-password-spraying.md) | Event Viewer, on each machine | | | | | | Not run yet |
-| Count a password spray's guesses per account on the file server and the domain controller | [7](level-2/07-password-spraying.md) | EvtxECmd + Timeline Explorer, grouped by account | | | | | | Not run yet |
+| Find one person's sign-in and shared-folder records on three machines | [6](level-2/06-meet-the-network.md) | Event Viewer, on each machine | Yes | About 17 minutes | None, built in | Every field of each record, on the machine itself | One machine at a time, signing in to each | 2026-11-04 |
+| Find one person's sign-in and shared-folder records on three machines | [6](level-2/06-meet-the-network.md) | EvtxECmd + Timeline Explorer, on collected copies | Not at first: filtering **User Name** missed every sign-in. Yes with **Payload Data1** | About 27 minutes, with collecting and hashing | Install on WS-IT-01 before it joins Rimeport | All three machines in one list | You have to know which column holds the name; times are UTC | 2026-11-04 |
+| Count a password spray's guesses per account on the file server and the domain controller | [7](level-2/07-password-spraying.md) | Event Viewer, on each machine | Yes: every guess, with its result | Not recorded | None, built in | Shows the full reason for each failure | **Find** searches only down from the selected record | 2026-11-18 |
+| Count a password spray's guesses per account on the file server and the domain controller | [7](level-2/07-password-spraying.md) | EvtxECmd + Timeline Explorer, grouped by account | Yes: one 4776 per sprayed name | Not recorded | Same as Lab 6 | Grouping by three columns gives account, workstation and result counts at once | Older records for other accounts (20 for Administrator) sit in the same list, so you have to narrow the time | 2026-11-18 |
 
 ## Tools so far
 
