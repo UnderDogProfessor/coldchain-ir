@@ -2,8 +2,9 @@
 
 **Level:** 2, A small company
 **Time:** about 90 minutes
-**You need:** the five machines at their **rimeport-ready** snapshot, your
-Kali Linux VM, and your notes from [Lab 6](06-meet-the-network.md)
+**You need:** the five machines at their **rimeport-ready** snapshot, a Kali
+Linux VM in VMware Workstation (Part 3 says where to get one), and your notes
+from [Lab 6](06-meet-the-network.md)
 
 > **Not yet tested.** This lab is written but hasn't been run on the real
 > network yet. Where it says what a record "should" show, that comes from
@@ -121,7 +122,28 @@ documentation lists 0 as the default.
 
 📸 **Screenshot 1:** the lockout settings on DC01. Save it as `lab7-1.png`.
 
-## Part 3: Get the attacker ready (20 minutes)
+## Part 3: Get the attacker ready (30 minutes, longer if you're new to Kali)
+
+### Get Kali (skip this if you already have it)
+
+Kali offers a ready-made VMware virtual machine, so you don't have to install
+it from scratch. Follow Kali's own pages rather than a copy here, because they
+stay up to date:
+
+- **Download:** on Kali's download page, under **Pre-built Virtual
+  Machines**, pick the **VMware** image: <https://www.kali.org/get-kali/>
+- **Open it in VMware:** Kali's guide, "Import Pre-Made Kali VMware VM":
+  <https://www.kali.org/docs/virtualization/import-premade-vmware/>. In
+  short, you extract the download, then in VMware choose **Open a Virtual
+  Machine** and pick the `.vmx` file.
+- **Sign in:** Kali's documentation lists `kali` / `kali` as the user and
+  password for its pre-built VMs:
+  <https://www.kali.org/docs/introduction/default-credentials/>. Everyone
+  knows that password, so change it after you first sign in, and add the new
+  one to your password list.
+
+Kali's other installation guides are at <https://www.kali.org/docs/installation/>.
+If a screen doesn't match, search Kali's documentation for that step.
 
 ### Install NetExec while Kali is still on NAT
 
@@ -150,8 +172,17 @@ network settings back the way they are now.
 
 ### Move Kali onto Rimeport
 
-1. With Kali still off, open **VM**, **Settings**, **Network Adapter**, choose
-   **LAN segment**, pick **Rimeport**, and click **OK**.
+Kali is on NAT right now, a different network from Rimeport. Until you move
+it, it can't see DC01 or FS01 at all. Three things have to be right: the
+VMware network, Kali's address, and the mask.
+
+1. With Kali still off, select it in VMware and open **VM**, **Settings**,
+   **Network Adapter**:
+   - Under **Device status**, tick **Connect at power on**.
+   - Under **Network connection**, choose **LAN segment** and pick
+     **Rimeport** from the list. It's the same segment the five Windows
+     machines use, made in setup Part 1.
+   - Click **OK**.
 2. Start Kali and open a terminal. List its network connections:
 
    ```
@@ -171,6 +202,43 @@ network settings back the way they are now.
    `10.20.99.50` isn't in any of Rimeport's ranges: servers are `10.20.10.x`
    and staff PCs are `10.20.20.x`. That's on purpose. It's a machine nobody at
    Rimeport owns.
+4. Check the address took:
+
+   ```
+   ip -4 address show
+   ```
+
+   Look for `10.20.99.50/16` on the wired device, usually `eth0`. The `/16`
+   matters: it's the same 255.255.0.0 mask the Windows machines use, and it's
+   what puts `10.20.99.50` on the same network as `10.20.10.x` and
+   `10.20.20.x`.
+
+### Check Kali can reach Rimeport
+
+With DC01 and FS01 running, from Kali:
+
+```
+ping -c 3 10.20.10.20
+ping -c 3 10.20.10.10
+```
+
+`-c 3` sends three pings and stops. **FS01 should answer**: the shares script
+in setup turned on FS01's File and Printer Sharing firewall rules, which let
+it answer ping. On the test build, DC01 answered ping from FS01 too. The PCs
+may not answer ping at all, and that's fine: this lab only needs FS01.
+
+**If Kali can't reach FS01:**
+
+| What you see | What to check |
+|---|---|
+| `ip -4 address show` has no `10.20.99.50` | Run the `nmcli connection modify` and `nmcli connection up` lines again, with the NAME that `nmcli connection show` lists |
+| The address ends in `/24`, not `/16` | With `/24`, Kali only treats `10.20.99.x` as its own network and can't reach `10.20.10.x`. Run the `modify` line again with `10.20.99.50/16`, then the `up` line |
+| `ping` says the host is unreachable | Kali isn't on the Rimeport segment. Check its **Network Adapter** settings in VMware: **Connected**, **LAN segment**, **Rimeport** |
+| No reply, but the address and segment are right | Check FS01 is running and still has `10.20.10.20`: run `Test-Rimeport.ps1` on FS01 |
+
+**Once it works, Kali has no way out.** Rimeport has no gateway to the
+internet, so from now until you go back to the **kali-nat** snapshot, Kali can
+only reach the lab.
 
 ### Check the target answers
 
@@ -500,6 +568,18 @@ moves between machines.
 - NetExec on GitHub (BSD-2-Clause license): <https://github.com/Pennyw0rth/NetExec>
 - NetworkManager, nmcli manual (`connection show`, `connection modify` with
   `ipv4.method manual`, `connection up`): <https://networkmanager.dev/docs/api/latest/nmcli.html>
+- Linux man pages: `ip address show` lists addresses, and `-4` limits it to
+  IPv4 (<https://man7.org/linux/man-pages/man8/ip-address.8.html>,
+  <https://man7.org/linux/man-pages/man8/ip.8.html>); `ping -c` stops after
+  that many pings (<https://man7.org/linux/man-pages/man8/ping.8.html>)
+- Kali Linux, "Get Kali" (pre-built VMware virtual machine):
+  <https://www.kali.org/get-kali/>
+- Kali Linux, "Import Pre-Made Kali VMware VM" (extract, then **Open a Virtual
+  Machine** and pick the `.vmx`): <https://www.kali.org/docs/virtualization/import-premade-vmware/>
+- Kali Linux, default credentials (`kali` / `kali` for pre-built VMs):
+  <https://www.kali.org/docs/introduction/default-credentials/>
+- Kali Linux, installation guides: <https://www.kali.org/docs/installation/>
+- Broadcom, configure a VM to use a LAN segment: <https://techdocs.broadcom.com/us/en/vmware-cis/desktop-hypervisors/workstation-pro/17-0/using-vmware-workstation-pro/configuring-network-connections/configuring-lan-segments/configure-a-virtual-machine-to-use-a-lan-segment.html>
 - Eric Zimmerman's tools (Timeline Explorer filters, groups and sorts):
   <https://ericzimmerman.github.io/>
 - EvtxECmd on GitHub (`-d`, `--csv`, `--csvf`): <https://github.com/EricZimmerman/evtx>

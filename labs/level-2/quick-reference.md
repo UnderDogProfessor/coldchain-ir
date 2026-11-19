@@ -74,6 +74,24 @@ powershell -ExecutionPolicy Bypass -File \\DC01\NETLOGON\Test-Rimeport.ps1
 Every FAIL line says how to fix it. Run it again until the last line says the
 machine is ready.
 
+## Put Kali on Rimeport (from Lab 7)
+
+1. Kali off, then in VMware: **VM**, **Settings**, **Network Adapter**:
+   **Connect at power on**, **LAN segment**, **Rimeport**. Take a **kali-nat**
+   snapshot first, so you can go back.
+2. In a Kali terminal (use the NAME from the first line):
+
+   ```
+   nmcli connection show
+   sudo nmcli connection modify "Wired connection 1" ipv4.method manual ipv4.addresses 10.20.99.50/16 ipv4.dns 10.20.10.10
+   sudo nmcli connection up "Wired connection 1"
+   ip -4 address show
+   ping -c 3 10.20.10.20
+   ```
+
+   Look for `10.20.99.50/16`, then replies from FS01. Kali attacks **only**
+   while it's on Rimeport. To put it back on NAT, go back to **kali-nat**.
+
 ## Collect a machine's Security log
 
 On the machine, as `RIMEPORT\responder`, in an admin PowerShell window. Write
