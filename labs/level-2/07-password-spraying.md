@@ -577,6 +577,8 @@ became compromised at the moment the one guess worked.
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-2/07-password-spraying.md).
 Spoilers, so finish the lab first.
 
+**Writeup:** [Lab 7 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/lab-7/)
+
 **Tool bench:** add your comparison to the [tool bench](../tool-bench.md).
 
 **Next:** Lab 8: Moving sideways, coming next. It follows an account as it
