@@ -23,6 +23,7 @@ be different, and that's expected.
 | Lab | My notes | Status |
 |---|---|---|
 | 6. Meet the network | [Notes](level-2/06-meet-the-network.md) | Done, 2026-11-04 |
+| 7. Password spraying over the network | [Notes](level-2/07-password-spraying.md) | Done, 2026-11-18 |
 
 Screenshots for each level live in that level's `images/` folder.
 
