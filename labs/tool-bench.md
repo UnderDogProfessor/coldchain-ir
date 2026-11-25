@@ -20,6 +20,8 @@ did it find what your notes say happened?
 | Find one person's sign-in and shared-folder records on three machines | [6](level-2/06-meet-the-network.md) | EvtxECmd + Timeline Explorer, on collected copies | Not at first: filtering **User Name** missed every sign-in. Yes with **Payload Data1** | About 27 minutes, with collecting and hashing | Install on WS-IT-01 before it joins Rimeport | All three machines in one list | You have to know which column holds the name; times are UTC | 2026-11-04 |
 | Count a password spray's guesses per account on the file server and the domain controller | [7](level-2/07-password-spraying.md) | Event Viewer, on each machine | Yes: every guess, with its result | Not recorded | None, built in | Shows the full reason for each failure | **Find** searches only down from the selected record | 2026-11-18 |
 | Count a password spray's guesses per account on the file server and the domain controller | [7](level-2/07-password-spraying.md) | EvtxECmd + Timeline Explorer, grouped by account | Yes: one 4776 per sprayed name | Not recorded | Same as Lab 6 | Grouping by three columns gives account, workstation and result counts at once | Older records for other accounts (20 for Administrator) sit in the same list, so you have to narrow the time | 2026-11-18 |
+| Follow one account's sign-ins across the file server and the domain controller | [8](level-2/08-moving-sideways.md) | Event Viewer, on each machine | | | | | | Not run yet |
+| Follow one account's sign-ins across the file server and the domain controller | [8](level-2/08-moving-sideways.md) | EvtxECmd + Timeline Explorer, grouped by computer | | | | | | Not run yet |
 
 ## Tools so far
 

@@ -27,7 +27,7 @@ The labs are numbered across the whole series, so Level 2 starts at 6.
 | 0 | [Before you start](00-setup.md) | Build Rimeport's network (once) | Ready, tested |
 | 6 | [Meet the network](06-meet-the-network.md) | Where one sign-in gets written down: the computer, the domain controller and the file server | Ready, tested |
 | 7 | [Password spraying over the network](07-password-spraying.md) | One password against every account from a machine nobody owns: what the file server and the domain controller each wrote down | Ready, tested |
-| 8 | Moving sideways | Follow one account as it hops between machines | Planned |
+| 8 | [Moving sideways](08-moving-sideways.md) | Follow one stolen account across machines: where it signed in, what it could see, and how it differs from a real Rimeport PC | Written, not yet tested |
 | 9 | Who touched the files | Read the file server's access records | Planned |
 | 10 | The new admin, domain-wide | Lab 3 again, now on the domain controller | Planned |
 | 11 | Reconstruct the night | Merge several machines' logs into one timeline | Planned |
