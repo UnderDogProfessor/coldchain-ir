@@ -50,6 +50,10 @@ fingerprints. You're in the logs too now, so write down every time you sign
 in. Investigate as `RIMEPORT\responder`, never Administrator, so your own
 records are easy to find.
 
+**Before every lab,** read
+[Things to remember](quick-reference.md#things-to-remember): a checklist of
+everything that's gone wrong on a real run so far.
+
 ## Lessons from the first build
 
 These came from the first build and run of Level 2. The guides now cover

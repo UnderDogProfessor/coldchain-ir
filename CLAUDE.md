@@ -28,6 +28,13 @@ setup only, unless a lab says otherwise. Each lab carries a short "Which
 account, where" table and a `whoami` check at its first sign-in. (On the first
 Lab 6 run, the sign-in screen offered Administrator and it got used.)
 
+**Keep "Things to remember" current.** `labs/level-2/quick-reference.md` has
+a checklist of pitfalls, each from a real run. Every lab points to it just
+before "Keep notes like a responder", and the notes template opens with a
+"Before I start" checklist drawn from it. When a run turns up a new pitfall,
+add it to the list in the same change that fixes the lab, and add it to his
+notes page under "What I'd do differently next time" in his words.
+
 **Every evidence file is named for its lab.** Exports are
 `<COMPUTER>-Security-labN.evtx` (for example `DC01-Security-lab8.evtx`), and
 the copy to WS-IT-01 picks up only that lab's files. Put the collect commands

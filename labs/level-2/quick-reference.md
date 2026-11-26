@@ -7,6 +7,60 @@ gathered in one place so you can copy commands into a VM.
 **Passwords don't go here.** This page is public. Keep yours in the password
 list from setup, in your password manager or a file you never publish.
 
+## Things to remember
+
+Every item here comes from something that went wrong on a real run of Level 2.
+Read it before each lab.
+
+**Before you start**
+
+- [ ] Go back to **rimeport-ready** on **all five** machines, together, and
+  start DC01 first.
+- [ ] Run the readiness check on each machine. Every line should say PASS.
+- [ ] Have your password list open on your real computer, not in a VM's
+  description.
+
+**Signing in**
+
+- [ ] Choose **Other user**, never the tile the screen offers, and type the
+  full name: `RIMEPORT\responder`, with a **backslash**.
+- [ ] Not sure who you are? `whoami` should say `rimeport\responder`.
+
+**Running commands**
+
+- [ ] Open **Windows PowerShell (Admin)** for anything that reads or saves the
+  Security log. Check with
+  `whoami /groups | Select-String "High Mandatory"`, which prints a line
+  only in an admin window.
+- [ ] **Paste** commands instead of typing them. One typo (`Net-Item` for
+  `New-Item`) broke an export.
+- [ ] Windows 11 blocks scripts. Start them with
+  `powershell -ExecutionPolicy Bypass -File`.
+
+**Evidence**
+
+- [ ] Name each lab's export for that lab, such as `DC01-Security-lab8.evtx`.
+- [ ] Write down the time and the **hash** of the file you keep. A new export
+  makes a new file with a new hash.
+
+**Notes and screenshots**
+
+- [ ] Write every time with its **time zone**, including Kali's (`date`).
+- [ ] Take screenshots on your **real computer** (Ctrl + Alt, then Windows key
+  + Shift + S) and **save each one as a file** straight away.
+
+**Reading the logs**
+
+- [ ] In Event Viewer, click the **top** record before **Find...**: it only
+  searches down from the selected record.
+- [ ] In Timeline Explorer, filter **Payload Data1** for a name, not **User
+  Name**. **Time Created** is in UTC.
+
+**Kali**
+
+- [ ] Kali attacks **only** on the Rimeport LAN segment, at `10.20.99.50/16`.
+- [ ] Before you put Kali back on NAT, go back to its **kali-nat** snapshot.
+
 ## The machines
 
 | Machine | Address | What it is | Sign in as |

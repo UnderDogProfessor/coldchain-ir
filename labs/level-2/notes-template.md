@@ -3,8 +3,24 @@
 Copy this file for each lab and fill it in as you go, not afterward.
 
 **Date:**
-**Machines:** DC01, FS01, WS-DSP-01, WS-FIN-01, WS-IT-01 (cross out any you
-didn't use)
+**Machines:** DC01, FS01, WS-DSP-01, WS-FIN-01, WS-IT-01, Kali (cross out any
+you didn't use)
+
+## Before I start
+
+Tick these off. The full list is
+[Things to remember](quick-reference.md#things-to-remember) in the quick
+reference.
+
+- [ ] All five machines back at **rimeport-ready**, started DC01 first
+- [ ] Readiness check: all PASS on every machine
+- [ ] Signed in as `RIMEPORT\responder` (**Other user**, backslash), checked
+  with `whoami`
+- [ ] **Windows PowerShell (Admin)** open where I'll read or save logs
+- [ ] Password list open on my real computer
+- [ ] This lab's evidence names end in `-labN`
+- [ ] Every time I write down has its time zone
+- [ ] Each screenshot saved as a file as soon as I take it
 
 ---
 
@@ -58,3 +74,6 @@ Number them in the order the lab asks for them.
 ## What surprised me
 
 ## What I'd do differently next time
+
+If it's something the next person should know too, it belongs in
+[Things to remember](quick-reference.md#things-to-remember).

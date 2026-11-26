@@ -43,6 +43,11 @@ more than one place.
 | **Computer account** | Computers have accounts too. Their names end in **$**, like `WS-DSP-01$`. |
 | **Hash** | A fingerprint of a file. Change one byte and the fingerprint changes. |
 
+> **Before you start,** read [Things to remember](quick-reference.md#things-to-remember)
+> in the quick reference. Each item there came from a real run going wrong:
+> the wrong account, a typo in a command, a missing time zone, a screenshot
+> that was never saved.
+
 ## Keep notes like a responder
 
 Copy the [Level 2 notes template](notes-template.md) into

@@ -44,6 +44,11 @@ you follow that one account across Rimeport's machines.
 | **`Pwn3d!`** | What NetExec prints when the account it used is most likely an administrator on that machine. |
 | **Kerberos** and **NTLM** | Two ways Windows checks who you are. Rimeport's PCs use Kerberos with DC01 (Lab 6). The attacker's tool used NTLM (Lab 7). |
 
+> **Before you start,** read [Things to remember](quick-reference.md#things-to-remember)
+> in the quick reference. Each item there came from a real run going wrong:
+> the wrong account, a typo in a command, a missing time zone, a screenshot
+> that was never saved.
+
 ## Keep notes like a responder
 
 Copy the [Level 2 notes template](notes-template.md) into
