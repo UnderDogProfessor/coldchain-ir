@@ -454,6 +454,8 @@ Lab 9 turns it on.
 **Compare notes:** [Shreyas's notes from his own run](../../notes/level-2/08-moving-sideways.md).
 Spoilers, so finish the lab first.
 
+**Writeup:** [Lab 8 on cyberneticsintern.com](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/lab-8/)
+
 **Tool bench:** add your comparison to the [tool bench](../tool-bench.md).
 
 **Next:** Lab 9: Who touched the files, coming next. It turns on file share

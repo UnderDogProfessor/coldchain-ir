@@ -38,6 +38,7 @@ the real network, so the planned ones can still change.
 **Writeups on my website:**
 [Lab 6](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/lab-6/),
 [Lab 7](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/lab-7/),
+[Lab 8](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/lab-8/),
 the [Level 2 page](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/level-2/), or the whole [COLD CHAIN series](https://cyberneticsintern.com/projects/lab-builds-and-writeups/coldchain-ir/).
 
 **While the VMs run,** keep the [quick reference](quick-reference.md) open on
