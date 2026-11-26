@@ -55,6 +55,9 @@ Read it before each lab.
 - [ ] Write every time with its **time zone**, including Kali's (`date`).
 - [ ] Take screenshots on your **real computer** (Ctrl + Alt, then Windows key
   + Shift + S) and **save each one as a file** straight away.
+- [ ] Write each Kali command into your notes **with its time, as you run
+  it**. On the Lab 8 run, one command was written down against the wrong
+  time.
 
 **Reading the logs**
 
@@ -62,6 +65,9 @@ Read it before each lab.
   searches down from the selected record.
 - [ ] In Timeline Explorer, filter **Payload Data1** for a name, not **User
   Name**. **Time Created** is in UTC.
+- [ ] A record at the right time isn't the attacker until the **account** and
+  **address** match. On the Lab 8 run, the 4624s on WS-DSP-01 in the attack's
+  minute were the PC's own services (SYSTEM, Logon Type 5).
 
 **Kali**
 

@@ -6,10 +6,9 @@
 Kali VM, and your notes from [Lab 6](06-meet-the-network.md) and
 [Lab 7](07-password-spraying.md)
 
-> **Not yet tested.** This lab is written but hasn't been run on the real
-> network yet. Where it says what a record "should" show, that comes from
-> Microsoft's and the tools' documentation and from the Lab 6 and Lab 7 runs.
-> If yours differs, write down what you saw.
+> **Tested on November 25, 2026,** on the author's Rimeport network, with
+> Kali at `10.20.99.50`. The answers say what the test run showed. If yours
+> differs, write down what you saw.
 
 ## The story
 
@@ -123,6 +122,11 @@ For each address, note what NetExec printed: a line with `[+]` (the sign-in
 worked), `Pwn3d!` after it (the account is most likely an administrator
 there), something else, or **nothing at all**.
 
+The first time NetExec runs on your Kali, it prints a block of
+`[*] Creating ...` lines while it sets itself up. That's normal. You may also
+see notes like `signing:True` and `Null Auth:True` after a machine's name.
+This lab doesn't need them.
+
 📸 **Screenshot 1:** NetExec's answer for all five machines. Save it as
 `lab8-1.png`.
 
@@ -202,6 +206,10 @@ Is there anything from the attacker? Compare what you find with what NetExec
 printed for `10.20.20.11` in Part 2. If you have time, check WS-FIN-01 the
 same way.
 
+A record at the right time isn't the attacker until the account and the
+address match. Open it and read **Account Name**, **Logon Type** and **Source
+Network Address** before you count it.
+
 📸 **Screenshot 6:** what the PC's log shows for the time of Part 2, even if
 it's nothing from `10.20.99.50`. Save it as `lab8-6.png`.
 
@@ -223,8 +231,9 @@ Copy-Item "$dir\$env:COMPUTERNAME-Security-lab8.evtx" \\FS01\Evidence\
 never mixes with an export from another lab. It's saved in `responder`'s
 **Documents\Evidence** folder on that machine: on the Lab 8 run, DC01
 refused to save into `C:\Evidence` (Access is denied, even as `responder`
-in an admin window), but saved into Documents without trouble. If `wevtutil` says **Access is
-denied**, see the [quick reference](quick-reference.md#quick-fixes).
+in an admin window), but saved into Documents without trouble. If `wevtutil`
+says **Access is denied**, see the
+[quick reference](quick-reference.md#quick-fixes).
 
 On **WS-IT-01**, as `RIMEPORT\responder`:
 
@@ -247,6 +256,12 @@ Check each hash matches the one you wrote down. In Timeline Explorer, open
 
 You now have Luis's whole evening in one list, grouped by machine and kind of
 record. **Time Created** is in UTC.
+
+The export is the whole Security log, so you'll also see Luis's older
+records: his account being made in setup, and anything from Lab 7 if the
+machines still have it. Use **Time Created** to pick out tonight's. You'll
+also see a **4634** (logoff) after each sign-in. Event Viewer didn't show
+those because the filter was 4624 and 4776 only.
 
 📸 **Screenshot 7:** Timeline Explorer with Luis's records grouped by
 computer. Save it as `lab8-7.png`.
@@ -296,72 +311,110 @@ proves it and number it from 8 on.
 <details>
 <summary><strong>Answers explained</strong> (try first)</summary>
 
-These come from Microsoft's and NetExec's documentation and from the Lab 6
-and Lab 7 runs. They'll be checked against a real run and updated. Wherever
-yours differs, yours is the evidence: write it down.
+These come from the author's test run on November 25, 2026, and from
+Microsoft's and NetExec's documentation. Times are Eastern. Wherever yours
+differs, yours is the evidence: write it down.
 
-**1. Most likely DC01 and FS01, with no `Pwn3d!`, and probably nothing from
-the PCs.** NetExec's documentation says `Pwn3d!` means the account is most
-likely a local administrator. Luis isn't an administrator anywhere, so there
-shouldn't be one. That's good news for Rimeport: Luis's account can sign in,
-but can't take over a machine. Microsoft says Windows Firewall blocks
-connections coming in unless a rule allows them. Setup opened file sharing on
-FS01 with the shares script, and DC01 serves NETLOGON to every machine, but
-nothing opened it on the PCs. So the PCs probably didn't answer at all. Write
-down what yours showed.
+**1. DC01 and FS01, with no `Pwn3d!`, and nothing at all from the PCs.** On
+the test run, NetExec printed `[+]` for DC01 and FS01, and no line for
+`10.20.20.11`, `10.20.20.12` or `10.20.20.30`. NetExec's documentation says
+`Pwn3d!` means the account is most likely a local administrator. Luis isn't
+an administrator anywhere, so there wasn't one. That's good news for
+Rimeport: Luis's account can sign in, but can't take over a machine.
+Microsoft says Windows Firewall blocks connections coming in unless a rule
+allows them. The shares script turned on the firewall's File and Printer
+Sharing rules on FS01, and DC01 serves NETLOGON to every machine, but nothing
+opened them on the PCs. So the PCs most likely never answered.
 
-**2. On FS01, most likely `Dispatch` (read and write), and not `Finance` or
-`Evidence`. On DC01, `NETLOGON` and `SYSVOL` (read).** The shares script lets
-only each team into its own folder, and Luis is a dispatcher. You may also see
-Windows' own shares, such as `IPC$`. Whatever the attacker could read in
-Dispatch, they could also change, because Luis can. And NETLOGON holds
-whatever scripts Rimeport keeps there, including `Test-Rimeport.ps1`.
+**2. On FS01, `Dispatch` (read and write). On DC01, `NETLOGON` and `SYSVOL`
+(read).** Both also showed `IPC$` (read). Luis couldn't open `Finance`,
+`Evidence`, `ADMIN$` or `C$`. The shares script lets only each team into its
+own folder, and Luis is a dispatcher. Whatever the attacker could read in
+Dispatch, they could also change, because Luis can. NETLOGON holds whatever
+scripts Rimeport keeps there, including `Test-Rimeport.ps1`. And NetExec
+listed every share's description, even for the ones Luis couldn't open, so
+the attacker now knows `Finance` holds "Invoices and vendor payments" and
+`Evidence` holds "Evidence collected by IT during an incident".
 
-**3. The real account names.** In Lab 7 the attacker guessed names, and one
-(`mike.chen`) didn't exist. Microsoft's documentation says a domain
-controller lets everyone read its list of accounts by default, to stay
+**3. The real names of all 11 accounts.** In Lab 7 the attacker guessed
+names, and one (`mike.chen`) didn't exist. Microsoft's documentation says a
+domain controller lets everyone read its list of accounts by default, to stay
 compatible with older systems. So any account at all, even Luis's, can hand
 an attacker the full list for the next spray, including `jordan.harlow` and
-`responder`.
+`responder`. The list also shows each account's last password change, bad
+password count and description, and `jordan.harlow`'s says he left Rimeport
+in 2025. NetExec's dates are in UTC: on the test run, Luis's was Lab 7's
+reset.
 
-**4. At least one per command that touched FS01: Logon Type 3, Authentication
-Package NTLM, from `10.20.99.50`, most likely with no Workstation Name** (as
-in Lab 7). Match each to your notes. Each NetExec command makes its own
-connections, so the count depends on what NetExec does inside.
+**4. Two on the test run, both Logon Type 3, NTLM, from `10.20.99.50`, with
+no Workstation Name.**
 
-**5. Two kinds.** A **4624**, Logon Type 3 from `10.20.99.50`, is Kali signing
-in to DC01 itself: once for each command that touched DC01. A **4776** is DC01
-checking Luis's password with NTLM: for its own sign-ins, and for every
-sign-in to FS01, because FS01 asks DC01 to check. As in Lab 7, a 4776 has no
-address. The 4624s on DC01 and FS01 are what put `10.20.99.50` on the record.
+| Time on FS01 | Command |
+|---|---|
+| 7:09:03 PM | the first one, against all five machines |
+| 7:12:05 PM | `--shares` |
 
-**6. Most likely not.** If the PCs didn't accept the connection, there was no
-sign-in to write down. That's useful to know: the attacker's own screen
-(nothing for those addresses) and the PCs' logs (nothing from `10.20.99.50`)
-agree. Before you rely on "nothing in the log", though, check the time range
-and the filter.
+`--users` asked DC01 only, so FS01 has no third.
 
-**7. Three things, compared with Dana in Lab 6.**
+**5. Two kinds, and they add up.** A **4624**, Logon Type 3, NTLM, from
+`10.20.99.50`, is Kali signing in to DC01 itself. A **4776** is DC01 checking
+Luis's password with NTLM: for its own sign-ins, and for every sign-in to
+FS01, because FS01 asks DC01 to check. As in Lab 7, a 4776 has no address.
+The 4624s on DC01 and FS01 are what put `10.20.99.50` on the record.
+
+| Time on DC01 | 4624 | 4776 | Command |
+|---|---|---|---|
+| 7:09:03 PM | 1 | 2 | against all five machines |
+| 7:12:05 PM | 1 | 2 | `--shares` |
+| 7:15:16 PM | 2 | 2 | `--users` |
+| **Total** | **4** | **6** | |
+
+Six checks for six sign-ins: four to DC01 and two to FS01. Every 4776 had
+Error Code `0x0`: the password was right. `--users` signed in twice in the
+same second, so match by time, not by counting commands.
+
+On the test run, Luis's 4624 on DC01 also said **Elevated Token: Yes**, and
+FS01's said **No**. Luis is only in Dispatch and NetExec printed no
+`Pwn3d!`, so why DC01 marked it Yes isn't confirmed yet. Write down what
+yours says.
+
+**6. No.** On the test run there was nothing from `10.20.99.50` or
+`luis.ferreira` on the PCs. The 4624s near that time on WS-DSP-01 were the
+PC's own services: account SYSTEM, Logon Type 5. If the PCs didn't accept
+the connection, there was no sign-in to write down. That's useful to know:
+the attacker's own screen (nothing for those addresses) and the PCs' logs
+(nothing from `10.20.99.50`) agree. Before you rely on "nothing in the log",
+though, check the time range and the filter.
+
+**7. The address and the Authentication Package, compared with Dana in Lab
+6.**
 
 | | Dana from her PC (Lab 6) | Luis's account from Kali (this lab) |
 |---|---|---|
-| Source address | `10.20.20.11`, a Rimeport PC | `10.20.99.50`, not in any Rimeport range |
-| Authentication Package | **Kerberos** | most likely **NTLM** |
-| Workstation Name | empty | most likely empty |
+| Source Network Address | `10.20.20.11`, a Rimeport PC | `10.20.99.50`, not in any Rimeport range |
+| Authentication Package | **Kerberos** | **NTLM** |
+| Workstation Name | empty | empty |
 
 Rimeport's own PCs sign in to FS01 with Kerberos, using a ticket from DC01.
 NTLM from an address that isn't a Rimeport machine stands out, even when the
 password was right. The empty Workstation Name doesn't help here, because
-Dana's Kerberos sign-in in Lab 6 had none either.
+Dana's real sign-in in Lab 6 had none either.
 
-**8. They should match.** If they don't, check the filter and the time range.
-Grouping by Computer shows at a glance which machines Luis's account touched.
+**8. Yes.** On the test run, both showed two sign-ins on FS01, four on DC01
+and six checks on DC01. Grouping by Computer shows at a glance which
+machines Luis's account touched. Timeline Explorer also showed a **4634**
+(logoff) in the same second as each sign-in: NetExec signed in, did its job
+and left. And it showed Luis's older records, because the export is the
+whole log.
 
-**9. Something like:** "Using Luis's stolen password, a machine that isn't
-ours, at 10.20.99.50, signed in to the file server and the domain controller,
-listed the shared folders Luis can open, and downloaded the list of every
-Rimeport account. Reset Luis's password, and find out what in Dispatch was
-opened or changed, which needs the file server to start recording it (Lab 9)."
+**9. Something like:** "Between 7:09 and 7:15 PM, a computer that isn't
+ours, at 10.20.99.50, used Luis's password to sign in to the file server and
+the domain controller, found it could read and change the Dispatch folder,
+and got a list of every Rimeport account, but it couldn't open Finance or
+Evidence and never reached a staff PC. First, reset Luis's password so it
+stops working for them, then turn on file share auditing so we can find out
+whether anything in Dispatch was opened or changed." There's no session to
+end first: on the test run, each sign-in logged off in the same second.
 
 **What these logs don't show:** which folders and files were opened. That
 needs **Audit File Share**, which records event **5140** with the share's name
@@ -395,8 +448,8 @@ Lab 9 turns it on.
   and change what its owner can.
 - Without file share auditing, nobody can say which files were opened.
 
-**Compare notes:** Shreyas's notes from his own run will be linked here once
-he's run it.
+**Compare notes:** [Shreyas's notes from his own run](../../notes/level-2/08-moving-sideways.md).
+Spoilers, so finish the lab first.
 
 **Tool bench:** add your comparison to the [tool bench](../tool-bench.md).
 
