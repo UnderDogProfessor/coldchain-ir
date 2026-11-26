@@ -202,15 +202,26 @@ it's nothing from `10.20.99.50`. Save it as `lab8-6.png`.
 
 ## Part 6: Same answer, another tool (15 minutes)
 
-On **FS01** and **DC01**, collect the Security log with the four lines from
-the [quick reference](quick-reference.md#collect-a-machines-security-log).
-**Write down each hash.**
+On **FS01** and **DC01**, as `RIMEPORT\responder`, open **Windows PowerShell
+(Admin)** and collect the Security log. **Write down each hash.**
+
+```
+whoami
+New-Item -ItemType Directory C:\Evidence -Force | Out-Null
+wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security-lab8.evtx" /ow:true
+Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security-lab8.evtx"
+Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security-lab8.evtx" \\FS01\Evidence\
+```
+
+`whoami` should say `rimeport\responder`. The file name ends in `-lab8`, so it
+never mixes with an export from another lab. If `wevtutil` says **Access is
+denied**, see the [quick reference](quick-reference.md#quick-fixes).
 
 On **WS-IT-01**, as `RIMEPORT\responder`:
 
 ```
 New-Item -ItemType Directory C:\Cases\lab8 -Force | Out-Null
-Copy-Item \\FS01\Evidence\FS01-Security.evtx, \\FS01\Evidence\DC01-Security.evtx C:\Cases\lab8\
+Copy-Item \\FS01\Evidence\FS01-Security-lab8.evtx, \\FS01\Evidence\DC01-Security-lab8.evtx C:\Cases\lab8\
 Get-FileHash C:\Cases\lab8\*.evtx
 $evtx = (Get-ChildItem C:\Tools -Recurse -Filter EvtxECmd.exe | Select-Object -First 1).FullName
 & $evtx -d C:\Cases\lab8 --csv C:\Cases\lab8\csv --csvf lab8-security.csv

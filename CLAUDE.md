@@ -28,6 +28,14 @@ setup only, unless a lab says otherwise. Each lab carries a short "Which
 account, where" table and a `whoami` check at its first sign-in. (On the first
 Lab 6 run, the sign-in screen offered Administrator and it got used.)
 
+**Every evidence file is named for its lab.** Exports are
+`<COMPUTER>-Security-labN.evtx` (for example `DC01-Security-lab8.evtx`), and
+the copy to WS-IT-01 picks up only that lab's files. Put the collect commands
+in the lab itself, with `whoami` first and "open **Windows PowerShell
+(Admin)**", and point to the quick reference's **Access is denied** fix. (In
+Lab 8, `wevtutil` was denied on DC01 while the same command worked on FS01,
+and every lab had been saving to the same file name.)
+
 **Same answer, another tool.** Where a second tool fits naturally, add a part
 that repeats a task with it. Add one or two extra tools, never all of them.
 Free tools go on the main path. Trial or commercial tools (AXIOM and the like)

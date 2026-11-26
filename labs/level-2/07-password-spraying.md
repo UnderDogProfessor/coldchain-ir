@@ -355,17 +355,27 @@ the sign-in happened.
 
 Count the spray a second way, with the tools from Lab 6.
 
-On **FS01** and **DC01**, collect the Security log with the four lines from the
-[quick reference](quick-reference.md#collect-a-machines-security-log). Write
-down each hash.
+On **FS01** and **DC01**, as `RIMEPORT\responder`, open **Windows PowerShell
+(Admin)** and collect the Security log. **Write down each hash.**
+
+```
+whoami
+New-Item -ItemType Directory C:\Evidence -Force | Out-Null
+wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security-lab7.evtx" /ow:true
+Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security-lab7.evtx"
+Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security-lab7.evtx" \\FS01\Evidence\
+```
+
+`whoami` should say `rimeport\responder`. The file name ends in `-lab7`, so it
+never mixes with an export from another lab. If `wevtutil` says **Access is
+denied**, see the [quick reference](quick-reference.md#quick-fixes).
 
 On **WS-IT-01**, as `RIMEPORT\responder`, copy the logs, check the hashes and
-make the timeline. These are the Lab 6 commands with `lab7` in place of
-`lab6`:
+make the timeline:
 
 ```
 New-Item -ItemType Directory C:\Cases\lab7 -Force | Out-Null
-Copy-Item \\FS01\Evidence\FS01-Security.evtx, \\FS01\Evidence\DC01-Security.evtx C:\Cases\lab7\
+Copy-Item \\FS01\Evidence\FS01-Security-lab7.evtx, \\FS01\Evidence\DC01-Security-lab7.evtx C:\Cases\lab7\
 Get-FileHash C:\Cases\lab7\*.evtx
 $evtx = (Get-ChildItem C:\Tools -Recurse -Filter EvtxECmd.exe | Select-Object -First 1).FullName
 & $evtx -d C:\Cases\lab7 --csv C:\Cases\lab7\csv --csvf lab7-security.csv

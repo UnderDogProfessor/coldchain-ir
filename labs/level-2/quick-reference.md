@@ -94,40 +94,46 @@ machine is ready.
 
 ## Collect a machine's Security log
 
-On the machine, as `RIMEPORT\responder`, in an admin PowerShell window. Write
-down the time and the hash it prints.
+On the machine, as `RIMEPORT\responder`, in **Windows PowerShell (Admin)**.
+**Change `lab8` in the first line to the lab you're on.** Each lab's file
+then gets its own name, so an export from an earlier lab never gets in the
+way or gets copied by mistake. Write down the time and the hash it prints.
 
 ```
+$lab = 'lab8'
+whoami
 New-Item -ItemType Directory C:\Evidence -Force | Out-Null
-wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security.evtx" /ow:true
-Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security.evtx"
-Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security.evtx" \\FS01\Evidence\
+wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security-$lab.evtx" /ow:true
+Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security-$lab.evtx"
+Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security-$lab.evtx" \\FS01\Evidence\
 ```
 
-Run all four lines together. If you export again, the file and its hash
-change, so hash the copy you keep.
+`whoami` should say `rimeport\responder`. Run the lines together. If you
+export again, the file and its hash change, so hash the copy you keep.
 
 ## On WS-IT-01: one timeline from all the logs
 
-Copy the logs over and check the hashes:
+Copy that lab's logs over and check the hashes. Change `lab8` in the first
+line to the lab you're on:
 
 ```
-New-Item -ItemType Directory C:\Cases\lab6 -Force | Out-Null
-Copy-Item \\FS01\Evidence\*-Security.evtx C:\Cases\lab6\
-Get-FileHash C:\Cases\lab6\*.evtx
+$lab = 'lab8'
+New-Item -ItemType Directory "C:\Cases\$lab" -Force | Out-Null
+Copy-Item "\\FS01\Evidence\*-Security-$lab.evtx" "C:\Cases\$lab\"
+Get-FileHash "C:\Cases\$lab\*.evtx"
 ```
 
 Make the timeline, then open Timeline Explorer:
 
 ```
 $evtx = (Get-ChildItem C:\Tools -Recurse -Filter EvtxECmd.exe | Select-Object -First 1).FullName
-& $evtx -d C:\Cases\lab6 --csv C:\Cases\lab6\csv --csvf lab6-security.csv
+& $evtx -d "C:\Cases\$lab" --csv "C:\Cases\$lab\csv" --csvf "$lab-security.csv"
 $tle = (Get-ChildItem C:\Tools -Recurse -Filter TimelineExplorer.exe | Select-Object -First 1).FullName
 Start-Process $tle
 ```
 
-Change `lab6` to the lab you're on. In Timeline Explorer, filter **Payload
-Data1** for a person's name, not **User Name**. **Time Created** is UTC.
+In Timeline Explorer, filter **Payload Data1** for a person's name, not
+**User Name**. **Time Created** is UTC.
 
 ## Quick fixes
 
@@ -139,6 +145,7 @@ Data1** for a person's name, not **User Name**. **Time Created** is UTC.
 | Sign-in fails | **Other user**, full name with a backslash, password from your list. Check Caps Lock and Num Lock. |
 | Trust with the domain is broken | Go back to **rimeport-ready** on all five, together, and start DC01 first |
 | A shared folder won't open | Check FS01 is running, then run `New-RimeportShares.ps1` on FS01 again |
+| `wevtutil` says **Access is denied** | 1. `whoami` must say `rimeport\responder`. 2. `whoami /groups \| Select-String "High Mandatory"` must print a line; if it prints nothing, the window isn't elevated, so open **Windows PowerShell (Admin)**. 3. If both are right, save under a name you haven't used yet, such as this lab's `$lab` name, and write down what happened. |
 | A command says "not recognized" | Check the spelling, or paste it instead of typing |
 | "Running scripts is disabled on this system" | Windows 11 blocks scripts by default. Start it with `powershell -ExecutionPolicy Bypass -File` and the script's path, as above |
 | Screenshot | **Ctrl + Alt**, then **Windows key + Shift + S** on your real computer, and drag around the VM window |

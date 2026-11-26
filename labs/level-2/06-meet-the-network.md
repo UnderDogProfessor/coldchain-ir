@@ -200,17 +200,23 @@ Zimmerman, and you installed them on WS-IT-01 during setup.
 ### Collect the logs
 
 On **WS-DSP-01**, **DC01** and **FS01**, still signed in as
-`RIMEPORT\responder`, open an admin PowerShell window and run:
+`RIMEPORT\responder`, open **Windows PowerShell (Admin)** and run:
 
 ```
+whoami
 New-Item -ItemType Directory C:\Evidence -Force | Out-Null
-wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security.evtx" /ow:true
-Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security.evtx"
-Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security.evtx" \\FS01\Evidence\
+wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security-lab6.evtx" /ow:true
+Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security-lab6.evtx"
+Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security-lab6.evtx" \\FS01\Evidence\
 ```
 
+- `whoami` should say `rimeport\responder`. Saving the Security log needs an
+  administrator, in a window opened as admin.
 - `wevtutil epl` saves a copy of the Security log as a file. Write down the
-  time and time zone: anything after it isn't in the copy.
+  time and time zone: anything after it isn't in the copy. The name ends in
+  `-lab6`, so it never mixes with a file from another lab.
+- If `wevtutil` says **Access is denied**, see the
+  [quick reference](quick-reference.md#quick-fixes).
 - `Get-FileHash` prints the file's SHA-256 fingerprint. Copy it into the
   evidence table in your notes.
 - `Copy-Item` puts the copy on the Evidence share, where only IT can reach it.
@@ -225,7 +231,7 @@ PowerShell and run:
 
 ```
 New-Item -ItemType Directory C:\Cases\lab6 -Force | Out-Null
-Copy-Item \\FS01\Evidence\*-Security.evtx C:\Cases\lab6\
+Copy-Item \\FS01\Evidence\*-Security-lab6.evtx C:\Cases\lab6\
 Get-FileHash C:\Cases\lab6\*.evtx
 ```
 
