@@ -36,12 +36,18 @@ add it to the list in the same change that fixes the lab, and add it to his
 notes page under "What I'd do differently next time" in his words.
 
 **Every evidence file is named for its lab.** Exports are
-`<COMPUTER>-Security-labN.evtx` (for example `DC01-Security-lab8.evtx`), and
-the copy to WS-IT-01 picks up only that lab's files. Put the collect commands
-in the lab itself, with `whoami` first and "open **Windows PowerShell
-(Admin)**", and point to the quick reference's **Access is denied** fix. (In
-Lab 8, `wevtutil` was denied on DC01 while the same command worked on FS01,
-and every lab had been saving to the same file name.)
+`<COMPUTER>-Security-labN.evtx` (for example `DC01-Security-lab8.evtx`), saved
+into `$env:USERPROFILE\Documents\Evidence` on the machine and copied to
+`\\FS01\Evidence\`. The copy to WS-IT-01 picks up only that lab's files. Put
+the collect commands in the lab itself, with `whoami` first and "open
+**Windows PowerShell (Admin)**", and point to the quick reference's **Access
+is denied** fix. Never save exports into `C:\Evidence`: on the Lab 8 run,
+DC01 refused it (Access is denied, as `responder`, elevated, with a normal
+folder ACL and a new file name) while FS01 accepted it, and the same export
+into Documents worked. The cause is still unknown; don't state one in a lab.
+Say which machine each command block runs on, in a heading or the line above
+it. (The WS-IT-01 timeline block was once run on DC01, where `C:\Tools`
+doesn't exist.)
 
 **Same answer, another tool.** Where a second tool fits naturally, add a part
 that repeats a task with it. Add one or two extra tools, never all of them.

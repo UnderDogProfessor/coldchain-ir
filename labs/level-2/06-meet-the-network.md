@@ -209,10 +209,11 @@ On **WS-DSP-01**, **DC01** and **FS01**, still signed in as
 
 ```
 whoami
-New-Item -ItemType Directory C:\Evidence -Force | Out-Null
-wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security-lab6.evtx" /ow:true
-Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security-lab6.evtx"
-Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security-lab6.evtx" \\FS01\Evidence\
+$dir = "$env:USERPROFILE\Documents\Evidence"
+New-Item -ItemType Directory $dir -Force | Out-Null
+wevtutil epl Security "$dir\$env:COMPUTERNAME-Security-lab6.evtx" /ow:true
+Get-FileHash "$dir\$env:COMPUTERNAME-Security-lab6.evtx"
+Copy-Item "$dir\$env:COMPUTERNAME-Security-lab6.evtx" \\FS01\Evidence\
 ```
 
 - `whoami` should say `rimeport\responder`. Saving the Security log needs an
@@ -220,6 +221,10 @@ Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security-lab6.evtx" \\FS01\Evidence\
 - `wevtutil epl` saves a copy of the Security log as a file. Write down the
   time and time zone: anything after it isn't in the copy. The name ends in
   `-lab6`, so it never mixes with a file from another lab.
+- The copy is saved in `responder`'s **Documents\Evidence** folder on that
+  machine, not on your real computer. On the Lab 8 run, DC01 refused to save
+  into `C:\Evidence` (Access is denied, even as `responder` in an admin
+  window), but saved into Documents without trouble.
 - If `wevtutil` says **Access is denied**, see the
   [quick reference](quick-reference.md#quick-fixes).
 - `Get-FileHash` prints the file's SHA-256 fingerprint. Copy it into the

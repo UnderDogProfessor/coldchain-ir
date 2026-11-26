@@ -18,7 +18,9 @@ reference.
   with `whoami`
 - [ ] **Windows PowerShell (Admin)** open where I'll read or save logs
 - [ ] Password list open on my real computer
-- [ ] This lab's evidence names end in `-labN`
+- [ ] This lab's evidence names end in `-labN`, saved into
+  **Documents\Evidence** on each machine
+- [ ] Each command block run on the machine named above it
 - [ ] Every time I write down has its time zone
 - [ ] Each screenshot saved as a file as soon as I take it
 

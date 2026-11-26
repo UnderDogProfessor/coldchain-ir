@@ -365,14 +365,18 @@ On **FS01** and **DC01**, as `RIMEPORT\responder`, open **Windows PowerShell
 
 ```
 whoami
-New-Item -ItemType Directory C:\Evidence -Force | Out-Null
-wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security-lab7.evtx" /ow:true
-Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security-lab7.evtx"
-Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security-lab7.evtx" \\FS01\Evidence\
+$dir = "$env:USERPROFILE\Documents\Evidence"
+New-Item -ItemType Directory $dir -Force | Out-Null
+wevtutil epl Security "$dir\$env:COMPUTERNAME-Security-lab7.evtx" /ow:true
+Get-FileHash "$dir\$env:COMPUTERNAME-Security-lab7.evtx"
+Copy-Item "$dir\$env:COMPUTERNAME-Security-lab7.evtx" \\FS01\Evidence\
 ```
 
 `whoami` should say `rimeport\responder`. The file name ends in `-lab7`, so it
-never mixes with an export from another lab. If `wevtutil` says **Access is
+never mixes with an export from another lab. It's saved in `responder`'s
+**Documents\Evidence** folder on that machine: on the Lab 8 run, DC01
+refused to save into `C:\Evidence` (Access is denied, even as `responder`
+in an admin window), but saved into Documents without trouble. If `wevtutil` says **Access is
 denied**, see the [quick reference](quick-reference.md#quick-fixes).
 
 On **WS-IT-01**, as `RIMEPORT\responder`, copy the logs, check the hashes and

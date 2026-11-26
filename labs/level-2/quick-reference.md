@@ -36,10 +36,17 @@ Read it before each lab.
   `New-Item`) broke an export.
 - [ ] Windows 11 blocks scripts. Start them with
   `powershell -ExecutionPolicy Bypass -File`.
+- [ ] Run each block on the **machine named above it**. The timeline block
+  only works on **WS-IT-01**, where the tools are in `C:\Tools`. Run on DC01,
+  it searched the whole of `C:\` and found nothing.
 
 **Evidence**
 
 - [ ] Name each lab's export for that lab, such as `DC01-Security-lab8.evtx`.
+- [ ] Save exports into your own **Documents\Evidence** folder on the VM, as
+  the commands do. On the Lab 8 run, DC01 refused to save into `C:\Evidence`
+  (Access is denied, even as `responder` in an admin window). Why is still
+  unknown.
 - [ ] Write down the time and the **hash** of the file you keep. A new export
   makes a new file with a new hash.
 
@@ -156,10 +163,11 @@ way or gets copied by mistake. Write down the time and the hash it prints.
 ```
 $lab = 'lab8'
 whoami
-New-Item -ItemType Directory C:\Evidence -Force | Out-Null
-wevtutil epl Security "C:\Evidence\$env:COMPUTERNAME-Security-$lab.evtx" /ow:true
-Get-FileHash "C:\Evidence\$env:COMPUTERNAME-Security-$lab.evtx"
-Copy-Item "C:\Evidence\$env:COMPUTERNAME-Security-$lab.evtx" \\FS01\Evidence\
+$dir = "$env:USERPROFILE\Documents\Evidence"
+New-Item -ItemType Directory $dir -Force | Out-Null
+wevtutil epl Security "$dir\$env:COMPUTERNAME-Security-$lab.evtx" /ow:true
+Get-FileHash "$dir\$env:COMPUTERNAME-Security-$lab.evtx"
+Copy-Item "$dir\$env:COMPUTERNAME-Security-$lab.evtx" \\FS01\Evidence\
 ```
 
 `whoami` should say `rimeport\responder`. Run the lines together. If you
@@ -199,7 +207,7 @@ In Timeline Explorer, filter **Payload Data1** for a person's name, not
 | Sign-in fails | **Other user**, full name with a backslash, password from your list. Check Caps Lock and Num Lock. |
 | Trust with the domain is broken | Go back to **rimeport-ready** on all five, together, and start DC01 first |
 | A shared folder won't open | Check FS01 is running, then run `New-RimeportShares.ps1` on FS01 again |
-| `wevtutil` says **Access is denied** | 1. `whoami` must say `rimeport\responder`. 2. `whoami /groups \| Select-String "High Mandatory"` must print a line; if it prints nothing, the window isn't elevated, so open **Windows PowerShell (Admin)**. 3. If both are right, save under a name you haven't used yet, such as this lab's `$lab` name, and write down what happened. |
+| `wevtutil` says **Access is denied** | 1. `whoami` must say `rimeport\responder`. 2. `whoami /groups \| Select-String "High Mandatory"` must print a line; if it prints nothing, the window isn't elevated, so open **Windows PowerShell (Admin)**. 3. If both are right, check the path: the labs save into your own **Documents\Evidence** folder, as above. On the Lab 8 run, DC01 refused `C:\Evidence` even with both checks right, but saved into Documents. Why it refused is still unknown, so write down what happened. |
 | A command says "not recognized" | Check the spelling, or paste it instead of typing |
 | "Running scripts is disabled on this system" | Windows 11 blocks scripts by default. Start it with `powershell -ExecutionPolicy Bypass -File` and the script's path, as above |
 | Screenshot | **Ctrl + Alt**, then **Windows key + Shift + S** on your real computer, and drag around the VM window |
