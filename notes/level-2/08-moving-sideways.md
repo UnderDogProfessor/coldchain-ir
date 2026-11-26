@@ -30,7 +30,7 @@ same records. Kali's clock lined up with the Windows machines.
 
 ## Part 1: Get ready
 
-| # | Machine | Signed in as | What I did | Time |
+| # | Machine | Signed in as | What I did | Time (EST) |
 |---|---|---|---|---|
 | 1 | DC01 | `RIMEPORT\responder` | Signed in | 7:03 PM |
 | 2 | FS01 | `RIMEPORT\responder` | Signed in | 7:03 PM |
@@ -39,16 +39,16 @@ same records. Kali's clock lined up with the Windows machines.
 | 5 | WS-IT-01 | `RIMEPORT\responder` | Signed in | 7:04 PM |
 | 6 | Kali | `kali` | Signed in | 7:05 PM |
 
-My notes don't record the rest of Part 1. The logs show the Windows machines
-still had everything from Lab 7: Luis's password was last set on November 18
-at 7:55:42 PM, by Lab 7's reset, and Lab 7's records are still in DC01's and
-FS01's logs. So his password was already `Rimeport2026!`.
+I didn't go back to **rimeport-ready** this time. I started from where Lab 7
+left off, so Luis's password was still `Rimeport2026!` from Lab 7's reset
+(November 18, 7:55:42 PM), and I didn't need to set it again. Lab 7's
+records were still in DC01's and FS01's logs too.
 
 ## Part 2: Use Luis's account
 
 The Kali terminal was a root shell (`root@kali`), so the commands ran as root.
 
-| # | Machine | Signed in as | What I did | Time |
+| # | Machine | Signed in as | What I did | Time (EST) |
 |---|---|---|---|---|
 | 7 | Kali | `root` | Tried Luis's password on all five Windows machines | 7:09 PM |
 | 8 | Kali | `root` | Listed the shares on DC01 and FS01 (`--shares`) | 7:12 PM |
@@ -120,7 +120,7 @@ are from setup on October 29.
 Event Viewer on FS01, Security log, filtered for 4624, searched for
 `luis.ferreira`. Two sign-ins from `10.20.99.50`:
 
-| Time | Logon Type | Authentication Package | Workstation Name | Source Network Address | Command |
+| Time (EST) | Logon Type | Authentication Package | Workstation Name | Source Network Address | Command |
 |---|---|---|---|---|---|
 | 7:09:03 PM | 3 | NTLM | (empty) | `10.20.99.50` | #7, all five machines |
 | 7:12:05 PM | 3 | NTLM | (empty) | `10.20.99.50` | #8, `--shares` |
@@ -136,7 +136,7 @@ Nothing at 7:15 PM: the `--users` command only went to DC01.
 Event Viewer on DC01, Security log, filtered for 4624 and 4776, searched for
 `luis.ferreira`.
 
-| Time | 4624 (signed in to DC01) | 4776 (password checked) | Command |
+| Time (EST) | 4624 (signed in to DC01) | 4776 (password checked) | Command |
 |---|---|---|---|
 | 7:09:03 PM | 1 | 2 | #7, all five machines |
 | 7:12:05 PM | 1 | 2 | #8, `--shares` |
@@ -159,8 +159,9 @@ address.
 ## Part 5: Check the PCs
 
 Event Viewer on WS-DSP-01, Security log, filtered for 4624 and 4625, searched
-for `luis.ferreira` and `10.20.99.50`. Nothing from either, and nothing on the
-other PCs either.
+for `luis.ferreira` and `10.20.99.50`. Nothing from either. I checked
+WS-FIN-01 and WS-IT-01 the same way and found nothing there either, but I
+didn't take screenshots of those two.
 
 There were 4624s around the time of the attack, at 7:09:10, 7:09:12 and
 7:09:48 PM. They were the PC itself: account **SYSTEM** (`WS-DSP-01$`),
@@ -326,12 +327,10 @@ was opened or changed.
    the whole C: drive and found nothing.
 3. **Write each command next to its time as I run it.** My first notes put
    `--users` at 7:12 PM. It was `--shares`, and `--users` was at 7:15 PM.
-4. **Write the time zone next to every time, and write down Part 1.** My notes
-   have no zones and don't record the revert or the readiness check.
-5. **Read the Lab 6 comparison closely.** My first answer to question 7 said
+4. **Read the Lab 6 comparison closely.** My first answer to question 7 said
    the empty Workstation Name gave the attacker away. It doesn't: Dana's real
    sign-in was empty too. The address and NTLM do.
-6. **Check the logs before telling Priya what to do.** My first answer said to
+5. **Check the logs before telling Priya what to do.** My first answer said to
    end Luis's active sessions. There weren't any: every sign-in logged off in
    the same second.
 

@@ -92,7 +92,10 @@ should say `rimeport\responder`.
    Set-ADAccountPassword luis.ferreira -Reset -NewPassword (Read-Host -AsSecureString 'New password for luis.ferreira')
    ```
 
-   Write down the time. This is your own step, not the attacker's.
+   Write down the time. This is your own step, not the attacker's. If you
+   didn't go back to **rimeport-ready** after Lab 7, his password is still
+   `Rimeport2026!`, so skip this step. The test run started that way, and
+   Lab 7's records were still in the logs.
 4. Put Kali on Rimeport at `10.20.99.50`. If you went back to **kali-nat**
    after Lab 7, follow
    [Put Kali on Rimeport](quick-reference.md#put-kali-on-rimeport-from-lab-7)
