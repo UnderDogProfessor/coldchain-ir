@@ -59,8 +59,11 @@ file** on your real computer as you take it.
 | Setting things up and investigating | DC01, FS01, the PCs, WS-IT-01 | `RIMEPORT\responder` |
 | Being the attacker | Kali | your own Kali account |
 
-On the Windows machines, choose **Other user** and type the full name. Check
-with `whoami` if you're not sure.
+**On every Windows machine in this lab, sign in as `RIMEPORT\responder`.** On
+the sign-in screen, don't click the account it offers (often Administrator).
+Choose **Other user** instead, and type `RIMEPORT\responder` in full, with
+`RIMEPORT\` and a backslash. To check, open PowerShell and run `whoami`. It
+should say `rimeport\responder`.
 
 > **Stay safe.** Kali works **only** while it's on the **Rimeport** LAN
 > segment, never on NAT or bridged. Everything here stays inside your own lab.
